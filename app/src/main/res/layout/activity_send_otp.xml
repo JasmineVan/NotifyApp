@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginPage"
+    android:background="@drawable/gradient_bg"
+    android:weightSum="4">
+
+    <RelativeLayout
+        android:id="@+id/registerPhone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/ivSendOtpBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:contentDescription="@string/login_back"
+            android:src="@drawable/ic_back" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="48dp"
+            android:layout_centerVertical="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/project_name"
+                android:textSize="48dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register_description"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-condensed"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@drawable/login_card">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="serif"
+            android:text="@string/sendOTP_title"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:inputType="phone"
+                android:id="@+id/textSendOtpPhone"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="48dp"
+                android:drawableTint="@color/black"
+                android:fontFamily="serif"
+                android:hint="@string/sendOTP_phone_hint"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/sendOtpError"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="48dp"
+                android:fontFamily="serif"
+                android:hint="@string/error"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="48dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSendOtp"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_button"
+                    android:fontFamily="serif"
+                    android:text="@string/sendOTP_title"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="48dp"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSendOtpChangePhone"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_button2"
+                    android:fontFamily="serif"
+                    android:text="@string/sendOtp_change_phone"
+                    android:textAllCaps="false"
+                    android:textColor="@color/myColor2"
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="12dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textSendOtpSkip"
+                android:clickable="true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:fontFamily="serif"
+                android:text="@string/sendOtp_skip"
+                android:textColor="@color/blue"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

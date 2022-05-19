@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginPage"
+    android:background="@drawable/gradient_bg"
+    android:weightSum="4">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/ivLoginBack"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_back"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:contentDescription="@string/login_back"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="48dp"
+            android:layout_centerVertical="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/project_name"
+                android:textSize="48dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_description"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif-condensed"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@drawable/login_card">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@string/login_title"
+            android:fontFamily="serif"
+            android:textSize="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/textLoginPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginRight="48dp"
+                android:background="@drawable/login_edit_text"
+                android:drawableEnd="@drawable/ic_user"
+                android:drawableTint="@color/black"
+                android:fontFamily="serif"
+                android:autofillHints="name"
+                android:inputType="text"
+                android:hint="@string/login_username_hint"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <EditText
+                android:inputType="textPassword"
+                android:id="@+id/textLoginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="48dp"
+                android:background="@drawable/login_edit_text"
+                android:drawableEnd="@drawable/ic_pass"
+                android:drawableTint="@color/black"
+                android:fontFamily="serif"
+                android:autofillHints="password"
+                android:hint="@string/login_password_hint"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/loginError"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="48dp"
+                android:fontFamily="serif"
+                android:hint="@string/error"
+                android:paddingLeft="12dp"
+                android:textColor="@color/red"
+                android:paddingRight="12dp"
+                android:textSize="15dp" />
+
+            <CheckBox
+                android:id="@+id/cbRemember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="serif"
+                android:text="@string/login_remember"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="48dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/textForgot"
+                    android:clickable="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:fontFamily="serif"
+                    android:text="@string/login_forgot"
+                    android:textColor="@color/blue"
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogin"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_button"
+                    android:fontFamily="serif"
+                    android:text="@string/login_title"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginBottom="12dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:fontFamily="serif"
+                android:text="@string/login_no_account"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+            <TextView
+                android:id="@+id/textCreateAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:fontFamily="serif"
+                android:text="@string/signup_title"
+                android:textColor="@color/blue"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:clickable="true" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

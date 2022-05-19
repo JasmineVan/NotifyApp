@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/custom_button.xml" value="0.2225" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/custom_button2.xml" value="0.2225" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/gradient_bg.xml" value="0.2225" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/home_pic.xml" value="0.2225" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/login_card.xml" value="0.2225" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/login_edit_text.xml" value="0.2225" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/otp_bg.xml" value="0.2255" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/font/font1.xml" value="0.30520833333333336" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/layout/activity_dashboard.xml" value="0.259375" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/layout/activity_login_page.xml" value="0.264" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/layout/activity_main.xml" value="0.275" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/layout/activity_otp.xml" value="0.275" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/layout/activity_register_with_email.xml" value="0.275" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/layout/activity_register_with_phone.xml" value="0.275" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/layout/activity_send_otp.xml" value="0.275" />
+        <entry key="..\:/Learning3/Project2/app/src/main/res/layout/activity_signup_page.xml" value="0.275" />
+        <entry key="..\:/Project2/app/src/main/res/layout/activity_login_page.xml" value="0.264" />
+        <entry key="..\:/Project2/app/src/main/res/layout/activity_otp.xml" value="0.25" />
+        <entry key="..\:/Project2/app/src/main/res/layout/activity_register_with_email.xml" value="0.10989583333333333" />
+        <entry key="..\:/Project2/app/src/main/res/layout/activity_register_with_phone.xml" value="0.25" />
+        <entry key="..\:/Project2/app/src/main/res/layout/activity_send_otp.xml" value="0.25" />
+        <entry key="..\:/Project2/app/src/main/res/layout/activity_signup_page.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_login_page.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/activity_otp.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/activity_register_with_email.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/activity_register_with_phone.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/activity_send_otp.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/activity_signup_page.xml" value="0.321875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,44 @@
+<resources>
+    <!--  All activity  -->
+    <string name="project_name">Notify</string>
+    <string name="error">Error show here</string>
+    <!--  Login  -->
+    <string name="app_name">Project2</string>
+    <string name="login_description">Login into your Notify account</string>
+    <string name="login_remember">Remember me</string>
+    <string name="login_no_account">Do not have account?</string>
+    <string name="login_forgot">Forgot password?</string>
+    <string name="login_back">back</string>
+    <string name="login_title">Login</string>
+    <string name="login_username_hint">Enter your username</string>
+    <string name="login_password_hint">Enter your password</string>
+    <!--  Signup  -->
+    <string name="signup_title">Sign up</string>
+    <string name="signup_description">Sign up your Notify account</string>
+    <string name="signup_username_hint">Full name</string>
+    <string name="signup_password_hint">Password</string>
+    <string name="signup_re_password_hint">Password confirm</string>
+    <string name="signup_email_hint">Email address</string>
+    <string name="signup_phone_hint">Phone number</string>
+    <string name="signup_has_account">Already has an account?</string>
+    <!-- Register -->
+    <string name="register_description">Register your Notify account</string>
+    <string name="register_title">Register</string>
+    <string name="register_skip">Skip</string>
+    <string name="phone_register_hint">Register with phone number</string>
+    <string name="phone_register_switch">Register with email address</string>
+    <string name="email_register_hint">Register with email address</string>
+    <string name="email_register_switch">Register with phone number</string>
+    <!--  OTP  -->
+    <string name="otp_title">OTP Verification</string>
+    <string name="verify_title">Verify</string>
+    <string name="otp_no_receive">Did not receive the OTP?</string>
+    <string name="otp_resend">Resend</string>
+    <!--  send OTP  -->
+    <string name="sendOTP_title">Send OTP</string>
+    <string name="sendOTP_phone_hint">Phone number show here</string>
+    <string name="sendOtp_skip">Skip</string>
+    <string name="sendOtp_change_phone">Change phone number</string>
+
+
+</resources>
