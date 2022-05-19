@@ -39,8 +39,8 @@ public class SendOTP extends AppCompatActivity {
     private ImageView ivSendOtpBack;
     private Button btnSendOtp, btnSendOtpChangePhone;
     private TextView textSendOtpSkip;
-    public TextView sendOtpError;
-    private SharedPreferences sharedPreferences;
+    private TextView sendOtpError;
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +56,12 @@ public class SendOTP extends AppCompatActivity {
         sendOtpError = findViewById(R.id.sendOtpError);
         btnSendOtp = findViewById(R.id.btnSendOtp);
         btnSendOtpChangePhone = findViewById(R.id.btnSendOtpChangePhone);
+
+        phoneNumber = getIntent().getStringExtra("phoneNumber");
+        textSendOtpPhone.setText(phoneNumber);
+
         sendOtpError.setVisibility(View.INVISIBLE);
 
-        sharedPreferences = this.getSharedPreferences("Login", MODE_PRIVATE);
-        String accessToken = sharedPreferences.getString("accessToken", "defaultToken");
-
-        getPhoneNumber(accessToken);
         btnSendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +95,7 @@ public class SendOTP extends AppCompatActivity {
     public void getOtp(){
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+84" + textSendOtpPhone.getText().toString().substring(1),
-                60,
+                90,
                 TimeUnit.SECONDS,
                 SendOTP.this,
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
@@ -116,53 +116,11 @@ public class SendOTP extends AppCompatActivity {
                         Intent intent = new Intent(SendOTP.this, OTP.class);
                         intent.putExtra("mobile", textSendOtpPhone.getText().toString());
                         intent.putExtra("verification", verificationId);
+                        intent.putExtra("phoneNumber", phoneNumber);
                         startActivity(intent);
                     }
                 }
         );
-    }
-
-    public void getPhoneNumber(String accessToken){
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/profile").header("Authorization", "Bear " + accessToken).build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d("onFailure", e.getMessage());
-            }
-            @Override
-            public void onResponse(Call call, final Response response)
-                    throws IOException {
-                try {
-                    String responseData = response.body().string();
-                    int code = response.code();
-                    JSONObject json = new JSONObject(responseData);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(code == 200){
-                                try {
-                                    String phoneNumber = json.getString("phoneNumber");
-                                    textSendOtpPhone.setText(phoneNumber);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            else {
-                                try {
-                                    String error = json.getString("error");
-                                    Toast.makeText(SendOTP.this, error,Toast.LENGTH_SHORT).show();
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    });
-                } catch (JSONException e) {
-                    Log.d("onResponse", e.getMessage());
-                }
-            }
-        });
     }
 }
 

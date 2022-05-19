@@ -122,6 +122,7 @@ public class SignupPage extends AppCompatActivity {
                                     editSharedPreferences.commit();
 
                                     Intent intent = new Intent(SignupPage.this, SendOTP.class);
+                                    intent.putExtra("phoneNumber", textSignupPhone.getText().toString().trim());
                                     startActivity(intent);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

@@ -7,27 +7,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.concurrent.TimeUnit;
+
 public class OTP extends AppCompatActivity {
 
     private Button btnOTPVerify;
+    private TextView textOTPResend, otpMinute, otpSecond;
     private ImageView ivOTPBack;
     private EditText otp1, otp2, otp3, otp4, otp5, otp6;
-    private String verificationId;
+    private String verifyId;
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,15 +42,23 @@ public class OTP extends AppCompatActivity {
         setContentView(R.layout.activity_otp);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
+
         btnOTPVerify = findViewById(R.id.btnOTPVerify);
+        textOTPResend = findViewById(R.id.textOTPResend);
         ivOTPBack = findViewById(R.id.ivOTPBack);
+        otpMinute = findViewById(R.id.otpMinute);
+        otpSecond = findViewById(R.id.otpSecond);
         otp1 = findViewById(R.id.otp1);
         otp2 = findViewById(R.id.otp2);
         otp3 = findViewById(R.id.otp3);
         otp4 = findViewById(R.id.otp4);
         otp5 = findViewById(R.id.otp5);
         otp6 = findViewById(R.id.otp6);
-        verificationId = getIntent().getStringExtra("verification");
+
+        verifyId = getIntent().getStringExtra("verification");
+        phoneNumber = getIntent().getStringExtra("phoneNumber");
+
+        countDown();
         setupOTPInput();
 
         btnOTPVerify.setOnClickListener(new View.OnClickListener() {
@@ -52,11 +67,29 @@ public class OTP extends AppCompatActivity {
                 sendOTP();
             }
         });
+
         ivOTPBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(OTP.this, SendOTP.class);
                 startActivity(intent1);
+            }
+        });
+
+        textOTPResend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getOtp();
+                textOTPResend.setEnabled(false);
+                new CountDownTimer(30000, 1000) {
+                    public void onTick(long millisUntilFinished) {
+                        textOTPResend.setText(String.valueOf(millisUntilFinished / 1000));
+                    }
+                    public void onFinish() {
+                        textOTPResend.setText("Resend");
+                        textOTPResend.setEnabled(false);
+                    }
+                }.start();
             }
         });
     }
@@ -69,7 +102,7 @@ public class OTP extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (otp2.getText().toString().trim().isEmpty()){
+                if (otp2.getText().toString().trim().isEmpty() && !otp1.getText().toString().trim().isEmpty()){
                     otp2.requestFocus();
                 }
             }
@@ -87,7 +120,7 @@ public class OTP extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (otp3.getText().toString().trim().isEmpty()){
+                if (otp3.getText().toString().trim().isEmpty() && !otp2.getText().toString().trim().isEmpty()){
                     otp3.requestFocus();
                 }
             }
@@ -105,7 +138,7 @@ public class OTP extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (otp4.getText().toString().trim().isEmpty()){
+                if (otp4.getText().toString().trim().isEmpty() && !otp3.getText().toString().trim().isEmpty()){
                     otp4.requestFocus();
                 }
             }
@@ -123,7 +156,7 @@ public class OTP extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (otp5.getText().toString().trim().isEmpty()){
+                if (otp5.getText().toString().trim().isEmpty() && !otp4.getText().toString().trim().isEmpty()){
                     otp5.requestFocus();
                 }
             }
@@ -141,7 +174,7 @@ public class OTP extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (otp6.getText().toString().trim().isEmpty()){
+                if (otp6.getText().toString().trim().isEmpty() && !otp5.getText().toString().trim().isEmpty()){
                     otp6.requestFocus();
                 }
             }
@@ -165,8 +198,8 @@ public class OTP extends AppCompatActivity {
         }
         String code = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString()
                 + otp4.getText().toString() + otp5.getText().toString() + otp6.getText().toString();
-        if(verificationId != null){
-            PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(verificationId, code);
+        if(verifyId != null){
+            PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(verifyId, code);
             FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -182,5 +215,43 @@ public class OTP extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    public void getOtp(){
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+84" + phoneNumber.substring(1),
+                60,
+                TimeUnit.SECONDS,
+                OTP.this,
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                        System.out.println("Ok2");
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                        Toast.makeText(OTP.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        verifyId = verificationId;
+                    }
+                }
+        );
+    }
+
+    public void countDown(){
+        new CountDownTimer(90000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                otpMinute.setText(String.valueOf(millisUntilFinished / 60000));
+                otpSecond.setText(String.valueOf(millisUntilFinished / 1000));
+            }
+            public void onFinish() {
+                System.out.println("Otp expired");
+            }
+        }.start();
     }
 }
