@@ -22,8 +22,8 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.hide();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         bottomNavigationView = findViewById(R.id.dashboard_btmNav);
         getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, homeFragment).commit();
