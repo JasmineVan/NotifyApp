@@ -39,6 +39,8 @@
     <string name="sendOTP_phone_hint">Phone number show here</string>
     <string name="sendOtp_skip">Skip</string>
     <string name="sendOtp_change_phone">Change phone number</string>
+    <!--    dash board-->
+    <!--    user fragment-->
 
 
 </resources>
