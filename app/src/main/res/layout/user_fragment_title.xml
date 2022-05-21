@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/fragment_user_topNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textSize="24dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="User Setting"
+            android:textSize="24dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/fragment_user_btnLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:textSize="24dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/red"
+            android:gravity="center"
+            android:layout_alignParentRight="true"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/user_fragment_partition"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/myColor1"
+        android:layout_below="@id/fragment_user_topNav"
+        android:paddingStart="8dp"
+        android:paddingRight="8dp"/>
+
+    <LinearLayout
+        android:id="@+id/user_fragment_user_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:layout_below="@id/user_fragment_partition">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/red"
+            android:text="Click here to activate your account!"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:padding="4dp"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingRight="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="24dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="4dp"/>
+
+            <TextView
+                android:id="@+id/user_fragment_tvFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Full name show here"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="24dp"
+            android:paddingRight="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingRight="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="24dp"
+                android:gravity="center"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="4dp"
+                android:paddingRight="40dp"/>
+
+            <TextView
+                android:id="@+id/user_fragment_tvPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone show here"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="24dp"
+            android:paddingRight="24dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="48dp"
+            android:layout_gravity="center"
+            android:paddingStart="12dp"
+            android:paddingRight="12dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragment_user_btnEdit"
+                android:layout_width="160dp"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:background="@drawable/custom_button2"
+                android:fontFamily="serif"
+                android:text="Edit Profile"
+                android:textAllCaps="false"
+                android:textColor="@color/myColor2"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:paddingStart="12dp"
+            android:paddingRight="12dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fragment_user_btnChangePassword"
+                android:layout_width="240dp"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:background="@drawable/custom_button2"
+                android:fontFamily="serif"
+                android:text="Change Password"
+                android:textAllCaps="false"
+                android:textColor="@color/myColor2"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
