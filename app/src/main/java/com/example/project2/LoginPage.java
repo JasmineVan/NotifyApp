@@ -11,8 +11,11 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +39,8 @@ public class LoginPage extends AppCompatActivity {
     private EditText textLoginPhoneNumber, textLoginPassword;
     private TextView textForgetPass, textCreateAccount;
     private ImageView ivLoginBack;
-    public TextView loginError;
+    private TextView loginError;
+    private CheckBox cbRemember;
     private SharedPreferences sharedPreferences;
 
 
@@ -49,18 +53,29 @@ public class LoginPage extends AppCompatActivity {
 
         textLoginPhoneNumber = findViewById(R.id.textLoginPhoneNumber);
         textLoginPassword = findViewById(R.id.textLoginPassword);
-
+        cbRemember = findViewById(R.id.cbRemember);
         btnLogin = findViewById(R.id.btnLogin);
         ivLoginBack = findViewById(R.id.ivLoginBack);
         textCreateAccount = findViewById(R.id.textCreateAccount);
         loginError = findViewById(R.id.loginError);
         loginError.setVisibility(View.INVISIBLE);
+        sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
+
+        getRemember();
 
         textCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginPage.this, SignupPage.class);
                 startActivity(intent);
+            }
+        });
+
+        cbRemember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferences.Editor editSharedPreferences = sharedPreferences.edit();
+                editSharedPreferences.putBoolean("checkRemember",  cbRemember.isChecked()).apply();
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -115,13 +130,15 @@ public class LoginPage extends AppCompatActivity {
                             if (code == 200) { //If request success, set error invisible, save access token to local
                                 try {
                                     String accessToken = json.getString("accessToken");
-                                    sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
                                     SharedPreferences.Editor editSharedPreferences = sharedPreferences.edit();
                                     editSharedPreferences.putString("accessToken", accessToken);
+                                    editSharedPreferences.putString("phoneNumber",  textLoginPhoneNumber.getText().toString().trim());
+                                    editSharedPreferences.putString("password",  textLoginPassword.getText().toString().trim());
                                     editSharedPreferences.commit();
 
                                     Intent intent1 = new Intent(LoginPage.this, Dashboard.class);
                                     startActivity(intent1);
+                                    finish();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -174,5 +191,22 @@ public class LoginPage extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void getRemember(){
+        Boolean checkRemember = sharedPreferences.getBoolean("checkRemember", false);
+
+        cbRemember.setChecked(checkRemember);
+        if(!checkRemember){
+            SharedPreferences.Editor editSharedPreferences = sharedPreferences.edit();
+            editSharedPreferences.putString("phoneNumber","");
+            editSharedPreferences.putString("password","");
+            editSharedPreferences.commit();
+        }
+        String phoneNumber = sharedPreferences.getString("phoneNumber", "");
+        String password = sharedPreferences.getString("password", "");
+
+        textLoginPhoneNumber.setText(phoneNumber);
+        textLoginPassword.setText((password));
     }
 }
