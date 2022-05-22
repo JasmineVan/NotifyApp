@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLandingNext;
     private SharedPreferences sharedPreferences;
     private String accessToken;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         btnLandingNext = findViewById(R.id.btnLandingNext);
         sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
-        accessToken = sharedPreferences.getString("accessToken","");
 
         btnLandingNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent;
-                System.out.println(accessToken);
+                accessToken = sharedPreferences.getString("accessToken","");
                 if (accessToken.isEmpty()){
                     intent = new Intent(MainActivity.this, LoginPage.class);
                 }else{
