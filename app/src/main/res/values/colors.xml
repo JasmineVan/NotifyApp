@@ -14,5 +14,8 @@
     <color name="blue">#0A2ADF</color>
     <color name="red">#cc1127</color>
     <color name="gray">#d9d6d9</color>
+    <color name="green">#52D510</color>
+    <color name="pink">#E30FE3</color>
+    <color name="orange">#D65717</color>
 
 </resources>

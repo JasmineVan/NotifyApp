@@ -17,6 +17,7 @@ public class Dashboard extends AppCompatActivity {
     private SettingFragment settingFragment = new SettingFragment();
     private FavoriteFragment favoriteFragment = new FavoriteFragment();
     private UserFragment userFragment = new UserFragment();
+    private TrashFragment trashFragment = new TrashFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,9 @@ public class Dashboard extends AppCompatActivity {
                         return true;
                     case R.id.btm_nav_setting:
                         getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, settingFragment).commit();
+                        return true;
+                    case R.id.btm_nav_trash:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, trashFragment).commit();
                         return true;
                 }
                 return false;

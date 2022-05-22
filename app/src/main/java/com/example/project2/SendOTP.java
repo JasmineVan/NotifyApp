@@ -83,13 +83,7 @@ public class SendOTP extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
-        btnSendOtpChangePhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent3 = new Intent(SendOTP.this, SignupPage.class);
-                startActivity(intent3);
-            }
-        });
+        btnSendOtpChangePhone.setVisibility(View.INVISIBLE);
     }
 
     public void getOtp(){
