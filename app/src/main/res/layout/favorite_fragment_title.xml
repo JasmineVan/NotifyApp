@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/fragment_favorite_topNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/favoriteFragmentHidenBlock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Logout"
+            android:textSize="24dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="All Note"
+            android:textSize="24dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/favoriteFragmentHidenBlock2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Logout"
+            android:textSize="24dp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignParentRight="true"/>
+
+    </LinearLayout>
+
+    <SearchView
+        android:id="@+id/favoriteFragmentSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_favorite_topNav"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/search_bar_bg"
+        android:iconifiedByDefault="false"
+        android:queryHint="Enter note name"
+        android:queryBackground="@android:color/transparent"/>
+
+</RelativeLayout>

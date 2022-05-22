@@ -91,13 +91,7 @@ public class LoginPage extends AppCompatActivity {
                 }
             }
         });
-        ivLoginBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2 = new Intent(LoginPage.this, MainActivity.class);
-                startActivity(intent2);
-            }
-        });
+        ivLoginBack.setVisibility(View.INVISIBLE);
         nextField();
     }
 

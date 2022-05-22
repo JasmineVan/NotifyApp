@@ -35,7 +35,7 @@ public class SignupPage extends AppCompatActivity {
     private EditText textSignupUsername, textSignupPhone, textSignupPassword, textSignupPasswordConfirm;
     private Button btnSignup;
     private ImageView ivSignupBack;
-    private TextView textSignupLoginAccount;
+    private TextView textSignupLoginAccount, signupAsk;
     public TextView signupError;
     private SharedPreferences sharedPreferences;
     private ProgressDialog dialog;
@@ -55,6 +55,8 @@ public class SignupPage extends AppCompatActivity {
         btnSignup = findViewById(R.id.btnSignup);
         ivSignupBack = findViewById(R.id.ivSignupBack);
         textSignupLoginAccount = findViewById(R.id.textSignupLoginAccount);
+        signupAsk = findViewById(R.id.signupAsk);
+        signupAsk.setVisibility(View.GONE);
         signupError = findViewById(R.id.signupError);
         signupError.setVisibility(View.INVISIBLE);
 
@@ -71,20 +73,8 @@ public class SignupPage extends AppCompatActivity {
                 }
             }
         });
-        textSignupLoginAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent(SignupPage.this, LoginPage.class);
-                startActivity(intent1);
-            }
-        });
-        ivSignupBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent2 = new Intent(SignupPage.this, MainActivity.class);
-                startActivity(intent2);
-            }
-        });
+        textSignupLoginAccount.setVisibility(View.GONE);
+        ivSignupBack.setVisibility(View.INVISIBLE);
         nextField();
     }
 
