@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class SendOTP extends AppCompatActivity {
     private TextView textSendOtpSkip;
     private TextView sendOtpError;
     private String phoneNumber;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class SendOTP extends AppCompatActivity {
         btnSendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(textSendOtpPhone.getText().toString().substring(1));
+                loading(true);
                 getOtp();
             }
         });
@@ -74,6 +76,7 @@ public class SendOTP extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent1 = new Intent(SendOTP.this, Dashboard.class);
                 startActivity(intent1);
+                finish();
             }
         });
         ivSendOtpBack.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +91,7 @@ public class SendOTP extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent3 = new Intent(SendOTP.this, SignupPage.class);
                 startActivity(intent3);
+                finish();
             }
         });
     }
@@ -95,32 +99,42 @@ public class SendOTP extends AppCompatActivity {
     public void getOtp(){
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+84" + textSendOtpPhone.getText().toString().substring(1),
-                90,
+                30,
                 TimeUnit.SECONDS,
                 SendOTP.this,
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
-
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                        System.out.println("Ok2");
+                        loading(false);
                     }
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
-                        System.out.println(e.getMessage());
+                        loading(false);
                         Toast.makeText(SendOTP.this,e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        loading(false);
                         Intent intent = new Intent(SendOTP.this, OTP.class);
                         intent.putExtra("mobile", textSendOtpPhone.getText().toString());
                         intent.putExtra("verification", verificationId);
                         intent.putExtra("phoneNumber", phoneNumber);
                         startActivity(intent);
+                        finish();
                     }
                 }
         );
+    }
+
+    public void loading(boolean isLoad){
+        if(isLoad){
+            dialog = ProgressDialog.show(SendOTP.this, "",
+                    "Loading. Please wait...", true);
+        }else{
+            dialog.dismiss();
+        }
     }
 }
 

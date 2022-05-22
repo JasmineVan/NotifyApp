@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +29,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class OTP extends AppCompatActivity {
 
@@ -35,6 +48,10 @@ public class OTP extends AppCompatActivity {
     private EditText otp1, otp2, otp3, otp4, otp5, otp6;
     private String verifyId;
     private String phoneNumber;
+    private Boolean isExpire = false;
+    private CountDownTimer countDown;
+    private SharedPreferences sharedPreferences;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +60,7 @@ public class OTP extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
         btnOTPVerify = findViewById(R.id.btnOTPVerify);
         textOTPResend = findViewById(R.id.textOTPResend);
         ivOTPBack = findViewById(R.id.ivOTPBack);
@@ -59,12 +77,18 @@ public class OTP extends AppCompatActivity {
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 
         countDown();
+        resendCountDown();
         setupOTPInput();
 
         btnOTPVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendOTP();
+                if(!isExpire){
+                    sendOTP();
+                }
+                else{
+                    Toast.makeText(OTP.this,"Code is expired, please enter resend", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -80,16 +104,9 @@ public class OTP extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getOtp();
-                textOTPResend.setEnabled(false);
-                new CountDownTimer(30000, 1000) {
-                    public void onTick(long millisUntilFinished) {
-                        textOTPResend.setText(String.valueOf(millisUntilFinished / 1000));
-                    }
-                    public void onFinish() {
-                        textOTPResend.setText("Resend");
-                        textOTPResend.setEnabled(false);
-                    }
-                }.start();
+                resendCountDown();
+                countDown();
+
             }
         });
     }
@@ -199,15 +216,15 @@ public class OTP extends AppCompatActivity {
         String code = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString()
                 + otp4.getText().toString() + otp5.getText().toString() + otp6.getText().toString();
         if(verifyId != null){
+            loading(true);
             PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.getCredential(verifyId, code);
             FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            loading(false);
                             if(task.isSuccessful()){
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
+                                activeUser();
                             }else{
                                 Toast.makeText(OTP.this,"The verification code is invalid", Toast.LENGTH_SHORT).show();
                                 return;
@@ -220,7 +237,7 @@ public class OTP extends AppCompatActivity {
     public void getOtp(){
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+84" + phoneNumber.substring(1),
-                60,
+                30,
                 TimeUnit.SECONDS,
                 OTP.this,
                 new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
@@ -244,14 +261,94 @@ public class OTP extends AppCompatActivity {
     }
 
     public void countDown(){
-        new CountDownTimer(90000, 1000) {
+        if(countDown != null){
+            countDown.cancel();
+        }
+        countDown = new CountDownTimer(120000, 1000) {
+            long minute, second;
+            String minuteText, secondText;
             public void onTick(long millisUntilFinished) {
-                otpMinute.setText(String.valueOf(millisUntilFinished / 60000));
-                otpSecond.setText(String.valueOf(millisUntilFinished / 1000));
+                minute = millisUntilFinished / 60000;
+                second = (millisUntilFinished - minute * 60000) / 1000;
+                minuteText = String.valueOf(minute);
+                secondText = String.valueOf(second);
+                if(minuteText.length() == 1){
+                    minuteText = "0" + minuteText;
+                }
+                if(secondText.length() == 1){
+                    secondText = "0" + secondText;
+                }
+                otpMinute.setText(minuteText);
+                otpSecond.setText(secondText);
             }
             public void onFinish() {
-                System.out.println("Otp expired");
+                isExpire = true;
+            }
+        };
+        countDown.start();
+    }
+
+    public void resendCountDown(){
+        textOTPResend.setEnabled(false);
+        new CountDownTimer(20000, 1000) {
+            String second;
+            public void onTick(long millisUntilFinished) {
+                second = String.valueOf(millisUntilFinished / 1000);
+                if(second.length() == 1){
+                    second = "0"+second;
+                }
+                textOTPResend.setText(second+"s");
+            }
+            public void onFinish() {
+                textOTPResend.setText("Resend");
+                textOTPResend.setEnabled(true);
+                isExpire = false;
             }
         }.start();
     }
+
+    public void activeUser() {
+        String accessToken = sharedPreferences.getString("accessToken", "");
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/active").header("Authorization", "Bear " + accessToken).build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("onFailure", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                try {
+                    String responseData = response.body().string();
+                    JSONObject json = new JSONObject(responseData);
+                    int code = response.code();
+                    runOnUiThread(new Runnable(){
+                        @Override
+                        public void run(){
+                           if(code == 200){
+                               Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                               startActivity(intent);
+                               finish();
+                           }else{
+                               Toast.makeText(OTP.this,"Active failed", Toast.LENGTH_SHORT).show();
+                           }
+                        }
+                    });
+                } catch (JSONException e) {
+                    Log.d("onResponse", e.getMessage());
+                }
+            }
+        });
+    }
+    public void loading(boolean isLoad){
+        if(isLoad){
+            dialog = ProgressDialog.show(OTP.this, "",
+                    "Loading. Please wait...", true);
+        }else{
+            dialog.dismiss();
+        }
+    }
+
 }

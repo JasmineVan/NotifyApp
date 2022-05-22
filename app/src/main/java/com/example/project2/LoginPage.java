@@ -3,6 +3,7 @@ package com.example.project2;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,7 +43,7 @@ public class LoginPage extends AppCompatActivity {
     private TextView loginError;
     private CheckBox cbRemember;
     private SharedPreferences sharedPreferences;
-
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,7 @@ public class LoginPage extends AppCompatActivity {
                 if(!msg.equals("")){
                     Toast.makeText(LoginPage.this,msg,Toast.LENGTH_SHORT).show();
                 }else{
+                    loading(true);
                     signInApi();
                 }
             }
@@ -121,6 +123,7 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(Call call, final Response response)
                     throws IOException {
                 try {
+                    loading(false);
                     String responseData = response.body().string();
                     int code = response.code();
                     JSONObject json = new JSONObject(responseData);
@@ -208,5 +211,14 @@ public class LoginPage extends AppCompatActivity {
 
         textLoginPhoneNumber.setText(phoneNumber);
         textLoginPassword.setText((password));
+    }
+
+    public void loading(boolean isLoad){
+        if(isLoad){
+            dialog = ProgressDialog.show(LoginPage.this, "",
+                    "Loading. Please wait...", true);
+        }else{
+            dialog.dismiss();
+        }
     }
 }

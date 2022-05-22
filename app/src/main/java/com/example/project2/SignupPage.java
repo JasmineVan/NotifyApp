@@ -3,6 +3,7 @@ package com.example.project2;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class SignupPage extends AppCompatActivity {
     private TextView textSignupLoginAccount;
     public TextView signupError;
     private SharedPreferences sharedPreferences;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class SignupPage extends AppCompatActivity {
                     signupError.setText(msg);
                     signupError.setVisibility(View.VISIBLE);
                 }else{
+                    loading(true);
                     signUpApi();
                 }
             }
@@ -106,6 +109,7 @@ public class SignupPage extends AppCompatActivity {
             public void onResponse(Call call, final Response response)
                     throws IOException {
                 try {
+                    loading(false);
                     String responseData = response.body().string();
                     int code = response.code();
                     JSONObject json = new JSONObject(responseData);
@@ -220,5 +224,14 @@ public class SignupPage extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void loading(boolean isLoad){
+        if(isLoad){
+            dialog = ProgressDialog.show(SignupPage.this, "",
+                    "Loading. Please wait...", true);
+        }else{
+            dialog.dismiss();
+        }
     }
 }
