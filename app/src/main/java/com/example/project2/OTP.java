@@ -73,6 +73,7 @@ public class OTP extends AppCompatActivity {
         otp5 = findViewById(R.id.otp5);
         otp6 = findViewById(R.id.otp6);
 
+        ivOTPBack.setVisibility(View.INVISIBLE);
         verifyId = getIntent().getStringExtra("verification");
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 

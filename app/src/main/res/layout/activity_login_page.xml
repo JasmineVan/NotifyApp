@@ -12,15 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <ImageView
-            android:clickable="true"
             android:id="@+id/ivLoginBack"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:src="@drawable/ic_back"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
-            android:contentDescription="@string/login_back"/>
+            android:clickable="true"
+            android:contentDescription="@string/login_back"
+            android:src="@drawable/ic_back" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -58,6 +58,7 @@ public class SendOTP extends AppCompatActivity {
         sendOtpError = findViewById(R.id.sendOtpError);
         btnSendOtp = findViewById(R.id.btnSendOtp);
         btnSendOtpChangePhone = findViewById(R.id.btnSendOtpChangePhone);
+        ivSendOtpBack.setVisibility(View.INVISIBLE);
 
         phoneNumber = getIntent().getStringExtra("phoneNumber");
         textSendOtpPhone.setText(phoneNumber);

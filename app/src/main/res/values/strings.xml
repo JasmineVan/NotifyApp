@@ -36,7 +36,7 @@
     <string name="otp_no_receive">Did not receive the OTP?</string>
     <string name="otp_resend">Resend</string>
     <!--  send OTP  -->
-    <string name="sendOTP_title">Send OTP</string>
+    <string name="sendOTP_title">Active</string>
     <string name="sendOTP_phone_hint">Phone number show here</string>
     <string name="sendOtp_skip">Skip</string>
     <string name="sendOtp_change_phone">Change phone number</string>

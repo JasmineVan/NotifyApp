@@ -60,6 +60,7 @@ public class LoginPage extends AppCompatActivity {
         textCreateAccount = findViewById(R.id.textCreateAccount);
         loginError = findViewById(R.id.loginError);
         loginError.setVisibility(View.INVISIBLE);
+        ivLoginBack.setVisibility(View.INVISIBLE);
         sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
 
         getRemember();
@@ -69,6 +70,7 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginPage.this, SignupPage.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -91,7 +93,6 @@ public class LoginPage extends AppCompatActivity {
                 }
             }
         });
-        ivLoginBack.setVisibility(View.INVISIBLE);
         nextField();
     }
 

@@ -58,6 +58,7 @@ public class SignupPage extends AppCompatActivity {
         signupAsk = findViewById(R.id.signupAsk);
         signupAsk.setVisibility(View.GONE);
         signupError = findViewById(R.id.signupError);
+        ivSignupBack.setVisibility(View.INVISIBLE);
         signupError.setVisibility(View.INVISIBLE);
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +118,8 @@ public class SignupPage extends AppCompatActivity {
 
                                     Intent intent = new Intent(SignupPage.this, SendOTP.class);
                                     intent.putExtra("phoneNumber", textSignupPhone.getText().toString().trim());
-                                    startActivity(intent);
+                                    startActivity(intent                                                             );
+                                    finish();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
