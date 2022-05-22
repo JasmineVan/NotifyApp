@@ -2,6 +2,7 @@
     <!--  All activity  -->
     <string name="project_name">Notify</string>
     <string name="error">Error show here</string>
+    <string name="Logout">Logout</string>
     <!--  Login  -->
     <string name="app_name">Project2</string>
     <string name="login_description">Login into your Notify account</string>
@@ -41,6 +42,13 @@
     <string name="sendOtp_change_phone">Change phone number</string>
     <!--    dash board-->
     <!--    user fragment-->
+    <string name="user_fragment_title">User Setting</string>
+    <string name="user_fragment_fullname">Full Name</string>
+    <string name="user_fragment_phone">Phone</string>
+    <string name="user_fragment_edit">Edit Profile</string>
+    <string name="user_fragment_change">Change Password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/fragment_user_topNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="App Setting"
+            android:textSize="24dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/user_fragment_partition"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/myColor1"
+        android:layout_below="@id/fragment_user_topNav"
+        android:paddingStart="8dp"
+        android:paddingRight="8dp"/>
+
+</RelativeLayout>
