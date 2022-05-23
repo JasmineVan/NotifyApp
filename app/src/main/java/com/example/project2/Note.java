@@ -1,10 +1,12 @@
 package com.example.project2;
 
+import java.util.ArrayList;
+
 public class Note {
     private String noteId;
     private String userId;
     private String title;
-    private String[] label;
+    private ArrayList<String> label;
     private String content;
     private String noteMedia;
     private String mediaType;
@@ -23,7 +25,7 @@ public class Note {
         this.isPin = false;
     }
 
-    public Note (String noteId, String userId, String title, String[] label, String content, String date){
+    public Note (String noteId, String userId, String title, ArrayList<String> label, String content, String date){
         this.noteId = noteId;
         this.userId = userId;
         this.title = title;
@@ -35,7 +37,7 @@ public class Note {
         this.isPin = false;
     }
 
-    public Note (String noteId, String title, String userId, String[] label, String content, String noteMedia, String mediaType, String date){
+    public Note (String noteId, String title, String userId, ArrayList<String> label, String content, String noteMedia, String mediaType, String date){
         this.noteId = noteId;
         this.userId = userId;
         this.title = title;
@@ -78,11 +80,11 @@ public class Note {
         this.title = title;
     }
 
-    public String[] getLabel() {
+    public ArrayList<String> getLabel() {
         return label;
     }
 
-    public void setLabel(String[] label) {
+    public void setLabel(ArrayList<String> label) {
         this.label = label;
     }
 

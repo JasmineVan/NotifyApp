@@ -12,6 +12,7 @@
 
         <TextView
             android:id="@+id/homeFragmentHidenBlock"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Logout"
@@ -35,6 +36,7 @@
         <TextView
             android:id="@+id/homeFragmentHidenBlock2"
             android:layout_width="wrap_content"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:text="@string/Logout"
             android:textSize="24dp"
@@ -53,7 +55,7 @@
         android:layout_marginVertical="8dp"
         android:background="@drawable/search_bar_bg"
         android:iconifiedByDefault="false"
-        android:queryHint="Enter note name"
-        android:queryBackground="@android:color/transparent"/>
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Enter note name" />
 
 </RelativeLayout>

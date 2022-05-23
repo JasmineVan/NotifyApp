@@ -12,35 +12,37 @@
 
         <TextView
             android:id="@+id/favoriteFragmentHidenBlock"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Logout"
-            android:textSize="24dp"
-            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
             android:gravity="center"
-            android:layout_alignParentRight="true"/>
+            android:text="@string/Logout"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
 
         <TextView
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="All Note"
-            android:textSize="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_weight="1"
             android:fontFamily="sans-serif"
-            android:textColor="@color/black"
             android:gravity="center"
-            android:textStyle="bold"
-            android:layout_alignParentLeft="true"/>
+            android:text="All Note"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/favoriteFragmentHidenBlock2"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Logout"
-            android:textSize="24dp"
-            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
             android:gravity="center"
-            android:layout_alignParentRight="true"/>
+            android:text="@string/Logout"
+            android:textColor="@color/white"
+            android:textSize="24dp" />
 
     </LinearLayout>
 
