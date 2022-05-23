@@ -34,7 +34,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
         Note note = notes.get(position);
         holder.title.setText(note.getTitle());
-        holder.date.setText(note.getDate());
+        holder.label.setText("Label: " + note.getLabel());
+        holder.date.setText("Created at: " + note.getDate());
     }
 
     @Override
@@ -45,12 +46,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     //Create new view holder
     class NoteHolder extends RecyclerView.ViewHolder{
 
-        TextView title, date;
+        TextView title, date, label;
 
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.homepageNoteTitle);
             date = itemView.findViewById(R.id.homepageNoteDate);
+            label = itemView.findViewById(R.id.homepageNoteLabel);
         }
     }
 }

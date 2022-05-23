@@ -6,7 +6,7 @@ public class Note {
     private String noteId;
     private String userId;
     private String title;
-    private ArrayList<String> label;
+    private String label;
     private String content;
     private String noteMedia;
     private String mediaType;
@@ -25,7 +25,7 @@ public class Note {
         this.isPin = false;
     }
 
-    public Note (String noteId, String userId, String title, ArrayList<String> label, String content, String date){
+    public Note (String noteId, String userId, String title, String label, String content, String date){
         this.noteId = noteId;
         this.userId = userId;
         this.title = title;
@@ -37,7 +37,7 @@ public class Note {
         this.isPin = false;
     }
 
-    public Note (String noteId, String title, String userId, ArrayList<String> label, String content, String noteMedia, String mediaType, String date){
+    public Note (String noteId, String title, String userId, String label, String content, String noteMedia, String mediaType, String date){
         this.noteId = noteId;
         this.userId = userId;
         this.title = title;
@@ -80,11 +80,11 @@ public class Note {
         this.title = title;
     }
 
-    public ArrayList<String> getLabel() {
+    public String getLabel() {
         return label;
     }
 
-    public void setLabel(ArrayList<String> label) {
+    public void setLabel(String label) {
         this.label = label;
     }
 

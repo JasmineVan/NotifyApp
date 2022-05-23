@@ -1,5 +1,6 @@
 package com.example.project2;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,12 +45,15 @@ public class HomeFragment extends Fragment {
     private NoteAdapter adapter;
     private SharedPreferences sharedPreferences;
     private View view;
+    private ProgressDialog dialog;
+    private SearchView homeFragmentSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.recyclerView);
+        homeFragmentSearch = view.findViewById(R.id.homeFragmentSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
         pinNotes = new ArrayList<>();
         adapter = new NoteAdapter(this.getContext(), pinNotes);
@@ -64,17 +69,31 @@ public class HomeFragment extends Fragment {
         ArrayList<String> array = new ArrayList<String>();
         GetPinNote("",array);
 
+        homeFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String search) {
+                GetPinNote(search, array);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String search) {
+                return false;
+            }
+        });
+
         return view;
     }
 
     public void setPinNotes(JSONArray jsonArray){
         try {
+            pinNotes.clear();
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date;
             JSONArray jsonLabel;
-            ArrayList<String> label;
+            String label;
             for(int i = 0; i < jsonArray.length(); i++){
-                label = new ArrayList<String>();
+                label = "";
                 note = jsonArray.getJSONObject(i);
                 noteId = note.getString("_id");
                 userId = note.getString("userId");
@@ -83,12 +102,15 @@ public class HomeFragment extends Fragment {
                 content = note.getString("content");
                 createdAt = note.getString("createdAt");
                 date = formatDateFromString("yyyy-MM-dd", "dd-MM-yyyy", createdAt.substring(0,10));
-                Log.e("dcc",String.valueOf(jsonLabel.length()));
                 for(int j = 0; j < jsonLabel.length(); j++){
-                    label.add(jsonLabel.getString(j));
+                    label += jsonLabel.getString(j) ;
+                    if( j != jsonLabel.length() - 1){
+                        label += ", ";
+                    }
                 }
-                pinNotes.add(new Note(noteId, userId, title, label,content, date));
+                pinNotes.add(new Note(noteId, userId, title, label, content, date));
             }
+
             recyclerView.setAdapter(adapter);
         } catch (JSONException e) {
             Log.e("setPin error", e.toString());
@@ -96,6 +118,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void GetPinNote(String search, ArrayList<String> label){
+        loading(true);
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();
         String createStudentURL = "https://note-app-lake.vercel.app/notes/query";
@@ -119,6 +142,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call call, final Response response)
                     throws IOException {
+                loading(false);
                 try {
                     String responseData = response.body().string();
                     int code = response.code();
@@ -162,5 +186,14 @@ public class HomeFragment extends Fragment {
         }
 
         return outputDate;
+    }
+
+    public void loading(boolean isLoad){
+        if(isLoad){
+            dialog = ProgressDialog.show(getContext(), "",
+                    "Loading. Please wait...", true);
+        }else{
+            dialog.dismiss();
+        }
     }
 }

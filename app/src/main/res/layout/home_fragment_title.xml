@@ -56,6 +56,6 @@
         android:background="@drawable/search_bar_bg"
         android:iconifiedByDefault="false"
         android:queryBackground="@android:color/transparent"
-        android:queryHint="Enter note name" />
+        android:queryHint="Search title or content" />
 
 </RelativeLayout>

@@ -29,7 +29,7 @@
             android:layout_marginTop="4dp"
             android:paddingStart="4dp">
             <TextView
-                android:id="@+id/homepageNoteLabel1"
+                android:id="@+id/homepageNoteLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
@@ -38,28 +38,6 @@
                 android:text="Label Blue"
                 android:fontFamily="sans-serif"
                 android:textColor="@color/blue" />
-
-            <TextView
-                android:id="@+id/homepageNoteLabel2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:text="Label Green"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/green" />
-
-            <TextView
-                android:id="@+id/homepageNoteLabel3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:text="Label Orange"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/orange" />
         </LinearLayout>
 
         <TextView
