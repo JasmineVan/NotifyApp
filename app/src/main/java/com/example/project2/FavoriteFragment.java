@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +48,8 @@ public class FavoriteFragment extends Fragment {
     private ProgressDialog dialog;
     private SearchView favoriteFragmentSearch;
     private ArrayList<String> labelFilter;
+    private FloatingActionButton btnFavoriteFragmentAddNote;
+    private NewNoteFragment newNoteFragment = new NewNoteFragment();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +57,7 @@ public class FavoriteFragment extends Fragment {
         view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_favorite, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
+        btnFavoriteFragmentAddNote = view.findViewById(R.id.btnFavoriteFragmentAddNote);
         favoriteFragmentSearch= view.findViewById(R.id.favoriteFragmentSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
         allNotes = new ArrayList<>();
@@ -79,6 +84,12 @@ public class FavoriteFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String search) {
                 return false;
+            }
+        });
+        btnFavoriteFragmentAddNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.dashboard_container1, newNoteFragment).commit();
             }
         });
 

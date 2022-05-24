@@ -14,8 +14,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -48,6 +51,9 @@ public class HomeFragment extends Fragment {
     private ProgressDialog dialog;
     private SearchView homeFragmentSearch;
     private ArrayList<String> labelFilter;
+    private FloatingActionButton btnHomeFragmentAddNote;
+    private NewNoteFragment newNoteFragment = new NewNoteFragment();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +63,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         homeFragmentSearch = view.findViewById(R.id.homeFragmentSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
+        btnHomeFragmentAddNote = view.findViewById(R.id.btnHomeFragmentAddNote);
         pinNotes = new ArrayList<>();
         adapter = new NoteAdapter(this.getContext(), pinNotes);
 
@@ -81,6 +88,12 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String search) {
                 return true;
+            }
+        });
+        btnHomeFragmentAddNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.dashboard_container1, newNoteFragment).commit();
             }
         });
 

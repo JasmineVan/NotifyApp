@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class UserFragment extends Fragment {
     private TextView logOutBtn, user_fragment_tvFullName,user_fragment_tvPhone, user_fragment_tvActive;
     private View view;
     private ProgressDialog dialog;
+    private Button fragment_user_btnEdit, fragment_user_btnChangePassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +49,10 @@ public class UserFragment extends Fragment {
         user_fragment_tvFullName = (TextView) view.findViewById(R.id.user_fragment_tvFullName);
         user_fragment_tvPhone = (TextView) view.findViewById(R.id.user_fragment_tvPhone);
         user_fragment_tvActive = (TextView) view.findViewById(R.id.user_fragment_tvActive);
+
+        fragment_user_btnEdit = (Button) view.findViewById(R.id.fragment_user_btnEdit);
+        fragment_user_btnChangePassword = (Button) view.findViewById(R.id.fragment_user_btnChangePassword);
+
 
         getUserInfo();
 
@@ -64,6 +70,22 @@ public class UserFragment extends Fragment {
                 intent.putExtra("phoneNumber", user_fragment_tvPhone.getText().toString().trim());
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        fragment_user_btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), EditProfile.class);
+                startActivity(intent);
+            }
+        });
+
+        fragment_user_btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ChangePassword.class);
+                startActivity(intent);
             }
         });
 
