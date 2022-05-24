@@ -12,7 +12,6 @@
 
         <TextView
             android:id="@+id/homeFragmentHidenBlock"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Logout"
@@ -36,7 +35,6 @@
         <TextView
             android:id="@+id/homeFragmentHidenBlock2"
             android:layout_width="wrap_content"
-            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:text="@string/Logout"
             android:textSize="24dp"
@@ -46,7 +44,7 @@
 
     </LinearLayout>
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/homeFragmentSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,6 +54,8 @@
         android:background="@drawable/search_bar_bg"
         android:iconifiedByDefault="false"
         android:queryBackground="@android:color/transparent"
-        android:queryHint="Search title or content" />
+        android:queryHint="Enter note name">
+
+    </androidx.appcompat.widget.SearchView>
 
 </RelativeLayout>

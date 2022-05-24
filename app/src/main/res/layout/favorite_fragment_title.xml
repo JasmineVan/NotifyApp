@@ -46,7 +46,7 @@
 
     </LinearLayout>
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/favoriteFragmentSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,7 +55,9 @@
         android:layout_marginVertical="8dp"
         android:background="@drawable/search_bar_bg"
         android:iconifiedByDefault="false"
-        android:queryHint="Enter note name"
-        android:queryBackground="@android:color/transparent"/>
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Enter note name">
+
+    </androidx.appcompat.widget.SearchView>
 
 </RelativeLayout>
