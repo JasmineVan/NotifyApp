@@ -47,11 +47,13 @@ public class HomeFragment extends Fragment {
     private View view;
     private ProgressDialog dialog;
     private SearchView homeFragmentSearch;
+    private ArrayList<String> labelFilter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
+
         recyclerView = view.findViewById(R.id.recyclerView);
         homeFragmentSearch = view.findViewById(R.id.homeFragmentSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
@@ -66,19 +68,19 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        ArrayList<String> array = new ArrayList<String>();
-        GetPinNote("",array);
+        labelFilter = new ArrayList<String>();
+        GetPinNote("",labelFilter);
 
         homeFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String search) {
-                GetPinNote(search, array);
-                return false;
+                GetPinNote(search, labelFilter);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String search) {
-                return false;
+                return true;
             }
         });
 
@@ -122,7 +124,7 @@ public class HomeFragment extends Fragment {
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();
         String createStudentURL = "https://note-app-lake.vercel.app/notes/query";
-        FormBody.Builder formBody = new FormBody.Builder().add("search",search);
+        FormBody.Builder formBody = new FormBody.Builder().add("search",search).add("isPin", "true");
         if(label.size() > 0){
             for(int i = 0; i < label.size(); i++){
                 formBody.add("label", label.get(i));
@@ -137,7 +139,7 @@ public class HomeFragment extends Fragment {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d("onFailure", e.getMessage());
+                Log.e("onFailure", e.getMessage());
             }
             @Override
             public void onResponse(Call call, final Response response)
@@ -190,9 +192,11 @@ public class HomeFragment extends Fragment {
 
     public void loading(boolean isLoad){
         if(isLoad){
+            Log.e("s","wait");
             dialog = ProgressDialog.show(getContext(), "",
                     "Loading. Please wait...", true);
         }else{
+            Log.e("s","complete");
             dialog.dismiss();
         }
     }
