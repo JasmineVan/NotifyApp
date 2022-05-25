@@ -14,6 +14,7 @@
         android:layout_weight="1">
 
         <ImageView
+            android:visibility="invisible"
             android:id="@+id/ivLoginBack"
             android:layout_width="36dp"
             android:layout_height="36dp"

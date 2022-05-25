@@ -87,7 +87,8 @@ public class LoginPage extends AppCompatActivity {
             public void onClick(View view) {
                 String msg = checkSignIn();
                 if(!msg.equals("")){
-                    Toast.makeText(LoginPage.this,msg,Toast.LENGTH_SHORT).show();
+                    loginError.setVisibility(View.VISIBLE);
+                    loginError.setText(msg);
                 }else{
                     loading(true);
                     signInApi();
@@ -128,6 +129,7 @@ public class LoginPage extends AppCompatActivity {
                         public void run() {
                             if (code == 200) { //If request success, set error invisible, save access token to local
                                 try {
+                                    loginError.setVisibility(View.INVISIBLE);
                                     String accessToken = json.getString("accessToken");
                                     SharedPreferences.Editor editSharedPreferences = sharedPreferences.edit();
                                     editSharedPreferences.putString("accessToken", accessToken);
@@ -144,7 +146,8 @@ public class LoginPage extends AppCompatActivity {
                             } else { // If request fail, set the error return
                                 try {
                                     String error = json.getString("error");
-                                    Toast.makeText(LoginPage.this, error, Toast.LENGTH_SHORT).show();
+                                    loginError.setVisibility(View.VISIBLE);
+                                    loginError.setText(error);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

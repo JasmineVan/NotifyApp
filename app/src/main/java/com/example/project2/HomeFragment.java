@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment {
 
     public void setPinNotes(JSONArray jsonArray){
         try {
-            pinNotes.clear();System.out.println("Ok");
+            pinNotes.clear();
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date;
             JSONArray jsonLabel;

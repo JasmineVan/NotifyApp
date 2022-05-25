@@ -14,12 +14,13 @@
         android:layout_weight="1">
 
         <ImageView
-            android:clickable="true"
+            android:visibility="invisible"
             android:id="@+id/ivSignupBack"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
+            android:clickable="true"
             android:contentDescription="@string/login_back"
             android:src="@drawable/ic_back" />
 

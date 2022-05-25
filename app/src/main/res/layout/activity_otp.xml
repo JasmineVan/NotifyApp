@@ -15,10 +15,10 @@
         android:layout_weight="1">
 
         <ImageView
+            android:visibility="invisible"
             android:id="@+id/ivOTPBack"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:contentDescription="@string/login_back"
             android:src="@drawable/ic_back" />

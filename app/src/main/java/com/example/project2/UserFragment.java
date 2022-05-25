@@ -79,6 +79,7 @@ public class UserFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), EditProfile.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -87,6 +88,7 @@ public class UserFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ChangePassword.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -159,7 +161,7 @@ public class UserFragment extends Fragment {
                                 }
                             }
                             else {
-                                Toast.makeText(getContext(),"Active failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"Get info failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
