@@ -13,7 +13,6 @@
 
         <TextView
             android:id="@+id/homeFragmentHidenBlock"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Logout"
@@ -37,7 +36,6 @@
         <TextView
             android:id="@+id/homeFragmentHidenBlock2"
             android:layout_width="wrap_content"
-            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:text="@string/Logout"
             android:textSize="24dp"
