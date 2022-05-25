@@ -11,7 +11,7 @@
     <string name="login_forgot">Forgot password?</string>
     <string name="login_back">back</string>
     <string name="login_title">Login</string>
-    <string name="login_username_hint">Enter your username</string>
+    <string name="login_username_hint">Enter your phone number</string>
     <string name="login_password_hint">Enter your password</string>
     <!--  Signup  -->
     <string name="signup_title">Sign up</string>

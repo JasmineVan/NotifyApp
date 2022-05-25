@@ -66,6 +66,7 @@ public class HomeFragment extends Fragment {
         btnHomeFragmentAddNote = view.findViewById(R.id.btnHomeFragmentAddNote);
         pinNotes = new ArrayList<>();
         adapter = new NoteAdapter(this.getContext(), pinNotes);
+        dialog = new ProgressDialog(getActivity());
 
         //recyclerView setting
         recyclerView.setHasFixedSize(true);
@@ -102,7 +103,7 @@ public class HomeFragment extends Fragment {
 
     public void setPinNotes(JSONArray jsonArray){
         try {
-            pinNotes.clear();
+            pinNotes.clear();System.out.println("Ok");
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date;
             JSONArray jsonLabel;
@@ -204,13 +205,13 @@ public class HomeFragment extends Fragment {
     }
 
     public void loading(boolean isLoad){
-        if(isLoad){
+        if(isLoad && !dialog.isShowing()){
             Log.e("s","wait");
-            dialog = ProgressDialog.show(getContext(), "",
-                    "Loading. Please wait...", true);
+            dialog.setMessage("Loading. Please wait...");
+            dialog.show();
         }else{
             Log.e("s","complete");
-            dialog.dismiss();
+            dialog.cancel();
         }
     }
 }

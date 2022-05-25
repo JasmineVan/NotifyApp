@@ -52,6 +52,7 @@ public class SendOTP extends AppCompatActivity {
         actionBar.hide();
         FirebaseApp.initializeApp(this);
 
+        dialog = new ProgressDialog(SendOTP.this);
         textSendOtpPhone = findViewById(R.id.textSendOtpPhone);
         ivSendOtpBack = findViewById(R.id.ivSendOtpBack);
         textSendOtpSkip = findViewById(R.id.textSendOtpSkip);
@@ -123,11 +124,13 @@ public class SendOTP extends AppCompatActivity {
     }
 
     public void loading(boolean isLoad){
-        if(isLoad){
-            dialog = ProgressDialog.show(SendOTP.this, "",
-                    "Loading. Please wait...", true);
+        if(isLoad && !dialog.isShowing()){
+            Log.e("s","wait");
+            dialog.setMessage("Loading. Please wait...");
+            dialog.show();
         }else{
-            dialog.dismiss();
+            Log.e("s","complete");
+            dialog.cancel();
         }
     }
 }

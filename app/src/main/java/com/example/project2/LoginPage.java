@@ -62,6 +62,7 @@ public class LoginPage extends AppCompatActivity {
         loginError.setVisibility(View.INVISIBLE);
         ivLoginBack.setVisibility(View.INVISIBLE);
         sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
+        dialog = new ProgressDialog(LoginPage.this);
 
         getRemember();
 
@@ -209,11 +210,13 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public void loading(boolean isLoad){
-        if(isLoad){
-            dialog = ProgressDialog.show(LoginPage.this, "",
-                    "Loading. Please wait...", true);
+        if(isLoad && !dialog.isShowing()){
+            Log.e("s","wait");
+            dialog.setMessage("Loading. Please wait...");
+            dialog.show();
         }else{
-            dialog.dismiss();
+            Log.e("s","complete");
+            dialog.cancel();
         }
     }
 }

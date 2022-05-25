@@ -61,6 +61,7 @@ public class OTP extends AppCompatActivity {
         actionBar.hide();
 
         sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
+        dialog = new ProgressDialog(OTP.this);
         btnOTPVerify = findViewById(R.id.btnOTPVerify);
         textOTPResend = findViewById(R.id.textOTPResend);
         ivOTPBack = findViewById(R.id.ivOTPBack);
@@ -343,12 +344,15 @@ public class OTP extends AppCompatActivity {
             }
         });
     }
+
     public void loading(boolean isLoad){
-        if(isLoad){
-            dialog = ProgressDialog.show(OTP.this, "",
-                    "Loading. Please wait...", true);
+        if(isLoad && !dialog.isShowing()){
+            Log.e("s","wait");
+            dialog.setMessage("Loading. Please wait...");
+            dialog.show();
         }else{
-            dialog.dismiss();
+            Log.e("s","complete");
+            dialog.cancel();
         }
     }
 

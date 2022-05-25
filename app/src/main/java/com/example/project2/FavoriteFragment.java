@@ -62,6 +62,7 @@ public class FavoriteFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
         allNotes = new ArrayList<>();
         adapter = new NoteAdapter(this.getContext(), allNotes);
+        dialog = new ProgressDialog(getActivity());
 
         //recyclerView setting
         recyclerView.setHasFixedSize(true);
@@ -199,12 +200,15 @@ public class FavoriteFragment extends Fragment {
         });
     }
 
+
     public void loading(boolean isLoad){
-        if(isLoad){
-            dialog = ProgressDialog.show(getContext(), "",
-                    "Loading. Please wait...", true);
+        if(isLoad && !dialog.isShowing()){
+            Log.e("s","wait");
+            dialog.setMessage("Loading. Please wait...");
+            dialog.show();
         }else{
-            dialog.dismiss();
+            Log.e("s","complete");
+            dialog.cancel();
         }
     }
 }

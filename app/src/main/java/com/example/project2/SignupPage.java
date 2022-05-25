@@ -47,6 +47,7 @@ public class SignupPage extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        dialog = new ProgressDialog(SignupPage.this);
         textSignupUsername = findViewById(R.id.textSignupUsername);
         textSignupPhone = findViewById(R.id.textSignupPhone);
         textSignupPassword = findViewById(R.id.textSignupPassword);
@@ -219,11 +220,13 @@ public class SignupPage extends AppCompatActivity {
     }
 
     public void loading(boolean isLoad){
-        if(isLoad){
-            dialog = ProgressDialog.show(SignupPage.this, "",
-                    "Loading. Please wait...", true);
+        if(isLoad && !dialog.isShowing()){
+            Log.e("s","wait");
+            dialog.setMessage("Loading. Please wait...");
+            dialog.show();
         }else{
-            dialog.dismiss();
+            Log.e("s","complete");
+            dialog.cancel();
         }
     }
 }

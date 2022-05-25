@@ -45,6 +45,7 @@ public class UserFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_user, container, false);
         sharedPreferences = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        dialog = new ProgressDialog(getActivity());
         logOutBtn = (TextView) view.findViewById(R.id.fragment_user_btnLogout);
         user_fragment_tvFullName = (TextView) view.findViewById(R.id.user_fragment_tvFullName);
         user_fragment_tvPhone = (TextView) view.findViewById(R.id.user_fragment_tvPhone);
@@ -170,11 +171,13 @@ public class UserFragment extends Fragment {
     }
 
     public void loading(boolean isLoad){
-        if(isLoad){
-            dialog = ProgressDialog.show(getContext(), "",
-                    "Loading. Please wait...", true);
+        if(isLoad && !dialog.isShowing()){
+            Log.e("s","wait");
+            dialog.setMessage("Loading. Please wait...");
+            dialog.show();
         }else{
-            dialog.dismiss();
+            Log.e("s","complete");
+            dialog.cancel();
         }
     }
 }
