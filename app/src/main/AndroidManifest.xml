@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project2">
         <activity
+            android:name=".OTPRecover"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
+        <activity
             android:name=".ChangePassword"
             android:exported="false" />
         <activity

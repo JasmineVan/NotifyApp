@@ -38,9 +38,8 @@ public class LoginPage extends AppCompatActivity {
 
     private Button btnLogin;
     private EditText textLoginPhoneNumber, textLoginPassword;
-    private TextView textForgetPass, textCreateAccount;
+    private TextView textForgetPass, textCreateAccount, loginError;
     private ImageView ivLoginBack;
-    private TextView loginError;
     private CheckBox cbRemember;
     private SharedPreferences sharedPreferences;
     private ProgressDialog dialog;
@@ -54,6 +53,7 @@ public class LoginPage extends AppCompatActivity {
 
         textLoginPhoneNumber = findViewById(R.id.textLoginPhoneNumber);
         textLoginPassword = findViewById(R.id.textLoginPassword);
+        textForgetPass = findViewById(R.id.textForgot);
         cbRemember = findViewById(R.id.cbRemember);
         btnLogin = findViewById(R.id.btnLogin);
         ivLoginBack = findViewById(R.id.ivLoginBack);
@@ -93,6 +93,13 @@ public class LoginPage extends AppCompatActivity {
                     loading(true);
                     signInApi();
                 }
+            }
+        });
+        textForgetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginPage.this, ForgotPassword.class);
+                startActivity(intent);
             }
         });
         nextField();
