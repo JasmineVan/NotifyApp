@@ -40,6 +40,7 @@ public class NewNoteFragment extends Fragment {
     private TextView newNoteFragmentSave;
     private ProgressDialog dialog;
     private ArrayList<String> listLabel;
+    private ArrayList<Integer> labelSelected;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +54,7 @@ public class NewNoteFragment extends Fragment {
         newNoteFragmentLabel = (TextView) view.findViewById(R.id.newNoteFragmentLabel);
         newNoteFragmentContent = (EditText) view.findViewById(R.id.newNoteFragmentContent);
         newNoteFragmentSave = (TextView) view.findViewById(R.id.newNoteFragmentSave);
+        labelSelected = new ArrayList<Integer>();
 
         getUserLabel();
 
@@ -63,6 +65,19 @@ public class NewNoteFragment extends Fragment {
             }
         });
 
+        newNoteFragmentSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = checkCreateNewNote();
+                if(msg.equals("")){
+                    System.out.println("Ok");
+                }
+                else{
+                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         return view;
     }
 
@@ -70,26 +85,66 @@ public class NewNoteFragment extends Fragment {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle("AlertDialog");
         String[] arrayLabel = new String[listLabel.size()];
+        boolean[] isCheckArr = new boolean[listLabel.size()];
 
         for (int i = 0; i < listLabel.size(); i++){
             arrayLabel[i] = listLabel.get(i);
+            isCheckArr[i] = false;
         }
 
-        final ArrayList itemsSelected = new ArrayList();
+        for(int i = 0; i < labelSelected.size(); i++){
+            isCheckArr[labelSelected.get(i)] = true;
+        }
 
-        alertDialog.setMultiChoiceItems(arrayLabel, null, new DialogInterface.OnMultiChoiceClickListener() {
+        alertDialog.setMultiChoiceItems(arrayLabel, isCheckArr, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 if (isChecked) {
-                    itemsSelected.add(which);
-                } else if (itemsSelected.contains(which)) {
-                    itemsSelected.remove(Integer.valueOf(which));
+                    labelSelected.add(which);
+                } else if (labelSelected.contains(which)) {
+                    labelSelected.remove(Integer.valueOf(which));
                 }
             }
         });
+
+        alertDialog.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String label = "";
+                        for(int index = 0; index < labelSelected.size(); index++){
+                            label = label + listLabel.get(labelSelected.get(index)) ;
+                            if( index != labelSelected.size() - 1){
+                                label += ", ";
+                            }
+                        }
+                        newNoteFragmentLabel.setText(label);
+                    }
+                });
+        alertDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
         AlertDialog alert = alertDialog.create();
         alert.setCanceledOnTouchOutside(false);
         alert.show();
+    }
+
+    public String checkCreateNewNote(){
+        String msg = "";
+        if(newNoteFragmentTitle.getText().toString().trim().equals("")){
+            msg = "Missing title";
+        }
+        if(newNoteFragmentLabel.getText().toString().trim().equals("")){
+            msg = "Missing label";
+        }
+        if(newNoteFragmentContent.getText().toString().trim().equals("")){
+            msg = "Missing content";
+        }
+        return msg;
     }
 
     public void getUserLabel(){
