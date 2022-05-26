@@ -20,17 +20,36 @@
             android:paddingStart="8dp"
             android:text="Note title here"/>
 
-        <TextView
-            android:id="@+id/homepageNoteLabel"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:paddingStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:text="Label Blue"
-            android:fontFamily="sans-serif"
-            android:textColor="@color/blue" />
+            android:orientation="horizontal"
+            android:layout_weight="10">
+            <TextView
+                android:id="@+id/homepageNoteLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_gravity="center_vertical"
+                android:paddingStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:text="Label Blue"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/blue"
+                android:layout_weight="9"/>
+
+            <ImageView
+                android:id="@+id/ivNoteUnlock"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:contentDescription="note_unlock"
+                android:src="@drawable/ic_lock_open"
+                android:visibility="visible"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/homepageNoteDate"
