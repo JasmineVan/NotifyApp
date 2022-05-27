@@ -3,14 +3,18 @@ package com.example.project2;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 public class OTPRecover extends AppCompatActivity {
 
     private EditText otpRe1, otpRe2, otpRe3, otpRe4, otpRe5, otpRe6;
+    private Button btnOTPReVerify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,16 @@ public class OTPRecover extends AppCompatActivity {
         otpRe4 = findViewById(R.id.otpRe4);
         otpRe5 = findViewById(R.id.otpRe5);
         otpRe6 = findViewById(R.id.otpRe6);
+        btnOTPReVerify = findViewById(R.id.btnOTPReVerify);
 
         setupOTPInput();
+        btnOTPReVerify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OTPRecover.this, PasswordRecover.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setupOTPInput(){

@@ -10,6 +10,26 @@
 
     <include layout="@layout/home_fragment_title"/>
 
+    <LinearLayout
+        android:id="@+id/fragment_home_empty_holder"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/fragment_home_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pin note is empty"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif"
+            android:textSize="24dp"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

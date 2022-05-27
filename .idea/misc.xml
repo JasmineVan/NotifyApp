@@ -3,6 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.25089928057553956" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_change_password.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_forgot_password.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_login_page.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_otp.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_otprecover.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_password_recover.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_send_otp.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_signup_page.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/favorite_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_favorite.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_home.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_new_note.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_trash.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_view_note.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/home_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/homepage_items.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/new_note_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/setting_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/trash_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/view_note_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/menu/recycler_item_menu.xml" value="0.275" />
         <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/custom_button.xml" value="0.2225" />
         <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/custom_button2.xml" value="0.2225" />
         <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/gradient_bg.xml" value="0.2225" />
@@ -31,20 +53,11 @@
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/activity_otp.xml" value="0.15364583333333334" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/activity_send_otp.xml" value="0.22826086956521738" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/activity_signup_page.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/favorite_fragment_title.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_favorite.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_new_note.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_setting.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_trash.xml" value="0.22826086956521738" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_user.xml" value="0.264" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_view_note.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/home_fragment_title.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/homepage_items.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/new_note_fragment_title.xml" value="0.264" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/setting_fragment_title.xml" value="0.22826086956521738" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/user_fragment_title.xml" value="0.2" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/view_note_fragment_title.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_change_password.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/activity_login_page.xml" value="0.3359375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3359375" />
         <entry key="app/src/main/res/layout/activity_otp.xml" value="0.3359375" />
@@ -55,11 +68,17 @@
         <entry key="app/src/main/res/layout/favorite_fragment_title.xml" value="0.525" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.525" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.525" />
+        <entry key="app/src/main/res/layout/fragment_new_note.xml" value="0.525" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.525" />
+        <entry key="app/src/main/res/layout/fragment_trash.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/fragment_user.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/fragment_view_note.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/home_fragment_title.xml" value="0.525" />
         <entry key="app/src/main/res/layout/homepage_items.xml" value="0.525" />
+        <entry key="app/src/main/res/layout/new_note_fragment_title.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/setting_fragment_title.xml" value="0.525" />
         <entry key="app/src/main/res/layout/user_fragment_title.xml" value="0.525" />
+        <entry key="app/src/main/res/layout/view_note_fragment_title.xml" value="0.2953125" />
       </map>
     </option>
   </component>

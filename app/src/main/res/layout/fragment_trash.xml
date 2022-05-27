@@ -3,17 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".TrashFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Trash is empty"
-        android:textSize="24dp"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/black"/>
+    <include layout="@layout/trash_fragment_title"/>
+
+    <LinearLayout
+        android:id="@+id/fragment_trash_empty_holder"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/fragment_trash_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trash is empty"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="sans-serif"
+            android:textSize="24dp"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>

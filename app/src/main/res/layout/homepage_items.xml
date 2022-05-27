@@ -40,13 +40,13 @@
                 android:layout_weight="9"/>
 
             <ImageView
-                android:id="@+id/ivNoteUnlock"
+                android:id="@+id/ivNoteItemMenu"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:clickable="true"
                 android:gravity="center_vertical"
-                android:contentDescription="note_unlock"
-                android:src="@drawable/ic_lock_open"
+                android:contentDescription="note_menu"
+                android:src="@drawable/ic_more_vertical"
                 android:visibility="visible"
                 android:layout_weight="1"/>
         </LinearLayout>

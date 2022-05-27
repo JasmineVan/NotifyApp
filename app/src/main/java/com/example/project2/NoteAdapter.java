@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,12 +69,22 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     class NoteHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title, date, label;
         private ItemClickListener itemClickListener;
+        private ImageView ivNoteItemMenu;
 
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.homepageNoteTitle);
             date = itemView.findViewById(R.id.homepageNoteDate);
             label = itemView.findViewById(R.id.homepageNoteLabel);
+            ivNoteItemMenu = itemView.findViewById(R.id.ivNoteItemMenu);
+            ivNoteItemMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                    popupMenu.inflate(R.menu.recycler_item_menu);
+                    popupMenu.show();
+                }
+            });
 
             itemView.setOnClickListener(this);
         }

@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Project2">
         <activity
+            android:name=".PasswordRecover"
+            android:exported="false" />
+        <activity
             android:name=".OTPRecover"
             android:exported="false" />
         <activity
