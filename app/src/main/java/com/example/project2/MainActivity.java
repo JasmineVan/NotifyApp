@@ -47,4 +47,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        accessToken = sharedPreferences.getString("accessToken","");
+//        if (accessToken.isEmpty()){
+//            intent = new Intent(MainActivity.this, LoginPage.class);
+//        }else{
+//            intent = new Intent(MainActivity.this, Dashboard.class);
+//        }
+//        startActivity(intent);
+//    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        accessToken = sharedPreferences.getString("accessToken","");
+        if (accessToken.isEmpty()){
+            intent = new Intent(MainActivity.this, LoginPage.class);
+        }else{
+            intent = new Intent(MainActivity.this, Dashboard.class);
+        }
+        startActivity(intent);
+    }
 }

@@ -71,22 +71,7 @@
                 android:textColor="@color/black"
                 android:layout_weight="1"/>
 
-            <EditText
-                android:background="@android:color/transparent"
-                android:id="@+id/newNoteFragmentDate"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:hint="Sunday, 20-01-2000"
-                android:textSize="20dp"
-                android:paddingStart="4dp"
-                android:textStyle="italic"
-                android:layout_marginVertical="4dp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/gray"
-                android:inputType="text"
-                android:layout_weight="1"/>
-
-            <EditText
+            <TextView
                 android:background="@android:color/transparent"
                 android:id="@+id/newNoteFragmentLabel"
                 android:layout_width="match_parent"
@@ -103,7 +88,7 @@
 
             <EditText
                 android:background="@android:color/transparent"
-                android:hint=". . ."
+                android:hint="Content here"
                 android:id="@+id/newNoteFragmentContent"
                 android:inputType="text|textMultiLine"
                 android:layout_width="match_parent"
