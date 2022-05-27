@@ -1,5 +1,6 @@
 package com.example.project2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -224,6 +225,7 @@ public class LoginPage extends AppCompatActivity {
             Log.e("s","wait");
             dialog.setMessage("Loading. Please wait...");
             dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
         }else{
             Log.e("s","complete");
             dialog.cancel();

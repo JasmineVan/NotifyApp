@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+   <font android:fontStyle="normal"
+       android:fontWeight="400"
+       android:font="@font/arya"/>
+    <font android:fontStyle="normal"
+        android:fontWeight="700"
+        android:font="@font/arya_bold"/>
+    <font android:font="@font/oleo_script"
+        android:fontWeight="400"
+        android:fontStyle="normal"/>
+    <font android:fontStyle="normal"
+        android:fontWeight="700"
+        android:font="@font/oleo_script_bold"
+        />
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/cambay"
+        />
+    <font android:fontStyle="normal"
+        android:fontWeight="700"
+        android:font="@font/cambay_bold"
+        />
+</font-family>

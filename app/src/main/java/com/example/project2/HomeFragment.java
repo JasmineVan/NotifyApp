@@ -1,10 +1,16 @@
 package com.example.project2;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -52,6 +59,9 @@ public class HomeFragment extends Fragment {
     private SearchView homeFragmentSearch;
     private ArrayList<String> labelFilter;
     private FloatingActionButton btnHomeFragmentAddNote;
+    private ImageView homeFragmentFilter;
+    private ArrayList<String> listLabel;
+    private ArrayList<Integer> labelSelected;
     private NewNoteFragment newNoteFragment = new NewNoteFragment();
 
 
@@ -61,9 +71,13 @@ public class HomeFragment extends Fragment {
         view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
+        listLabel = new ArrayList<String>();
+        labelSelected = new ArrayList<Integer>();
+        labelFilter = new ArrayList<String>();
         homeFragmentSearch = view.findViewById(R.id.homeFragmentSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
         btnHomeFragmentAddNote = view.findViewById(R.id.btnHomeFragmentAddNote);
+        homeFragmentFilter = view.findViewById(R.id.homeFragmentFilter);
         pinNotes = new ArrayList<>();
         adapter = new NoteAdapter(this.getContext(), pinNotes);
         dialog = new ProgressDialog(getActivity());
@@ -76,8 +90,16 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
 
-        labelFilter = new ArrayList<String>();
         GetPinNote("",labelFilter);
+        getUserLabel();
+
+
+        homeFragmentFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLabelDialog();
+            }
+        });
 
         homeFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -106,6 +128,7 @@ public class HomeFragment extends Fragment {
             pinNotes.clear();
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date;
+            Boolean isPassword;
             JSONArray jsonLabel;
             String label;
             for(int i = 0; i < jsonArray.length(); i++){
@@ -116,6 +139,7 @@ public class HomeFragment extends Fragment {
                 jsonLabel = note.getJSONArray("label");
                 title = note.getString("title");
                 content = note.getString("content");
+                isPassword = note.getBoolean("isPassword");
                 createdAt = note.getString("createdAt");
                 date = formatDateFromString("yyyy-MM-dd", "dd-MM-yyyy", createdAt.substring(0,10));
                 for(int j = 0; j < jsonLabel.length(); j++){
@@ -124,13 +148,55 @@ public class HomeFragment extends Fragment {
                         label += ", ";
                     }
                 }
-                pinNotes.add(new Note(noteId, userId, title, label, content, date));
+                pinNotes.add(new Note(noteId, userId, title, label, content, date, isPassword));
             }
 
             recyclerView.setAdapter(adapter);
         } catch (JSONException e) {
             Log.e("setPin error", e.toString());
         }
+    }
+
+    public void getUserLabel(){
+        String accessToken = sharedPreferences.getString("accessToken", "");
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/settings").header("Authorization", "Bear " + accessToken).build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("onFailure", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                try {
+                    String responseData = response.body().string();
+                    JSONObject json = new JSONObject(responseData);
+                    int code = response.code();
+
+                    getActivity().runOnUiThread(new Runnable(){
+                        @Override
+                        public void run(){
+                            if(code == 200){
+                                try {
+                                    JSONArray label = json.getJSONArray("label");
+                                    for(int i = 0; i < label.length(); i++){
+                                        listLabel.add(label.getString(i));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else {
+                                Toast.makeText(getContext(),"Get label failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    Log.d("onResponse", e.getMessage());
+                }
+            }
+        });
     }
 
     public void GetPinNote(String search, ArrayList<String> label){
@@ -186,6 +252,55 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void showLabelDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle("Label");
+        String[] arrayLabel = new String[listLabel.size()];
+        boolean[] isCheckArr = new boolean[listLabel.size()];
+
+        for (int i = 0; i < listLabel.size(); i++){
+            arrayLabel[i] = listLabel.get(i);
+            isCheckArr[i] = false;
+        }
+
+        for(int i = 0; i < labelSelected.size(); i++){
+            isCheckArr[labelSelected.get(i)] = true;
+        }
+
+        alertDialog.setMultiChoiceItems(arrayLabel, isCheckArr, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                if (isChecked) {
+                    labelSelected.add(which);
+                } else if (labelSelected.contains(which)) {
+                    labelSelected.remove(Integer.valueOf(which));
+                }
+            }
+        });
+
+        alertDialog.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        labelFilter.clear();
+                        for(int index = 0; index < labelSelected.size(); index++){
+                            labelFilter.add(listLabel.get(labelSelected.get(index)));
+                        }
+                        GetPinNote("", labelFilter);
+                    }
+                });
+        alertDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
+    }
+
     public static String formatDateFromString(String inputFormat, String outputFormat, String inputDate){
         Date parsed = null;
         String outputDate = "";
@@ -209,6 +324,7 @@ public class HomeFragment extends Fragment {
             Log.e("s","wait");
             dialog.setMessage("Loading. Please wait...");
             dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
         }else{
             Log.e("s","complete");
             dialog.cancel();

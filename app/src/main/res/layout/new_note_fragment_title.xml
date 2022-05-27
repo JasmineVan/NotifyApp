@@ -29,16 +29,16 @@
                 android:layout_alignParentRight="true"/>
 
             <TextView
-                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="New Note"
-                android:textSize="24dp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/black"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="1"
+                android:fontFamily="More Fonts..."
                 android:gravity="center"
-                android:textStyle="bold"
-                android:layout_alignParentLeft="true"/>
+                android:text="New Note"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/newNoteFragmentSave"

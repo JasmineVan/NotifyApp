@@ -2,17 +2,22 @@ package com.example.project2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -25,6 +30,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     private Context context;
     private List<Note> notes;
+
     private ViewNoteFragment viewNoteFragment = new ViewNoteFragment();
 
     public NoteAdapter(Context context, List<Note> notes) {
@@ -38,17 +44,23 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         View view = LayoutInflater.from(context).inflate(R.layout.homepage_items, parent, false);
         return new NoteHolder(view);    }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull NoteHolder holder, int position) {
         Note note = notes.get(position);
         holder.title.setText(note.getTitle());
         holder.label.setText("Label: " + note.getLabel());
         holder.date.setText("Created at: " + note.getDate());
+        if(note.getPassword()){
+            holder.ivNoteUnlock.setImageResource(R.drawable.ic_lock_close);
+        }
+        else{
+            holder.ivNoteUnlock.setImageResource(R.drawable.ic_lock_open);
+        }
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                Toast.makeText(context, " "+ note.getNoteId(), Toast.LENGTH_SHORT).show();
                 Bundle data = new Bundle();
                 data.putString("noteId", note.getNoteId());
                 viewNoteFragment.setArguments(data);
@@ -66,6 +78,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     //Create new view holder
     class NoteHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title, date, label;
+        ImageView ivNoteUnlock;
         private ItemClickListener itemClickListener;
 
         public NoteHolder(@NonNull View itemView) {
@@ -73,6 +86,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             title = itemView.findViewById(R.id.homepageNoteTitle);
             date = itemView.findViewById(R.id.homepageNoteDate);
             label = itemView.findViewById(R.id.homepageNoteLabel);
+            ivNoteUnlock = itemView.findViewById(R.id.ivNoteUnlock);
+
+            ivNoteUnlock.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String noteId = notes.get(getAdapterPosition()).getNoteId();
+                }
+            });
 
             itemView.setOnClickListener(this);
         }

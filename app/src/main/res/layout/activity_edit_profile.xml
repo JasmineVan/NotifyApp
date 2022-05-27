@@ -31,15 +31,16 @@
             android:layout_marginLeft="48dp"
             android:layout_marginRight="48dp"
             android:layout_centerVertical="true">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:fontFamily="More Fonts..."
                 android:text="@string/project_name"
-                android:textSize="48dp"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-condensed"/>
+                android:textSize="48dp"
+                android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="24dp"
-            android:fontFamily="serif"
+            android:fontFamily="More Fonts..."
             android:text="Edit Profile"
             android:textColor="@color/black"
             android:textSize="20dp" />

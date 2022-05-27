@@ -44,7 +44,6 @@ public class OTP extends AppCompatActivity {
 
     private Button btnOTPVerify;
     private TextView textOTPResend, otpMinute, otpSecond;
-    private ImageView ivOTPBack;
     private EditText otp1, otp2, otp3, otp4, otp5, otp6;
     private String verifyId;
     private String phoneNumber;
@@ -64,7 +63,6 @@ public class OTP extends AppCompatActivity {
         dialog = new ProgressDialog(OTP.this);
         btnOTPVerify = findViewById(R.id.btnOTPVerify);
         textOTPResend = findViewById(R.id.textOTPResend);
-        ivOTPBack = findViewById(R.id.ivOTPBack);
         otpMinute = findViewById(R.id.otpMinute);
         otpSecond = findViewById(R.id.otpSecond);
         otp1 = findViewById(R.id.otp1);
@@ -74,7 +72,6 @@ public class OTP extends AppCompatActivity {
         otp5 = findViewById(R.id.otp5);
         otp6 = findViewById(R.id.otp6);
 
-        ivOTPBack.setVisibility(View.INVISIBLE);
         verifyId = getIntent().getStringExtra("verification");
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 
@@ -91,14 +88,6 @@ public class OTP extends AppCompatActivity {
                 else{
                     Toast.makeText(OTP.this,"Code is expired, please enter resend", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-
-        ivOTPBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent(OTP.this, SendOTP.class);
-                startActivity(intent1);
             }
         });
 
@@ -350,10 +339,10 @@ public class OTP extends AppCompatActivity {
             Log.e("s","wait");
             dialog.setMessage("Loading. Please wait...");
             dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
         }else{
             Log.e("s","complete");
             dialog.cancel();
         }
     }
-
 }

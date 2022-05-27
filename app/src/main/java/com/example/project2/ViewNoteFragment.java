@@ -1,17 +1,26 @@
 package com.example.project2;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +32,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import okhttp3.Call;
@@ -35,13 +43,11 @@ import okhttp3.Response;
 
 public class ViewNoteFragment extends Fragment {
     private View view;
-    private TextView viewNoteFragmentTitle;
-    private TextView viewNoteFragmentDate;
-    private TextView viewNoteFragmentLabel;
-    private TextView viewNoteFragmentContent;
+    private TextView viewNoteFragmentTitle, viewNoteFragmentDate, viewNoteFragmentLabel, viewNoteFragmentContent;
     private ProgressDialog dialog;
     private SharedPreferences sharedPreferences;
     private String noteId;
+    private Typeface typeface;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,8 +66,7 @@ public class ViewNoteFragment extends Fragment {
             noteId = bundle.getString("noteId", "");
         }
 
-        getNoteDetail();
-
+        getIsPassword();
         return view;
     }
 
@@ -92,10 +97,10 @@ public class ViewNoteFragment extends Fragment {
                     int code = response.code();
                     JSONObject json = new JSONObject(responseData);
                     getActivity().runOnUiThread(new Runnable() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
                         @Override
                         public void run() {
                             if(code == 200){
-                                System.out.println(json);
                                 try {
                                     String title = json.getString("title");
                                     String content = json.getString("content");
@@ -109,6 +114,18 @@ public class ViewNoteFragment extends Fragment {
                                             label += ", ";
                                         }
                                     }
+                                    int font = json.getInt("font");
+                                    switch (font){
+                                        case 1:
+                                            typeface = getContext().getResources().getFont(R.font.arya);
+                                        case 2:
+                                            typeface = getContext().getResources().getFont(R.font.oleo_script);
+                                    }
+                                    viewNoteFragmentTitle.setTypeface(typeface);
+                                    viewNoteFragmentDate.setTypeface(typeface);
+                                    viewNoteFragmentLabel.setTypeface(typeface);
+                                    viewNoteFragmentContent.setTypeface(typeface);
+
                                     viewNoteFragmentTitle.setText(title);
                                     viewNoteFragmentContent.setText(content);
                                     viewNoteFragmentDate.setText("Created At: " + date);
@@ -118,7 +135,55 @@ public class ViewNoteFragment extends Fragment {
                                 }
                             }
                             else {
-                                Toast.makeText(getContext(),"Active failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"Wrong Password", Toast.LENGTH_SHORT).show();
+                                createVerifyPasswordAlert();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    Log.d("onResponse", e.getMessage());
+                }
+            }
+        });
+    }
+
+    public void getIsPassword(){
+        loading(true);
+        String accessToken = sharedPreferences.getString("accessToken", "");
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("https://note-app-lake.vercel.app/notes/isPassword/noteId/" + noteId).header("Authorization", "Bear " + accessToken).build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("onFailure", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                loading(false);
+                try {
+                    String responseData = response.body().string();
+                    JSONObject json = new JSONObject(responseData);
+                    int code = response.code();
+
+                    getActivity().runOnUiThread(new Runnable(){
+                        @Override
+                        public void run(){
+                            if(code == 200){
+                                try {
+                                    Boolean isPassword = json.getBoolean("isPassword");
+                                    if(isPassword){
+                                        createVerifyPasswordAlert();
+                                    }
+                                    else{
+                                        getNoteDetail();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else {
+                                Toast.makeText(getContext(),"Get is password failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -134,10 +199,34 @@ public class ViewNoteFragment extends Fragment {
             Log.e("s","wait");
             dialog.setMessage("Loading. Please wait...");
             dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
         }else{
             Log.e("s","complete");
             dialog.cancel();
         }
+    }
+
+    public void createVerifyPasswordAlert(){
+        AlertDialog builder;
+        builder = new AlertDialog.Builder(getContext()).create();
+        builder.setCanceledOnTouchOutside(false);
+        builder.setTitle("Enter Password");
+        final EditText input = new EditText(getContext());
+        input.setHint("Enter password");
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        input.setLayoutParams(lp);
+        builder.setView(input);
+
+        builder.setButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        getNoteDetail();
+                    }
+                });
+        builder.show();
     }
 
     public static String formatDateFromString(String inputFormat, String outputFormat, String inputDate){

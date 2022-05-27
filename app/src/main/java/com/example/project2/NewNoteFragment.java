@@ -6,9 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -46,7 +50,12 @@ public class NewNoteFragment extends Fragment {
     private ProgressDialog dialog;
     private ArrayList<String> listLabel;
     private ArrayList<Integer> labelSelected;
+    private ViewNoteFragment viewNoteFragment = new ViewNoteFragment();
+    private Typeface typeface;
+    private int font = 0;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,11 +71,12 @@ public class NewNoteFragment extends Fragment {
         labelSelected = new ArrayList<Integer>();
 
         getUserLabel();
+        getUserFont();
 
         newNoteFragmentLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAlertDialog();
+                showLabelDialog();
             }
         });
 
@@ -86,9 +96,9 @@ public class NewNoteFragment extends Fragment {
         return view;
     }
 
-    private void showAlertDialog() {
+    private void showLabelDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-        alertDialog.setTitle("AlertDialog");
+        alertDialog.setTitle("Label");
         String[] arrayLabel = new String[listLabel.size()];
         boolean[] isCheckArr = new boolean[listLabel.size()];
 
@@ -157,7 +167,7 @@ public class NewNoteFragment extends Fragment {
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();
         String createStudentURL = "https://note-app-lake.vercel.app/notes/create";
-        FormBody.Builder formBody = new FormBody.Builder().add("title",newNoteFragmentTitle.getText().toString().trim()).add("content", newNoteFragmentContent.getText().toString().trim());
+        FormBody.Builder formBody = new FormBody.Builder().add("title",newNoteFragmentTitle.getText().toString().trim()).add("content", newNoteFragmentContent.getText().toString().trim()).add("font", String.valueOf(font));
         if(labelSelected.size() > 0){
             for(int i = 0; i < labelSelected.size(); i++){
                 formBody.add("label", listLabel.get(labelSelected.get(i)));
@@ -188,16 +198,65 @@ public class NewNoteFragment extends Fragment {
                             if(code == 200){
                                 try {
                                     String noteId = json.getString("noteId");
-                                    Intent intent1 = new Intent(getActivity(), ViewNoteFragment.class);
-                                    intent1.putExtra("noteId", noteId);
-                                    startActivity(intent1);
-                                    getActivity().finish();
+                                    Bundle data = new Bundle();
+                                    data.putString("noteId", noteId);
+                                    viewNoteFragment.setArguments(data);
+                                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, viewNoteFragment).commit();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
                             else {
                                 Toast.makeText(getContext(),"Active failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    Log.d("onResponse", e.getMessage());
+                }
+            }
+        });
+    }
+
+    public void getUserFont(){
+        String accessToken = sharedPreferences.getString("accessToken", "");
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/settings").header("Authorization", "Bear " + accessToken).build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("onFailure", e.getMessage());
+            }
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                try {
+                    String responseData = response.body().string();
+                    JSONObject json = new JSONObject(responseData);
+                    int code = response.code();
+
+                    getActivity().runOnUiThread(new Runnable(){
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+                        @Override
+                        public void run(){
+                            if(code == 200){
+                                try {
+                                    font = json.getInt("font");
+
+                                    switch (font){
+                                        case 1:
+                                            typeface = getContext().getResources().getFont(R.font.arya);
+                                        case 2:
+                                            typeface = getContext().getResources().getFont(R.font.oleo_script);
+                                    }
+                                    newNoteFragmentTitle.setTypeface(typeface);
+                                    newNoteFragmentLabel.setTypeface(typeface);
+                                    newNoteFragmentContent.setTypeface(typeface);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else {
+                                Toast.makeText(getContext(),"Get font failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -257,6 +316,7 @@ public class NewNoteFragment extends Fragment {
             Log.e("s","wait");
             dialog.setMessage("Loading. Please wait...");
             dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
         }else{
             Log.e("s","complete");
             dialog.cancel();

@@ -1,5 +1,6 @@
 package com.example.project2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -52,6 +54,7 @@ public class SignupPage extends AppCompatActivity {
         textSignupPhone = findViewById(R.id.textSignupPhone);
         textSignupPassword = findViewById(R.id.textSignupPassword);
         textSignupPasswordConfirm = findViewById(R.id.textSignupPasswordConfirm);
+        sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
 
         btnSignup = findViewById(R.id.btnSignup);
         ivSignupBack = findViewById(R.id.ivSignupBack);
@@ -112,7 +115,6 @@ public class SignupPage extends AppCompatActivity {
                                 try {
                                     signupError.setVisibility(View.INVISIBLE);
                                     String accessToken = json.getString("accessToken");
-                                    sharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
                                     SharedPreferences.Editor editSharedPreferences = sharedPreferences.edit();
                                     editSharedPreferences.putString("accessToken", accessToken);
                                     editSharedPreferences.commit();
@@ -224,6 +226,7 @@ public class SignupPage extends AppCompatActivity {
             Log.e("s","wait");
             dialog.setMessage("Loading. Please wait...");
             dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
         }else{
             Log.e("s","complete");
             dialog.cancel();

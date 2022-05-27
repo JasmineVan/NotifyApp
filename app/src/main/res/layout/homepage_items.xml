@@ -55,9 +55,10 @@
             android:id="@+id/homepageNoteDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/font"
             android:paddingStart="8dp"
-            android:textSize="16dp"
-            android:text="Sunday 15/05/2022 12:00"/>
+            android:text="Sunday 15/05/2022 12:00"
+            android:textSize="16dp" />
     </LinearLayout>
 
 </LinearLayout>

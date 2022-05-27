@@ -113,7 +113,6 @@ public class SendOTP extends AppCompatActivity {
                     public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         loading(false);
                         Intent intent = new Intent(SendOTP.this, OTP.class);
-                        intent.putExtra("mobile", textSendOtpPhone.getText().toString());
                         intent.putExtra("verification", verificationId);
                         intent.putExtra("phoneNumber", phoneNumber);
                         startActivity(intent);
@@ -128,6 +127,7 @@ public class SendOTP extends AppCompatActivity {
             Log.e("s","wait");
             dialog.setMessage("Loading. Please wait...");
             dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
         }else{
             Log.e("s","complete");
             dialog.cancel();
