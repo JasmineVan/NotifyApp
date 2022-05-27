@@ -7,26 +7,27 @@
         android:id="@+id/fragment_favorite_topNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/myColor1"
-        android:padding="12dp">
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:weightSum="10">
 
-        <TextView
-            android:id="@+id/favoriteFragmentHidenBlock"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:text="@string/Logout"
-            android:textColor="@color/white"
-            android:textSize="24dp" />
+        <ImageView
+            android:id="@+id/ivFavoriteFragmentHidden"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:contentDescription="note_grid"
+            android:src="@drawable/ic_gridview"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_weight="1"
+            android:layout_weight="8"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:text="All Note"
@@ -34,29 +35,47 @@
             android:textSize="24dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/favoriteFragmentHidenBlock2"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:gravity="center"
-            android:text="@string/Logout"
-            android:textColor="@color/white"
-            android:textSize="24dp" />
+        <ImageView
+            android:id="@+id/ivFavoriteFragmentGrid"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:contentDescription="note_grid"
+            android:src="@drawable/ic_gridview"
+            android:visibility="visible" />
 
     </LinearLayout>
 
-    <SearchView
-        android:id="@+id/favoriteFragmentSearch"
+    <LinearLayout
+        android:id="@+id/favoriteFragmentContainer2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_below="@id/fragment_favorite_topNav"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="8dp"
-        android:background="@drawable/search_bar_bg"
-        android:iconifiedByDefault="false"
-        android:queryBackground="@android:color/transparent"
-        android:queryHint="Search title or content" />
+        android:weightSum="10">
+        <SearchView
+            android:id="@+id/favoriteFragmentSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="8dp"
+            android:background="@drawable/search_bar_bg"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"
+            android:queryHint="Search title or content"
+            android:layout_weight="9"/>
+        <ImageView
+            android:id="@+id/favoriteFragmentFilter"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:clickable="true"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="note_audio"
+            android:src="@drawable/ic_filter"
+            android:visibility="visible"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 </RelativeLayout>

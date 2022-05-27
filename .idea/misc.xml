@@ -3,6 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.25089928057553956" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_change_password.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_forgot_password.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_login_page.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_otp.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_otprecover.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_send_otp.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_signup_page.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/favorite_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_new_note.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_view_note.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/home_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/homepage_items.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/new_note_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/view_note_fragment_title.xml" value="0.275" />
         <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/custom_button.xml" value="0.2225" />
         <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/custom_button2.xml" value="0.2225" />
         <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/gradient_bg.xml" value="0.2225" />
