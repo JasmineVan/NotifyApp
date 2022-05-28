@@ -23,12 +23,14 @@
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:paddingStart="8dp"
+                android:layout_gravity="center"
                 android:text="Note title here"
                 android:layout_weight="6"/>
             <ImageView
                 android:id="@+id/ivNoteItemLock"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:clickable="true"
                 android:gravity="center_vertical"
                 android:contentDescription="note_lock"
