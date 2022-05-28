@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -89,13 +90,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             date = itemView.findViewById(R.id.homepageNoteDate);
             label = itemView.findViewById(R.id.homepageNoteLabel);
             ivNoteItemLock = itemView.findViewById(R.id.ivNoteItemLock);
-
-            ivNoteItemLock.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String noteId = notes.get(getAdapterPosition()).getNoteId();
-                }
-            });
             
             ivNoteItemMenu = itemView.findViewById(R.id.ivNoteItemMenu);
             ivNoteItemMenu.setOnClickListener(new View.OnClickListener() {
@@ -103,10 +97,41 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                 public void onClick(View view) {
                     PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
                     popupMenu.inflate(R.menu.recycler_item_menu);
+
+
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+                            return menuItemClicked(menuItem);
+                        }
+
+                        private boolean menuItemClicked(MenuItem item) {
+                            String noteId = "";
+                            switch (item.getItemId()) {
+                                case R.id.recycler_item_pin:
+                                    noteId = notes.get(getAdapterPosition()).getNoteId();
+                                    Toast.makeText(context, "Pin", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case R.id.recycler_item_edit:
+                                    noteId = notes.get(getAdapterPosition()).getNoteId();
+                                    Toast.makeText(context, "Edit", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case R.id.recycler_item_lock:
+                                    noteId = notes.get(getAdapterPosition()).getNoteId();
+                                    Toast.makeText(context, "Lock", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case R.id.recycler_item_delete:
+                                    noteId = notes.get(getAdapterPosition()).getNoteId();
+                                    Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
+                                    break;
+                            }
+                            System.out.println(noteId);
+                            return true;
+                        }
+                    });
                     popupMenu.show();
                 }
             });
-
             itemView.setOnClickListener(this);
         }
 
@@ -118,6 +143,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         @Override
         public void onClick(View view) {
             itemClickListener.onClick(view, getAdapterPosition(), false);
+        }
+
+        public void pinItem (String noteId){
+
         }
     }
     public interface ItemClickListener {
