@@ -97,7 +97,6 @@ public class OTP extends AppCompatActivity {
                 getOtp();
                 resendCountDown();
                 countDown();
-
             }
         });
     }

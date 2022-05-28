@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -28,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -45,6 +47,7 @@ public class OTPRecover extends AppCompatActivity {
     private ProgressDialog dialog;
     private String verifyId;
     private CountDownTimer countDown;
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class OTPRecover extends AppCompatActivity {
         textOTPReResend = findViewById(R.id.textOTPReResend);
         btnOTPReVerify = findViewById(R.id.btnOTPReVerify);
         verifyId = getIntent().getStringExtra("verification");
-        System.out.println(verifyId);
+        phoneNumber = getIntent().getStringExtra("phoneNumber");
 
         countDown();
         resendCountDown();
@@ -79,6 +82,15 @@ public class OTPRecover extends AppCompatActivity {
                 } else{
                     Toast.makeText(OTPRecover.this,"Code is expired, please enter resend", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        textOTPReResend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOtp();
+                resendCountDown();
+                countDown();
             }
         });
     }
@@ -176,6 +188,32 @@ public class OTPRecover extends AppCompatActivity {
         });
     }
 
+    public void getOtp(){
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+84" + phoneNumber.substring(1),
+                30,
+                TimeUnit.SECONDS,
+                OTPRecover.this,
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                        System.out.println("Ok2");
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                        Toast.makeText(OTPRecover.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        verifyId = verificationId;
+                    }
+                }
+        );
+    }
+
     public void sendOTP(){
         if(otpRe1.getText().toString().trim().isEmpty()
                 || otpRe2.getText().toString().trim().isEmpty()
@@ -197,7 +235,10 @@ public class OTPRecover extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             loading(false);
                             if(task.isSuccessful()){
-                                Toast.makeText(OTPRecover.this,"OK", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(OTPRecover.this, PasswordRecover.class);
+                                intent.putExtra("phoneNumber", phoneNumber);
+                                startActivity(intent);
+                                finish();
                             }else{
                                 Toast.makeText(OTPRecover.this,"The verification code is invalid", Toast.LENGTH_SHORT).show();
                                 return;
@@ -253,50 +294,6 @@ public class OTPRecover extends AppCompatActivity {
             }
         }.start();
     }
-
-//    public void forgetPasswordAPI() {
-//        OkHttpClient client = new OkHttpClient();
-//        String createStudentURL = "https://note-app-lake.vercel.app/users/forgetPassword";
-//        RequestBody formBody = new FormBody.Builder()
-//                .add("phoneNumber", textLoginPhoneNumber.getText().toString().trim())
-//                .add("password", textLoginPassword.getText().toString().trim())
-//                .build();
-//        Request request = new Request.Builder()
-//                .url(createStudentURL)
-//                .post(formBody)
-//                .build();
-//
-//        client.newCall(request).enqueue(new okhttp3.Callback() {
-//            @Override
-//            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-//                Log.d("onFailure", e.getMessage());
-//            }
-//
-//            @Override
-//            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-//                try {
-//                    String responseData = response.body().string();
-//                    JSONObject json = new JSONObject(responseData);
-//                    int code = response.code();
-//                    runOnUiThread(new Runnable(){
-//                        @Override
-//                        public void run(){
-//                            if(code == 200){
-//                                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                startActivity(intent);
-//                                finish();
-//                            }else{
-//                                Toast.makeText(OTP.this,"Active failed", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//                    });
-//                } catch (JSONException e) {
-//                    Log.d("onResponse", e.getMessage());
-//                }
-//            }
-//        });
-//    }
 
     public void loading(boolean isLoad){
         if(isLoad && !dialog.isShowing()){
