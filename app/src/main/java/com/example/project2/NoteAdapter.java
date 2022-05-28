@@ -26,18 +26,31 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentViewHolder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
 
     private Context context;
     private List<Note> notes;
+    private SharedPreferences sharedPreferences;
 
     private ViewNoteFragment viewNoteFragment = new ViewNoteFragment();
 
     public NoteAdapter(Context context, List<Note> notes) {
         this.context = context;
         this.notes = notes;
+        sharedPreferences = context.getSharedPreferences("Login", Context.MODE_PRIVATE);
     }
 
     @NonNull
@@ -81,8 +94,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     class NoteHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title, date, label;
         ImageView ivNoteItemLock;
-        private ItemClickListener itemClickListener;
-        private ImageView ivNoteItemMenu;
+        ItemClickListener itemClickListener;
+        ImageView ivNoteItemMenu;
 
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,8 +108,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             ivNoteItemMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Note note = notes.get(getAdapterPosition());
                     PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
                     popupMenu.inflate(R.menu.recycler_item_menu);
+
+                    if(note.getPin()){
+                        popupMenu.getMenu().findItem(R.id.recycler_item_pin).setVisible(false);
+                    }else{
+                        popupMenu.getMenu().findItem(R.id.recycler_item_unpin).setVisible(false);
+                    }
 
 
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -106,26 +126,29 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                         }
 
                         private boolean menuItemClicked(MenuItem item) {
-                            String noteId = "";
                             switch (item.getItemId()) {
                                 case R.id.recycler_item_pin:
-                                    noteId = notes.get(getAdapterPosition()).getNoteId();
-                                    Toast.makeText(context, "Pin", Toast.LENGTH_SHORT).show();
+                                    pinItem(note.getNoteId(), getAdapterPosition());
+                                    break;
+                                case R.id.recycler_item_unpin:
+                                    unpinItem(note.getNoteId(), getAdapterPosition());
                                     break;
                                 case R.id.recycler_item_edit:
-                                    noteId = notes.get(getAdapterPosition()).getNoteId();
                                     Toast.makeText(context, "Edit", Toast.LENGTH_SHORT).show();
                                     break;
                                 case R.id.recycler_item_lock:
-                                    noteId = notes.get(getAdapterPosition()).getNoteId();
                                     Toast.makeText(context, "Lock", Toast.LENGTH_SHORT).show();
                                     break;
+                                case R.id.recycler_item_unlock:
+                                    Toast.makeText(context, "Unlock", Toast.LENGTH_SHORT).show();
+                                    break;
                                 case R.id.recycler_item_delete:
-                                    noteId = notes.get(getAdapterPosition()).getNoteId();
                                     Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
                                     break;
+                                case R.id.recycler_item_restore:
+                                    Toast.makeText(context, "Restore", Toast.LENGTH_SHORT).show();
+                                    break;
                             }
-                            System.out.println(noteId);
                             return true;
                         }
                     });
@@ -145,10 +168,98 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             itemClickListener.onClick(view, getAdapterPosition(), false);
         }
 
-        public void pinItem (String noteId){
+        public void pinItem(String noteId, int position) {
+            String accessToken = sharedPreferences.getString("accessToken", "");
+            OkHttpClient client = new OkHttpClient();
+            String createStudentURL = "https://note-app-lake.vercel.app/notes/pin";
+            RequestBody formBody = new FormBody.Builder()
+                    .add("noteId", noteId)
+                    .add("isPin", "true")
+                    .build();
+            Request request = new Request.Builder()
+                    .url(createStudentURL)
+                    .header("Authorization", "Bear " + accessToken)
+                    .put(formBody)
+                    .build();
 
+            client.newCall(request).enqueue(new okhttp3.Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.d("onFailure", e.getMessage());
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    try {
+                        String responseData = response.body().string();
+                        JSONObject json = new JSONObject(responseData);
+                        int code = response.code();
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable(){
+                            @Override
+                            public void run(){
+                                if(code == 200){
+                                    notes.remove(position);
+                                    NoteAdapter.this.notifyItemRemoved(position);
+
+                                }else{
+                                    Toast.makeText( ((AppCompatActivity)context),"Set pin failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } catch (JSONException e) {
+                        Log.d("onResponse", e.getMessage());
+                    }
+                }
+            });
         }
+
+        public void unpinItem(String noteId, int position) {
+            String accessToken = sharedPreferences.getString("accessToken", "");
+            OkHttpClient client = new OkHttpClient();
+            String createStudentURL = "https://note-app-lake.vercel.app/notes/pin";
+            RequestBody formBody = new FormBody.Builder()
+                    .add("noteId", noteId)
+                    .add("isPin", "false")
+                    .build();
+            Request request = new Request.Builder()
+                    .url(createStudentURL)
+                    .header("Authorization", "Bear " + accessToken)
+                    .put(formBody)
+                    .build();
+
+            client.newCall(request).enqueue(new okhttp3.Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.d("onFailure", e.getMessage());
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    try {
+                        String responseData = response.body().string();
+                        JSONObject json = new JSONObject(responseData);
+                        int code = response.code();
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable(){
+                            @Override
+                            public void run(){
+                                if(code == 200){
+                                    notes.remove(position);
+                                    NoteAdapter.this.notifyItemRemoved(position);
+
+                                }else{
+                                    Toast.makeText( ((AppCompatActivity)context),"Set unpin failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } catch (JSONException e) {
+                        Log.d("onResponse", e.getMessage());
+                    }
+                }
+            });
+        }
+
     }
+
     public interface ItemClickListener {
         void onClick(View view, int position,boolean isLongClick);
     }

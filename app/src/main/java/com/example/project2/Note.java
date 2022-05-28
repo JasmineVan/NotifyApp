@@ -12,6 +12,8 @@ public class Note {
     private String mediaType;
     private String date;
     private Boolean isPassword;
+    private Boolean isPin;
+    private Boolean isDelete;
 
     public Note (String noteId, String userId, String title, String content, String date){
         this.noteId = noteId;
@@ -24,7 +26,7 @@ public class Note {
         this.isPassword = false;
     }
 
-    public Note (String noteId, String userId, String title, String label, String content, String date, Boolean isPassword){
+    public Note (String noteId, String userId, String title, String label, String content, String date, Boolean isPassword, Boolean isPin, Boolean isDelete){
         this.noteId = noteId;
         this.userId = userId;
         this.title = title;
@@ -32,6 +34,8 @@ public class Note {
         this.date = date;
         this.content = content;
         this.isPassword = isPassword;
+        this.isPin = isPin;
+        this.isDelete = isDelete;
         this.noteMedia = "";
         this.mediaType = "";
     }
@@ -118,5 +122,21 @@ public class Note {
 
     public void setPassword(Boolean password) {
         isPassword = password;
+    }
+
+    public Boolean getPin() {
+        return isPin;
+    }
+
+    public void setPin(Boolean pin) {
+        isPin = pin;
+    }
+
+    public Boolean getDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(Boolean delete) {
+        isDelete = delete;
     }
 }

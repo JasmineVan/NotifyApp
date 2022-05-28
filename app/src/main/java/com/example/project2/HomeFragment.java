@@ -22,7 +22,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -57,6 +59,8 @@ public class HomeFragment extends Fragment {
     private View view;
     private ProgressDialog dialog;
     private SearchView homeFragmentSearch;
+    private TextView fragment_home_empty;
+    private LinearLayout fragment_home_empty_holder;
     private ArrayList<String> labelFilter;
     private FloatingActionButton btnHomeFragmentAddNote;
     private ImageView homeFragmentFilter;
@@ -77,6 +81,8 @@ public class HomeFragment extends Fragment {
         homeFragmentSearch = view.findViewById(R.id.homeFragmentSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
         btnHomeFragmentAddNote = view.findViewById(R.id.btnHomeFragmentAddNote);
+        fragment_home_empty = view.findViewById(R.id.fragment_home_empty);
+        fragment_home_empty_holder = view.findViewById(R.id.fragment_home_empty_holder);
         homeFragmentFilter = view.findViewById(R.id.homeFragmentFilter);
         pinNotes = new ArrayList<>();
         adapter = new NoteAdapter(this.getContext(), pinNotes);
@@ -92,7 +98,6 @@ public class HomeFragment extends Fragment {
 
         GetPinNote("",labelFilter);
         getUserLabel();
-
 
         homeFragmentFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,12 +128,16 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public void setPinNotes(JSONArray jsonArray){
+    public void setPinNotes(@NonNull JSONArray jsonArray){
         try {
+            if(jsonArray.length() == 0){
+                fragment_home_empty_holder.setVisibility(View.VISIBLE);
+                fragment_home_empty.setVisibility(View.VISIBLE);
+            }
             pinNotes.clear();
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date;
-            Boolean isPassword;
+            Boolean isPassword, isPin, isDelete;
             JSONArray jsonLabel;
             String label;
             for(int i = 0; i < jsonArray.length(); i++){
@@ -140,6 +149,8 @@ public class HomeFragment extends Fragment {
                 title = note.getString("title");
                 content = note.getString("content");
                 isPassword = note.getBoolean("isPassword");
+                isPin = note.getBoolean("isPin");
+                isDelete = note.getBoolean("isDelete");
                 createdAt = note.getString("createdAt");
                 date = formatDateFromString("yyyy-MM-dd", "dd-MM-yyyy", createdAt.substring(0,10));
                 for(int j = 0; j < jsonLabel.length(); j++){
@@ -148,7 +159,7 @@ public class HomeFragment extends Fragment {
                         label += ", ";
                     }
                 }
-                pinNotes.add(new Note(noteId, userId, title, label, content, date, isPassword));
+                pinNotes.add(new Note(noteId, userId, title, label, content, date, isPassword, isPin, isDelete));
             }
 
             recyclerView.setAdapter(adapter);
@@ -199,7 +210,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    public void GetPinNote(String search, ArrayList<String> label){
+    public void GetPinNote(String search, @NonNull ArrayList<String> label){
         loading(true);
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();

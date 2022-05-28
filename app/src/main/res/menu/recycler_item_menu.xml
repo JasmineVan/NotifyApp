@@ -5,12 +5,22 @@
         android:id="@+id/recycler_item_pin"
         android:title="Pin" />
     <item
+        android:id="@+id/recycler_item_unpin"
+        android:title="Unpin" />
+    <item
         android:id="@+id/recycler_item_edit"
         android:title="Edit" />
+    <item
+        android:id="@+id/recycler_item_unlock"
+        android:title="Unlock" />
     <item
         android:id="@+id/recycler_item_lock"
         android:title="Lock" />
     <item
         android:id="@+id/recycler_item_delete"
         android:title="Delete" />
+    <item
+        android:id="@+id/recycler_item_restore"
+        android:title="Restore" />
+    restore
 </menu>

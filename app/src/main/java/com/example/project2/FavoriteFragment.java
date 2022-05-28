@@ -18,7 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -52,6 +54,8 @@ public class FavoriteFragment extends Fragment {
     private ProgressDialog dialog;
     private SearchView favoriteFragmentSearch;
     private ArrayList<String> labelFilter;
+    private LinearLayout fragment_favorite_empty_holder;
+    private TextView fragment_favorite_empty;
     private FloatingActionButton btnFavoriteFragmentAddNote;
     private ImageView favoriteFragmentFilter;
     private ArrayList<String> listLabel;
@@ -68,6 +72,8 @@ public class FavoriteFragment extends Fragment {
         labelSelected = new ArrayList<Integer>();
         labelFilter = new ArrayList<String>();
         favoriteFragmentFilter = view.findViewById(R.id.favoriteFragmentFilter);
+        fragment_favorite_empty_holder = view.findViewById(R.id.fragment_favorite_empty_holder);
+        fragment_favorite_empty = view.findViewById(R.id.fragment_favorite_empty);
         btnFavoriteFragmentAddNote = view.findViewById(R.id.btnFavoriteFragmentAddNote);
         favoriteFragmentSearch= view.findViewById(R.id.favoriteFragmentSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
@@ -117,11 +123,15 @@ public class FavoriteFragment extends Fragment {
 
     public void setNotes(JSONArray jsonArray){
         try {
+            if(jsonArray.length() == 0){
+                fragment_favorite_empty_holder.setVisibility(View.VISIBLE);
+                fragment_favorite_empty.setVisibility(View.VISIBLE);
+            }
             allNotes.clear();
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date;
             JSONArray jsonLabel;
-            Boolean isPassword;
+            Boolean isPassword, isPin, isDelete;
             String label;
             for(int i = 0; i < jsonArray.length(); i++){
                 label = "";
@@ -132,6 +142,8 @@ public class FavoriteFragment extends Fragment {
                 title = note.getString("title");
                 content = note.getString("content");
                 isPassword = note.getBoolean("isPassword");
+                isPin = note.getBoolean("isPin");
+                isDelete = note.getBoolean("isDelete");
                 createdAt = note.getString("createdAt");
                 date = formatDateFromString("yyyy-MM-dd", "dd-MM-yyyy", createdAt.substring(0,10));
                 for(int j = 0; j < jsonLabel.length(); j++){
@@ -140,7 +152,7 @@ public class FavoriteFragment extends Fragment {
                         label += ", ";
                     }
                 }
-                allNotes.add(new Note(noteId, userId, title, label, content, date, isPassword));
+                allNotes.add(new Note(noteId, userId, title, label, content, date, isPassword, isPin, isDelete));
             }
 
             recyclerView.setAdapter(adapter);
