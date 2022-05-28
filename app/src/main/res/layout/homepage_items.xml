@@ -11,14 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/homepageNoteTitle"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:paddingStart="8dp"
-            android:text="Note title here"/>
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <TextView
+                android:id="@+id/homepageNoteTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:paddingStart="8dp"
+                android:text="Note title here"
+                android:layout_weight="6"/>
+            <ImageView
+                android:id="@+id/ivNoteItemLock"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:contentDescription="note_lock"
+                android:src="@drawable/ic_lock_open"
+                android:visibility="visible"
+                android:layout_weight="4"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,13 +57,13 @@
                 android:layout_weight="9"/>
 
             <ImageView
-                android:id="@+id/ivNoteUnlock"
+                android:id="@+id/ivNoteItemMenu"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:clickable="true"
                 android:gravity="center_vertical"
-                android:contentDescription="note_unlock"
-                android:src="@drawable/ic_lock_open"
+                android:contentDescription="note_menu"
+                android:src="@drawable/ic_more_vertical"
                 android:visibility="visible"
                 android:layout_weight="1"/>
         </LinearLayout>
@@ -55,10 +72,9 @@
             android:id="@+id/homepageNoteDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/font"
             android:paddingStart="8dp"
-            android:text="Sunday 15/05/2022 12:00"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:text="Sunday 15/05/2022 12:00"/>
     </LinearLayout>
 
 </LinearLayout>

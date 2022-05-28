@@ -73,7 +73,7 @@
             android:clickable="true"
             android:layout_gravity="center_vertical"
             android:contentDescription="note_audio"
-            android:src="@drawable/ic_filter"
+            android:src="@drawable/ic_filter_list"
             android:visibility="visible"
             android:layout_weight="1"/>
     </LinearLayout>

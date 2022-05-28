@@ -4,59 +4,59 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/fragment_favorite_topNav"
+        android:id="@+id/fragment_trash_topNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/myColor1"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:weightSum="10">
+        android:background="@color/myColor1"
+        android:weightSum="10"
+        android:padding="12dp">
 
         <ImageView
-            android:id="@+id/ivFavoriteFragmentHidden"
-            android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:contentDescription="note_grid"
-            android:src="@drawable/ic_gridview"
-            android:visibility="invisible" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_weight="8"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:text="All Note"
-            android:textColor="@color/black"
-            android:textSize="24dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/ivFavoriteFragmentGrid"
+            android:id="@+id/ivTrashFragmentHidden"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:clickable="true"
+            android:layout_gravity="center_vertical"
             android:contentDescription="note_grid"
-            android:src="@drawable/ic_gridview"
-            android:visibility="visible" />
+            android:src="@drawable/ic_delete"
+            android:visibility="invisible"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_weight="8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Trash"
+            android:textSize="24dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_alignParentLeft="true"/>
+
+        <ImageView
+            android:id="@+id/trashFragmentEmpty"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:clickable="true"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="note_grid"
+            android:src="@drawable/ic_delete"
+            android:visibility="visible"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/favoriteFragmentContainer2"
+        android:id="@+id/trashFragmentContainer2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/fragment_favorite_topNav"
+        android:layout_below="@id/fragment_trash_topNav"
         android:weightSum="10">
         <SearchView
-            android:id="@+id/favoriteFragmentSearch"
+            android:id="@+id/trashFragmentSearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
@@ -67,7 +67,7 @@
             android:queryHint="Search title or content"
             android:layout_weight="9"/>
         <ImageView
-            android:id="@+id/favoriteFragmentFilter"
+            android:id="@+id/trashFragmentFilter"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:clickable="true"

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,10 +53,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         holder.label.setText("Label: " + note.getLabel());
         holder.date.setText("Created at: " + note.getDate());
         if(note.getPassword()){
-            holder.ivNoteUnlock.setImageResource(R.drawable.ic_lock_close);
+            holder.ivNoteItemLock.setImageResource(R.drawable.ic_lock_close);
         }
         else{
-            holder.ivNoteUnlock.setImageResource(R.drawable.ic_lock_open);
+            holder.ivNoteItemLock.setImageResource(R.drawable.ic_lock_open);
         }
 
         holder.setItemClickListener(new ItemClickListener() {
@@ -78,20 +79,31 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
     //Create new view holder
     class NoteHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title, date, label;
-        ImageView ivNoteUnlock;
+        ImageView ivNoteItemLock;
         private ItemClickListener itemClickListener;
+        private ImageView ivNoteItemMenu;
 
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.homepageNoteTitle);
             date = itemView.findViewById(R.id.homepageNoteDate);
             label = itemView.findViewById(R.id.homepageNoteLabel);
-            ivNoteUnlock = itemView.findViewById(R.id.ivNoteUnlock);
+            ivNoteItemLock = itemView.findViewById(R.id.ivNoteItemLock);
 
-            ivNoteUnlock.setOnClickListener(new View.OnClickListener() {
+            ivNoteItemLock.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String noteId = notes.get(getAdapterPosition()).getNoteId();
+                }
+            });
+            
+            ivNoteItemMenu = itemView.findViewById(R.id.ivNoteItemMenu);
+            ivNoteItemMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                    popupMenu.inflate(R.menu.recycler_item_menu);
+                    popupMenu.show();
                 }
             });
 
