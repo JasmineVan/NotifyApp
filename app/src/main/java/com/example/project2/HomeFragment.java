@@ -1,6 +1,8 @@
 package com.example.project2;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,6 +13,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -136,7 +140,7 @@ public class HomeFragment extends Fragment {
             }
             pinNotes.clear();
             JSONObject note;
-            String noteId, userId, title ,content, createdAt, date;
+            String noteId, userId, title ,content, createdAt, date, notePassword;
             Boolean isPassword, isPin, isDelete;
             JSONArray jsonLabel;
             String label;
@@ -151,6 +155,7 @@ public class HomeFragment extends Fragment {
                 isPassword = note.getBoolean("isPassword");
                 isPin = note.getBoolean("isPin");
                 isDelete = note.getBoolean("isDelete");
+                notePassword = note.getString("notePassword");
                 createdAt = note.getString("createdAt");
                 date = formatDateFromString("yyyy-MM-dd", "dd-MM-yyyy", createdAt.substring(0,10));
                 for(int j = 0; j < jsonLabel.length(); j++){
@@ -159,7 +164,7 @@ public class HomeFragment extends Fragment {
                         label += ", ";
                     }
                 }
-                pinNotes.add(new Note(noteId, userId, title, label, content, date, isPassword, isPin, isDelete));
+                pinNotes.add(new Note(noteId, userId, title, label, content, date, isPassword, isPin, isDelete, notePassword));
             }
 
             recyclerView.setAdapter(adapter);

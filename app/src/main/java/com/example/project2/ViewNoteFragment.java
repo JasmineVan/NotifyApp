@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.text.InputType;
 import android.util.Log;
@@ -43,11 +44,12 @@ import okhttp3.Response;
 
 public class ViewNoteFragment extends Fragment {
     private View view;
-    private TextView viewNoteFragmentTitle, viewNoteFragmentDate, viewNoteFragmentLabel, viewNoteFragmentContent;
+    private TextView viewNoteFragmentTitle, viewNoteFragmentDate, viewNoteFragmentLabel, viewNoteFragmentContent, viewNoteFragmentEdit;
     private ProgressDialog dialog;
     private SharedPreferences sharedPreferences;
     private String noteId;
     private Typeface typeface;
+    private EditNoteFragment editNoteFragment = new EditNoteFragment();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,23 +62,35 @@ public class ViewNoteFragment extends Fragment {
         viewNoteFragmentDate = (TextView) view.findViewById(R.id.viewNoteFragmentDate);
         viewNoteFragmentLabel = (TextView) view.findViewById(R.id.viewNoteFragmentLabel);
         viewNoteFragmentContent = (TextView) view.findViewById(R.id.viewNoteFragmentContent);
-        noteId = getActivity().getIntent().getStringExtra("noteId");
+        viewNoteFragmentEdit = (TextView) view.findViewById(R.id.viewNoteFragmentEdit);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             noteId = bundle.getString("noteId", "");
         }
 
+        viewNoteFragmentEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle data = new Bundle();
+                data.putString("noteId", noteId);
+                editNoteFragment.setArguments(data);
+                getFragmentManager().beginTransaction().replace(R.id.dashboard_container1, editNoteFragment).commit();
+            }
+        });
+
         getIsPassword();
         return view;
     }
 
-    public void getNoteDetail(){
+    public void getNoteDetail(String password){
         loading(true);
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();
         String createStudentURL = "https://note-app-lake.vercel.app/notes/detail/noteId/" + noteId;
         FormBody.Builder formBody = new FormBody.Builder();
-
+        if(!password.equals("")){
+            formBody.add("password",password);
+        }
         FormBody form =  formBody.build();
         Request request = new Request.Builder()
                 .url(createStudentURL)
@@ -121,8 +135,8 @@ public class ViewNoteFragment extends Fragment {
                                         case 2:
                                             typeface = getContext().getResources().getFont(R.font.oleo_script);
                                     }
-                                    viewNoteFragmentTitle.setTypeface(typeface);
                                     viewNoteFragmentDate.setTypeface(typeface);
+                                    viewNoteFragmentTitle.setTypeface(typeface);
                                     viewNoteFragmentLabel.setTypeface(typeface);
                                     viewNoteFragmentContent.setTypeface(typeface);
 
@@ -176,7 +190,7 @@ public class ViewNoteFragment extends Fragment {
                                         createVerifyPasswordAlert();
                                     }
                                     else{
-                                        getNoteDetail();
+                                        getNoteDetail("");
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -223,7 +237,7 @@ public class ViewNoteFragment extends Fragment {
         builder.setButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        getNoteDetail();
+                        getNoteDetail(input.getText().toString().trim());
                     }
                 });
         builder.show();

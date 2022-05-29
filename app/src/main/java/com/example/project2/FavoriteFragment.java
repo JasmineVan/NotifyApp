@@ -129,7 +129,7 @@ public class FavoriteFragment extends Fragment {
             }
             allNotes.clear();
             JSONObject note;
-            String noteId, userId, title ,content, createdAt, date;
+            String noteId, userId, title ,content, createdAt, date, notePassword;
             JSONArray jsonLabel;
             Boolean isPassword, isPin, isDelete;
             String label;
@@ -144,6 +144,7 @@ public class FavoriteFragment extends Fragment {
                 isPassword = note.getBoolean("isPassword");
                 isPin = note.getBoolean("isPin");
                 isDelete = note.getBoolean("isDelete");
+                notePassword = note.getString("notePassword");
                 createdAt = note.getString("createdAt");
                 date = formatDateFromString("yyyy-MM-dd", "dd-MM-yyyy", createdAt.substring(0,10));
                 for(int j = 0; j < jsonLabel.length(); j++){
@@ -152,7 +153,7 @@ public class FavoriteFragment extends Fragment {
                         label += ", ";
                     }
                 }
-                allNotes.add(new Note(noteId, userId, title, label, content, date, isPassword, isPin, isDelete));
+                allNotes.add(new Note(noteId, userId, title, label, content, date, isPassword, isPin, isDelete, notePassword));
             }
 
             recyclerView.setAdapter(adapter);

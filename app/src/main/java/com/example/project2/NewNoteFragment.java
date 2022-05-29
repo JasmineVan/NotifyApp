@@ -207,7 +207,7 @@ public class NewNoteFragment extends Fragment {
                                 }
                             }
                             else {
-                                Toast.makeText(getContext(),"Active failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(),"Create note failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

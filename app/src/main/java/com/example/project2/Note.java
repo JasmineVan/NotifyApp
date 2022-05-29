@@ -14,19 +14,9 @@ public class Note {
     private Boolean isPassword;
     private Boolean isPin;
     private Boolean isDelete;
+    private String notePassword;
 
-    public Note (String noteId, String userId, String title, String content, String date){
-        this.noteId = noteId;
-        this.userId = userId;
-        this.title = title;
-        this.date = date;
-        this.content = content;
-        this.noteMedia = "";
-        this.mediaType = "";
-        this.isPassword = false;
-    }
-
-    public Note (String noteId, String userId, String title, String label, String content, String date, Boolean isPassword, Boolean isPin, Boolean isDelete){
+    public Note (String noteId, String userId, String title, String label, String content, String date, Boolean isPassword, Boolean isPin, Boolean isDelete, String notePassword){
         this.noteId = noteId;
         this.userId = userId;
         this.title = title;
@@ -38,18 +28,7 @@ public class Note {
         this.isDelete = isDelete;
         this.noteMedia = "";
         this.mediaType = "";
-    }
-
-    public Note (String noteId, String title, String userId, String label, String content, String noteMedia, String mediaType, String date, Boolean isPassword){
-        this.noteId = noteId;
-        this.userId = userId;
-        this.title = title;
-        this.label = label;
-        this.content = content;
-        this.noteMedia = noteMedia;
-        this.mediaType = mediaType;
-        this.date = date;
-        this.isPassword = isPassword;
+        this.notePassword = notePassword;
     }
 
     public String getNoteId() {
@@ -138,5 +117,13 @@ public class Note {
 
     public void setDelete(Boolean delete) {
         isDelete = delete;
+    }
+
+    public String getNotePassword() {
+        return notePassword;
+    }
+
+    public void setNotePassword(String notePassword) {
+        this.notePassword = notePassword;
     }
 }

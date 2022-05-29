@@ -56,15 +56,10 @@
         <item>English</item>
     </string-array>
     <string-array name="fonts">
-        <item>Roboto Thin</item>
-        <item>Roboto Light</item>
-        <item>Roboto Regular</item>
-        <item>Roboto Black</item>
-        <item>Noto Serif</item>
-        <item>Droid Sans Mono</item>
-        <item>Cutive Mono</item>
-        <item>Dancing Script</item>
-        <item>Carrois Gothic SC</item>
+        <item>Default</item>
+        <item>Arya</item>
+        <item>Cambay</item>
+        <item>Oleo Script</item>
     </string-array>
     <string-array name="ringtones">
         <item>Song 1</item>

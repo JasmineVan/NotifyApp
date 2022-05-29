@@ -64,8 +64,9 @@
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/activity_otprecover.xml" value="0.264" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/activity_send_otp.xml" value="0.22826086956521738" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/activity_signup_page.xml" value="0.22826086956521738" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/edit_note_fragment_title.xml" value="0.16" />
+        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/edit_note_fragment_title.xml" value="0.264" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/favorite_fragment_title.xml" value="0.18568840579710144" />
+        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_edit_note.xml" value="0.22826086956521738" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_favorite.xml" value="0.18568840579710144" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_new_note.xml" value="0.18568840579710144" />
@@ -76,7 +77,7 @@
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/home_fragment_title.xml" value="0.2" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/homepage_items.xml" value="0.18568840579710144" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/new_note_fragment_title.xml" value="0.18568840579710144" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/setting_fragment_title.xml" value="0.1" />
+        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/setting_fragment_title.xml" value="0.264" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/trash_fragment_title.xml" value="0.22826086956521738" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/user_fragment_title.xml" value="0.2" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/view_note_fragment_title.xml" value="0.18568840579710144" />
