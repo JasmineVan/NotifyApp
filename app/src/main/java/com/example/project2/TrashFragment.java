@@ -69,10 +69,8 @@ public class TrashFragment extends Fragment {
         listLabel = new ArrayList<String>();
         labelSelected = new ArrayList<Integer>();
         labelFilter = new ArrayList<String>();
-        trashFragmentSearch = view.findViewById(R.id.trashFragmentSearch);
         fragment_trash_empty = view.findViewById(R.id.fragment_trash_empty);
         fragment_trash_empty_holder = view.findViewById(R.id.fragment_trash_empty_holder);
-        trashFragmentFilter = view.findViewById(R.id.trashFragmentFilter);
         trashNotes = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
         dialog = new ProgressDialog(getActivity());

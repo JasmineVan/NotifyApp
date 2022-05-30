@@ -107,7 +107,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="36dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.2"
                     android:layout_gravity="center"/>
 
                 <ImageView
@@ -126,7 +126,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="36dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.2"
                     android:layout_gravity="center"/>
 
                 <ImageView
@@ -145,7 +145,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="36dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.2"
                     android:layout_gravity="center"/>
 
                 <ImageView
@@ -164,17 +164,17 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="36dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.2"
                     android:layout_gravity="center"/>
 
                 <ImageView
-                    android:id="@+id/ivEditNoteNotification"
+                    android:id="@+id/ivNewNoteNotification"
                     android:layout_width="0dp"
                     android:layout_height="36dp"
                     android:clickable="true"
                     android:padding="4dp"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="note_notification_none"
+                    android:contentDescription="note_notification_off"
                     android:src="@drawable/ic_noti_none"
                     android:visibility="visible"
                     android:background="@drawable/tools_bg"
@@ -183,7 +183,27 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="5"/>
+                    android:layout_weight="4"/>
+
+                <ImageView
+                    android:id="@+id/ivEditNoteShare"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:clickable="true"
+                    android:padding="4dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="note_notification_off"
+                    android:src="@drawable/ic_share"
+                    android:visibility="visible"
+                    android:background="@drawable/tools_bg"
+                    android:layout_weight="1"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="0.2"
+                    android:layout_gravity="center"/>
+
 
             </LinearLayout>
 

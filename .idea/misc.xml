@@ -14,6 +14,7 @@
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_password_recover.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_send_otp.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_signup_page.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/edit_note_fragment_title.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/favorite_fragment_title.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_favorite.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_home.xml" value="0.275" />
@@ -80,8 +81,7 @@
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_user.xml" value="0.264" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/fragment_view_note.xml" value="0.22826086956521738" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/home_fragment_title.xml" value="0.2" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/homepage_items.xml" value="0.264" />
-        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/homepage_items_2.xml" value="0.22826086956521738" />
+        <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/homepage_items.xml" value="0.18568840579710144" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/new_note_fragment_title.xml" value="0.18568840579710144" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/setting_fragment_title.xml" value="0.264" />
         <entry key="..\:/documents/mobileApp/NotifyApp/app/src/main/res/layout/trash_fragment_title.xml" value="0.22826086956521738" />

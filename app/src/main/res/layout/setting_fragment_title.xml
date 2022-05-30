@@ -196,6 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:layout_margin="2dp"
                 android:background="@color/gray"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
@@ -208,18 +209,28 @@
                 android:layout_weight="1" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="0.01"
+            android:background="@color/gray"
+            android:paddingStart="24dp"
+            android:paddingRight="24dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="5">
+            android:weightSum="10">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:fontFamily="sans-serif"
                 android:paddingStart="4dp"
                 android:text="Label"
@@ -227,59 +238,42 @@
                 android:textSize="24dp"
                 android:textStyle="bold" />
 
-            <View
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAddLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/btnAddLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/darker_gray"
+                android:layout_weight="2.5"
+                android:background="@color/gray"
+                android:layout_margin="2dp"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Add"
                 android:textColor="@color/black" />
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnEditLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@color/gray"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/darker_gray"
+                android:layout_margin="2dp"
+                android:layout_weight="2.5"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Edit"
                 android:textColor="@color/black" />
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnDeleteLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/darker_gray"
+                android:layout_margin="2dp"
+                android:layout_weight="2.5"
+                android:background="@color/gray"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
                 android:text="Delete"
                 android:textColor="@color/black" />
-            <View
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/settingLabel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:fontFamily="sans-serif"
-                android:layout_gravity="center"
-                android:layout_weight="3"
-                android:textColor="@color/black"
-                android:paddingStart="8dp" />
 
         </LinearLayout>
         <View
@@ -295,7 +289,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_weight="3"
             android:orientation="horizontal"
             android:weightSum="5">
 
@@ -330,6 +324,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="5">
 
         </LinearLayout>
 
