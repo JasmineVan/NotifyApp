@@ -22,7 +22,8 @@
             android:layout_marginTop="12dp"
             android:clickable="true"
             android:contentDescription="@string/login_back"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:focusable="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,7 +88,8 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:autofillHints="" />
 
             <EditText
                 android:text="0364511405"
@@ -105,7 +107,8 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                tools:ignore="Autofill" />
 
             <com.google.android.material.textfield.TextInputLayout
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -131,7 +134,8 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    tools:ignore="Autofill" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -158,7 +162,8 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    tools:ignore="Autofill" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -237,7 +242,8 @@
                 android:text="@string/login_title"
                 android:textColor="@color/blue"
                 android:textSize="16dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:focusable="true" />
         </LinearLayout>
 
     </RelativeLayout>

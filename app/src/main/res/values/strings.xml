@@ -50,10 +50,76 @@
     <string name="user_fragment_change">Change Password</string>
     <!-- view note -->
     <string name="dummy1">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</string>
+    <string name="change_pass_hint">Change your Notify account password</string>
+    <string name="change_password_title">Change Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="new_password_confirm">New Password Confirm</string>
+    <string name="save">Save</string>
+    <string name="edit_profile_hint">Edit your Notify account information</string>
+    <string name="edit_profile_title">Edit Profile</string>
+    <string name="forgot_password_hint">Recover your Notify account</string>
+    <string name="forgot_password_title">Recover</string>
+    <string name="enter_phone_num">Enter your phone number</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="get_started">Get Started</string>
+    <string name="otp_min">00</string>
+    <string name="otp_break">:</string>
+    <string name="otp_recover_hint">Recover your Notify account</string>
+    <string name="otp_recover_title">OTP Recover Verification</string>
+    <string name="password_recover_hint">Recover your Notify account</string>
+    <string name="password_recover_title">Password Recover</string>
+    <string name="title_show_here">Title show here</string>
+    <string name="label_blue">Label Blue</string>
+    <string name="content_here">Content here</string>
+    <string name="note_picture">Note picture</string>
+    <string name="note_video">Note video</string>
+    <string name="note_audio">Note audio</string>
+    <string name="note_notification">Note notification</string>
+    <string name="note_share">Note share</string>
+    <string name="note_grid">Note grid</string>
+    <string name="all_note">All Note</string>
+    <string name="note_filter">Note filter</string>
+    <string name="all_note_is_empty">All note is empty</string>
+    <string name="btn_new_note">New note</string>
+    <string name="pin_note_is_empty">Pin note is empty</string>
+    <string name="trash_is_empty">Trash is empty</string>
+    <string name="pin_note">Pin Note</string>
+    <string name="ote_title_here">Note title here</string>
+    <string name="note_lock">Note lock</string>
+    <string name="note_menu">Note menu</string>
+    <string name="day_time">Sunday 15/05/2022 12:00</string>
+    <string name="new_note">New Note</string>
+    <string name="app_setting">App Setting</string>
+    <string name="language">Language</string>
+    <string name="font">Font</string>
+    <string name="delete_after">Delete After</string>
+    <string name="ringtone">Ringtone</string>
+    <string name="select">Select</string>
+    <string name="label">Label</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="trash">Trash</string>
+    <string name="note_bin">Note delete</string>
+    <string name="click_here_to_active">Click here to activate your account!</string>
+    <string name="view_note">View Note</string>
+    <string name="send">Send</string>
+    <string name="home">Home</string>
+    <string name="note">Note</string>
+    <string name="user">User</string>
+    <string name="setting">Setting</string>
+    <string name="trash2">Trash</string>
+    <string name="pin">Pin</string>
+    <string name="unpin">Unpin</string>
+    <string name="change_password">Change Password</string>
+    <string name="unlock">Unlock</string>
+    <string name="lock">Lock</string>
+    <string name="restore">Restore</string>
     <!-- app setting -->
     <string-array name="languages">
-        <item>Vietnamese</item>
         <item>English</item>
+        <item>Vietnamese</item>
     </string-array>
     <string-array name="fonts">
         <item>Default</item>

@@ -3,29 +3,29 @@
 
     <item
         android:id="@+id/recycler_item_pin"
-        android:title="Pin" />
+        android:title="@string/pin" />
     <item
         android:id="@+id/recycler_item_unpin"
-        android:title="Unpin" />
+        android:title="@string/unpin" />
     <item
         android:id="@+id/recycler_item_edit"
-        android:title="Edit" />
+        android:title="@string/edit" />
     <item
         android:id="@+id/recycler_item_changePassword"
-        android:title="Change password" />
+        android:title="@string/change_password" />
     <item
         android:id="@+id/recycler_item_unlock"
-        android:title="Unlock" />
+        android:title="@string/unlock" />
     <item
         android:id="@+id/recycler_item_lock"
-        android:title="Lock" />
+        android:title="@string/lock" />
     <item
         android:id="@+id/recycler_item_delete"
-        android:title="Delete" />
+        android:title="@string/delete" />
     <item
         android:id="@+id/recycler_item_super_delete"
-        android:title="Delete" />
+        android:title="@string/delete" />
     <item
         android:id="@+id/recycler_item_restore"
-        android:title="Restore" />
+        android:title="@string/restore" />
 </menu>

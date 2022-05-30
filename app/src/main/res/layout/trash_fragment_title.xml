@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -7,44 +8,46 @@
         android:id="@+id/fragment_trash_topNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/myColor1"
+        android:orientation="horizontal"
+        android:padding="12dp"
         android:weightSum="10"
-        android:padding="12dp">
+        tools:ignore="UselessParent">
 
         <ImageView
             android:id="@+id/ivTrashFragmentHidden"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:clickable="true"
             android:layout_gravity="center_vertical"
-            android:contentDescription="note_grid"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:contentDescription="@string/note_bin"
+            android:focusable="true"
             android:src="@drawable/ic_delete"
-            android:visibility="invisible"
-            android:layout_weight="1"/>
+            android:visibility="invisible" />
 
         <TextView
-            android:layout_weight="8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Trash"
-            android:textSize="24dp"
+            android:layout_weight="8"
             android:fontFamily="sans-serif"
-            android:textColor="@color/black"
             android:gravity="center"
-            android:textStyle="bold"
-            android:layout_alignParentLeft="true"/>
+            android:text="@string/trash"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/trashFragmentEmpty"
             android:layout_width="0dp"
             android:layout_height="36dp"
-            android:clickable="true"
             android:layout_gravity="center_vertical"
-            android:contentDescription="note_grid"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:contentDescription="@string/note_bin"
             android:src="@drawable/ic_delete"
             android:visibility="visible"
-            android:layout_weight="1"/>
+            android:focusable="true" />
 
     </LinearLayout>
 

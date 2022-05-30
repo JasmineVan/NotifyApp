@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recover your Notify account"
+                android:text="@string/otp_recover_hint"
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:fontFamily="sans-serif-condensed"/>
@@ -61,7 +61,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="24dp"
             android:fontFamily="serif"
-            android:text="OTP Recover Verification"
+            android:text="@string/otp_recover_title"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -91,7 +91,8 @@
                     android:maxLength="1"
                     android:textColor="@color/black"
                     android:textSize="24dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:ignore="LabelFor" />
 
                 <EditText
                     android:id="@+id/otpRe2"
@@ -104,7 +105,8 @@
                     android:maxLength="1"
                     android:textColor="@color/black"
                     android:textSize="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    tools:ignore="LabelFor" />
                 <EditText
                     android:id="@+id/otpRe3"
                     android:layout_width="48dp"
@@ -116,7 +118,8 @@
                     android:maxLength="1"
                     android:textColor="@color/black"
                     android:textSize="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    tools:ignore="LabelFor" />
                 <EditText
                     android:id="@+id/otpRe4"
                     android:layout_width="48dp"
@@ -128,7 +131,8 @@
                     android:maxLength="1"
                     android:textColor="@color/black"
                     android:textSize="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    tools:ignore="LabelFor" />
                 <EditText
                     android:id="@+id/otpRe5"
                     android:layout_width="48dp"
@@ -140,7 +144,8 @@
                     android:maxLength="1"
                     android:textColor="@color/black"
                     android:textSize="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    tools:ignore="LabelFor" />
                 <EditText
                     android:id="@+id/otpRe6"
                     android:layout_width="48dp"
@@ -152,7 +157,8 @@
                     android:maxLength="1"
                     android:textColor="@color/black"
                     android:textSize="24dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    tools:ignore="LabelFor" />
 
             </LinearLayout>
 
@@ -191,7 +197,7 @@
                     android:id="@+id/otpReMinute"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="00"
+                    android:text="@string/otp_min"
                     android:textSize="24dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
@@ -200,7 +206,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
-                    android:text=":"
+                    android:text="@string/otp_break"
                     android:textSize="24dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
@@ -209,7 +215,7 @@
                     android:id="@+id/otpReSecond"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="00"
+                    android:text="@string/otp_min"
                     android:textSize="24dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
@@ -244,7 +250,8 @@
                 android:textColor="@color/blue"
                 android:textSize="16dp"
                 android:textStyle="bold"
-                android:clickable="true" />
+                android:clickable="true"
+                android:focusable="true" />
 
         </LinearLayout>
 

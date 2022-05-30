@@ -18,22 +18,22 @@
             android:layout_height="24dp"
             android:clickable="true"
             android:layout_gravity="center_vertical"
-            android:contentDescription="note_grid"
+            android:contentDescription="@string/note_grid"
             android:src="@drawable/ic_gridview"
             android:visibility="invisible"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:focusable="true" />
 
         <TextView
             android:layout_weight="8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Pin Note"
+            android:text="@string/pin_note"
             android:textSize="24dp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
             android:gravity="center"
-            android:textStyle="bold"
-            android:layout_alignParentLeft="true"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/homeFragmentChangeLayoutView"
@@ -41,10 +41,11 @@
             android:layout_height="36dp"
             android:clickable="true"
             android:layout_gravity="center_vertical"
-            android:contentDescription="note_grid"
+            android:contentDescription="@string/note_grid"
             android:src="@drawable/ic_gridview"
             android:visibility="visible"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:focusable="true" />
 
     </LinearLayout>
 
@@ -72,10 +73,11 @@
             android:layout_height="36dp"
             android:clickable="true"
             android:layout_gravity="center_vertical"
-            android:contentDescription="note_audio"
+            android:contentDescription="@string/note_audio"
             android:src="@drawable/ic_filter_list"
             android:visibility="visible"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:focusable="true" />
     </LinearLayout>
 
 </RelativeLayout>

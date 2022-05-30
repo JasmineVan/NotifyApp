@@ -22,7 +22,7 @@
             android:id="@+id/fragment_favorite_empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="All note is empty"
+            android:text="@string/all_note_is_empty"
             android:layout_gravity="center_horizontal"
             android:fontFamily="sans-serif"
             android:textSize="24dp"/>
@@ -41,12 +41,12 @@
         android:id="@+id/btnFavoriteFragmentAddNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="16dp"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_add"
         android:backgroundTint="@color/myColor1"
-        />
+        android:contentDescription="@string/btn_new_note" />
 </LinearLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
     <LinearLayout
@@ -16,13 +16,15 @@
             android:orientation="horizontal"
             android:background="@color/myColor1"
             android:padding="12dp"
+            android:weightSum="5"
             android:layout_weight="1">
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/editNoteFragmentHidenBlock"
                 android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save"
+                android:text="@string/save"
                 android:textSize="24dp"
                 android:textColor="@color/white"
                 android:gravity="center" />
@@ -30,7 +32,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:fontFamily="More Fonts..."
                 android:gravity="center"
                 android:text="Edit Note"
@@ -39,10 +41,11 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:layout_weight="1"
                 android:id="@+id/editNoteFragmentSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Save"
+                android:text="@string/save"
                 android:textSize="24dp"
                 android:textColor="@color/white"
                 android:gravity="center" />
@@ -55,37 +58,38 @@
             android:weightSum="10"
             android:orientation="vertical">
             <EditText
+                android:inputType="text"
                 android:background="@android:color/transparent"
                 android:id="@+id/editNoteFragmentTitle"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:hint="Title show here"
+                android:hint="@string/title_show_here"
                 android:textSize="24dp"
-                android:paddingStart="4dp"
+                android:paddingHorizontal="4dp"
                 android:textStyle="bold"
                 android:layout_marginVertical="4dp"
                 android:fontFamily="sans-serif"
                 android:textColor="@color/black"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                tools:ignore="Autofill" />
 
             <TextView
                 android:background="@android:color/transparent"
                 android:id="@+id/editNoteFragmentLabel"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:hint="Label Blue"
+                android:hint="@string/label_blue"
                 android:textSize="20dp"
-                android:paddingStart="4dp"
+                android:paddingHorizontal="4dp"
                 android:textStyle="italic"
                 android:layout_marginVertical="4dp"
                 android:fontFamily="sans-serif"
                 android:textColor="@color/blue"
-                android:inputType="text"
                 android:layout_weight="1"/>
 
             <EditText
                 android:background="@android:color/transparent"
-                android:hint="Content here"
+                android:hint="@string/content_here"
                 android:id="@+id/editNoteFragmentContent"
                 android:inputType="text|textMultiLine"
                 android:layout_width="match_parent"
@@ -94,7 +98,8 @@
                 android:textSize="20dp"
                 android:textColor="@color/black"
                 android:fontFamily="sans-serif"
-                android:gravity="top" />
+                android:gravity="top"
+                tools:ignore="Autofill" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -117,11 +122,12 @@
                     android:clickable="true"
                     android:padding="4dp"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="note_picture"
+                    android:contentDescription="@string/note_picture"
                     android:src="@drawable/ic_image"
                     android:background="@drawable/tools_bg"
                     android:visibility="visible"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:focusable="true" />
 
                 <View
                     android:layout_width="0dp"
@@ -136,11 +142,12 @@
                     android:clickable="true"
                     android:padding="4dp"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="note_video"
+                    android:contentDescription="@string/note_video"
                     android:src="@drawable/ic_video"
                     android:visibility="visible"
                     android:background="@drawable/tools_bg"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:focusable="true" />
 
                 <View
                     android:layout_width="0dp"
@@ -155,11 +162,13 @@
                     android:clickable="true"
                     android:padding="4dp"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="note_audio"
+                    android:contentDescription="@string/note_audio"
                     android:src="@drawable/ic_audio"
                     android:visibility="visible"
                     android:background="@drawable/tools_bg"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    tools:ignore="HardcodedText"
+                    android:focusable="true" />
 
                 <View
                     android:layout_width="0dp"
@@ -174,11 +183,12 @@
                     android:clickable="true"
                     android:padding="4dp"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="note_notification_off"
+                    android:contentDescription="@string/note_notification"
                     android:src="@drawable/ic_noti_none"
                     android:visibility="visible"
                     android:background="@drawable/tools_bg"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:focusable="true" />
 
                 <View
                     android:layout_width="0dp"
@@ -192,11 +202,12 @@
                     android:clickable="true"
                     android:padding="4dp"
                     android:layout_gravity="center_vertical"
-                    android:contentDescription="note_notification_off"
+                    android:contentDescription="@string/note_share"
                     android:src="@drawable/ic_share"
                     android:visibility="visible"
                     android:background="@drawable/tools_bg"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:focusable="true" />
 
                 <View
                     android:layout_width="0dp"

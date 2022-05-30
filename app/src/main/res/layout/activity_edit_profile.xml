@@ -22,7 +22,8 @@
             android:layout_marginTop="12dp"
             android:clickable="true"
             android:contentDescription="@string/login_back"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:focusable="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit your Notify account information"
+                android:text="@string/edit_profile_hint"
                 android:textSize="20dp"
                 android:textColor="@color/white"
                 android:fontFamily="sans-serif-condensed"/>
@@ -63,7 +64,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="24dp"
             android:fontFamily="More Fonts..."
-            android:text="Edit Profile"
+            android:text="@string/edit_profile_title"
             android:textColor="@color/black"
             android:textSize="20dp" />
 
@@ -87,7 +88,8 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:autofillHints="" />
 
             <EditText
                 android:inputType="phone"
@@ -104,7 +106,8 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:autofillHints="" />
 
 
             <LinearLayout
@@ -160,7 +163,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/custom_button"
                     android:fontFamily="serif"
-                    android:text="Save"
+                    android:text="@string/save"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16dp"

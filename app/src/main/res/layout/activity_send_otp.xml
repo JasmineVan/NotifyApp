@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,7 +24,8 @@
             android:layout_marginTop="12dp"
             android:clickable="true"
             android:contentDescription="@string/login_back"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:focusable="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,7 +78,6 @@
 
 
             <TextView
-                android:inputType="phone"
                 android:id="@+id/textSendOtpPhone"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center"
@@ -84,13 +85,13 @@
                 android:layout_marginLeft="48dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginRight="48dp"
-                android:drawableTint="@color/black"
                 android:fontFamily="serif"
                 android:hint="@string/sendOTP_phone_hint"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                app:drawableTint="@color/black" />
 
             <TextView
                 android:id="@+id/sendOtpError"
@@ -170,7 +171,8 @@
                 android:text="@string/sendOtp_skip"
                 android:textColor="@color/blue"
                 android:textSize="16dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:focusable="true" />
 
         </LinearLayout>
 
