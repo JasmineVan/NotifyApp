@@ -116,6 +116,8 @@
     <string name="unlock">Unlock</string>
     <string name="lock">Lock</string>
     <string name="restore">Restore</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="new_title">New Title</string>
     <!-- app setting -->
     <string-array name="languages">
         <item>English</item>

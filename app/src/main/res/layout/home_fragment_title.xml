@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/pin_note"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:fontFamily="sans-serif"
             android:textColor="@color/black"
             android:gravity="center"

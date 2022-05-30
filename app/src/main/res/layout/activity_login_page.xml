@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/project_name"
-                android:textSize="48dp"
+                android:textSize="48sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-condensed"/>
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login_description"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/white"
                 android:fontFamily="sans-serif-condensed"/>
         </LinearLayout>
@@ -65,7 +65,7 @@
             android:fontFamily="serif"
             android:text="@string/login_title"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <EditText
                 android:inputType="textPassword"
@@ -108,7 +108,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/loginError"
@@ -122,7 +122,7 @@
                 android:paddingLeft="12dp"
                 android:textColor="@color/red"
                 android:paddingRight="12dp"
-                android:textSize="15dp" />
+                android:textSize="15sp" />
 
             <CheckBox
                 android:id="@+id/cbRemember"
@@ -133,7 +133,7 @@
                 android:fontFamily="serif"
                 android:text="@string/login_remember"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,7 +154,7 @@
                     android:fontFamily="serif"
                     android:text="@string/login_forgot"
                     android:textColor="@color/blue"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     android:focusable="true" />
 
@@ -168,7 +168,7 @@
                     android:text="@string/login_title"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"/>
             </LinearLayout>
 
@@ -188,7 +188,7 @@
                 android:fontFamily="serif"
                 android:text="@string/login_no_account"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/textCreateAccount"
                 android:layout_width="wrap_content"
@@ -198,7 +198,7 @@
                 android:fontFamily="serif"
                 android:text="@string/signup_title"
                 android:textColor="@color/blue"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:clickable="true"
                 android:focusable="true" />

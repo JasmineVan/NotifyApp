@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/project_name"
-                android:textSize="48dp"
+                android:textSize="48sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-condensed"/>
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/signup_description"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/white"
                 android:fontFamily="sans-serif-condensed"/>
         </LinearLayout>
@@ -65,7 +65,7 @@
             android:fontFamily="serif"
             android:text="@string/signup_title"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:autofillHints="" />
 
             <EditText
@@ -107,7 +107,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 tools:ignore="Autofill" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -134,7 +134,7 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     tools:ignore="Autofill" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,7 +162,7 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     tools:ignore="Autofill" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -186,7 +186,7 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:textColor="@color/red"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -209,7 +209,7 @@
                     android:text="@string/signup_title"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"/>
             </LinearLayout>
 
@@ -230,7 +230,7 @@
                 android:fontFamily="serif"
                 android:text="@string/signup_has_account"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
             <TextView
                 android:clickable="true"
                 android:id="@+id/textSignupLoginAccount"
@@ -241,7 +241,7 @@
                 android:fontFamily="serif"
                 android:text="@string/login_title"
                 android:textColor="@color/blue"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:focusable="true" />
         </LinearLayout>

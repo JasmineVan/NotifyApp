@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/project_name"
-                android:textSize="48dp"
+                android:textSize="48sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-condensed"/>
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/register_description"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/white"
                 android:fontFamily="sans-serif-condensed"/>
         </LinearLayout>
@@ -60,7 +60,7 @@
             android:textColor="@color/black"
             android:text="@string/otp_title"
             android:fontFamily="serif"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_marginTop="24dp"
             android:layout_marginStart="40dp"/>
 
@@ -89,7 +89,7 @@
                     android:inputType="number"
                     android:maxLength="1"
                     android:textColor="@color/black"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="LabelFor" />
 
@@ -103,7 +103,7 @@
                     android:inputType="number"
                     android:maxLength="1"
                     android:textColor="@color/black"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="LabelFor" />
                 <EditText
@@ -116,7 +116,7 @@
                     android:inputType="number"
                     android:maxLength="1"
                     android:textColor="@color/black"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="LabelFor" />
                 <EditText
@@ -129,7 +129,7 @@
                     android:inputType="number"
                     android:maxLength="1"
                     android:textColor="@color/black"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="LabelFor" />
                 <EditText
@@ -142,7 +142,7 @@
                     android:inputType="number"
                     android:maxLength="1"
                     android:textColor="@color/black"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="LabelFor" />
                 <EditText
@@ -155,7 +155,7 @@
                     android:inputType="number"
                     android:maxLength="1"
                     android:textColor="@color/black"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
                     tools:ignore="LabelFor" />
 
@@ -180,7 +180,7 @@
                     android:text="@string/verify_title"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"/>
             </LinearLayout>
             <LinearLayout
@@ -197,7 +197,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/otp_min"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
                 <TextView
@@ -206,7 +206,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
                     android:text="@string/otp_break"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
 
@@ -215,7 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/otp_min"
-                    android:textSize="24dp"
+                    android:textSize="24sp"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
 
@@ -238,7 +238,7 @@
                 android:fontFamily="serif"
                 android:text="@string/otp_no_receive"
                 android:textColor="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/textOTPResend"
                 android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                 android:fontFamily="serif"
                 android:text="@string/otp_resend"
                 android:textColor="@color/blue"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:clickable="true"
                 android:focusable="true" />

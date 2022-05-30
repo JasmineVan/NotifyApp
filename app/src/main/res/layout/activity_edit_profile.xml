@@ -40,13 +40,13 @@
                 android:fontFamily="More Fonts..."
                 android:text="@string/project_name"
                 android:textColor="@color/white"
-                android:textSize="48dp"
+                android:textSize="48sp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/edit_profile_hint"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/white"
                 android:fontFamily="sans-serif-condensed"/>
         </LinearLayout>
@@ -66,7 +66,7 @@
             android:fontFamily="More Fonts..."
             android:text="@string/edit_profile_title"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:autofillHints="" />
 
             <EditText
@@ -106,7 +106,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:autofillHints="" />
 
 
@@ -130,7 +130,7 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:textColor="@color/red"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/editSuccess"
@@ -143,7 +143,7 @@
                     android:paddingLeft="12dp"
                     android:paddingRight="12dp"
                     android:textColor="@color/green"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -166,7 +166,7 @@
                     android:text="@string/save"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold"/>
             </LinearLayout>
 

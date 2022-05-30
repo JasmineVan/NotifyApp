@@ -20,12 +20,11 @@
             android:layout_weight="1">
             <TextView
                 android:layout_weight="1"
-                android:id="@+id/editNoteFragmentHidenBlock"
                 android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/save"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:textColor="@color/white"
                 android:gravity="center" />
 
@@ -35,9 +34,9 @@
                 android:layout_weight="3"
                 android:fontFamily="More Fonts..."
                 android:gravity="center"
-                android:text="Edit Note"
+                android:text="@string/edit_note"
                 android:textColor="@color/black"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -46,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/save"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:textColor="@color/white"
                 android:gravity="center" />
 
@@ -64,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:hint="@string/title_show_here"
-                android:textSize="24dp"
+                android:textSize="24sp"
                 android:paddingHorizontal="4dp"
                 android:textStyle="bold"
                 android:layout_marginVertical="4dp"
@@ -79,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:hint="@string/label_blue"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:paddingHorizontal="4dp"
                 android:textStyle="italic"
                 android:layout_marginVertical="4dp"
@@ -95,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="7.5"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textColor="@color/black"
                 android:fontFamily="sans-serif"
                 android:gravity="top"
