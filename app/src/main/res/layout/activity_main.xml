@@ -16,6 +16,7 @@
         android:layout_weight="1"
         android:fontFamily="serif"
         android:gravity="center"
+        android:textColor="@color/black"
         android:text="@string/project_name"
         android:textSize="60dp" />
 
@@ -32,6 +33,7 @@
             android:layout_width="240dp"
             android:layout_height="60dp"
             android:textSize="24dp"
+            android:fontFamily="sans-serif"
             android:layout_gravity="bottom|right"
             android:text="Get Started"
             android:background="@drawable/custom_button"

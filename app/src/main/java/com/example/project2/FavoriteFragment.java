@@ -84,7 +84,7 @@ public class FavoriteFragment extends Fragment {
         //recyclerView setting
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), RecyclerView.VERTICAL));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), RecyclerView.VERTICAL));
         sharedPreferences = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
 
         recyclerView.setAdapter(adapter);

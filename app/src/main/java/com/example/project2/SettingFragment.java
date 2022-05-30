@@ -34,7 +34,7 @@ import okhttp3.Response;
 public class SettingFragment extends Fragment {
 
     private View view;
-    private Spinner languageSpinner, soundSnipper;
+    private Spinner languageSpinner;
     private TextView settingFonts, settingDelete;
     private SharedPreferences sharedPreferences;
     private int font = 0;
@@ -51,7 +51,6 @@ public class SettingFragment extends Fragment {
         languageSpinner = view.findViewById(R.id.settingLanguages);
         settingFonts = view.findViewById(R.id.settingFonts);
         settingDelete = view.findViewById(R.id.settingDelete);
-        soundSnipper = view.findViewById(R.id.settingSounds);
         sharedPreferences = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
 
         getUserSettings();
@@ -96,11 +95,6 @@ public class SettingFragment extends Fragment {
             }
         });
 
-        //ringtone spinner
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this.getContext(),
-                R.array.ringtones, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        soundSnipper.setAdapter(adapter2);
         return view;
     }
 
