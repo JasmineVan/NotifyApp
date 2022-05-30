@@ -68,7 +68,8 @@ public class NewNoteFragment extends Fragment {
     private Typeface typeface;
     private int font = 0;
     private ImageView ivNewNotePic;
-    private ImageView newNotePlaceHolder;
+    private ImageView newNotePlaceHolder, ivNewNoteNotification;
+
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 200;
     private static final int REQUEST_CODE_SELECT_IMAGE = 201;
 
@@ -86,6 +87,7 @@ public class NewNoteFragment extends Fragment {
         newNoteFragmentLabel = (TextView) view.findViewById(R.id.newNoteFragmentLabel);
         newNoteFragmentContent = (EditText) view.findViewById(R.id.newNoteFragmentContent);
         newNoteFragmentSave = (TextView) view.findViewById(R.id.newNoteFragmentSave);
+        ivNewNoteNotification = view.findViewById(R.id.ivNewNoteNotification);
         labelSelected = new ArrayList<Integer>();
         ivNewNotePic = view.findViewById(R.id.ivNewNotePic);
         newNotePlaceHolder = view.findViewById(R.id.newNotePlaceHolder);
