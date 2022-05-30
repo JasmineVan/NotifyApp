@@ -4,7 +4,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -53,6 +56,8 @@ public class SettingFragment extends Fragment {
     private Button btnDeleteLabel, btnEditLabel, btnAddLabel;
     private  int lb = 0;
 
+    private Button btnSettingSounds;
+    public static final int REQUEST_RING_TONES = 999;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +67,7 @@ public class SettingFragment extends Fragment {
         languageSpinner = view.findViewById(R.id.settingLanguages);
         settingFonts = view.findViewById(R.id.settingFonts);
         settingDelete = view.findViewById(R.id.settingDelete);
+        btnSettingSounds = view.findViewById(R.id.btnSettingSounds);
         sharedPreferences = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
         listLabel = new ArrayList<String>();
         btnDeleteLabel = view.findViewById(R.id.btnDeleteLabel);
@@ -136,8 +142,32 @@ public class SettingFragment extends Fragment {
                         .show();
             }
         });
+        //setting sound
+        btnSettingSounds.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent to select Ringtone.
+                final Uri currentTone=
+                        RingtoneManager.getActualDefaultRingtoneUri(getContext(),
+                                RingtoneManager.TYPE_ALARM);
+                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_RINGTONE);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone");
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, currentTone);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false);
+                intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
+                startActivityForResult(intent, REQUEST_RING_TONES);
+            }
+        });
 
         return view;
+    }
+
+     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_RING_TONES && resultCode == getActivity().RESULT_OK){
+            Uri uri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+        }
     }
 
     private void showLabelDialog() {
@@ -209,6 +239,7 @@ public class SettingFragment extends Fragment {
                     }
                 });
         builder.show();
+
     }
 
     public void getUserSettings(){
