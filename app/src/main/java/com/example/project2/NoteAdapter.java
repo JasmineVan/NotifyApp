@@ -80,14 +80,19 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         else{
             holder.ivNoteItemLock.setImageResource(R.drawable.ic_lock_open);
         }
+        if(note.getPin()){
+            holder.pin.setImageResource(R.drawable.ic_pin);
+        }
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                Bundle data = new Bundle();
-                data.putString("noteId", note.getNoteId());
-                viewNoteFragment.setArguments(data);
-                ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, viewNoteFragment).commit();
+                if(!note.getDelete()){
+                    Bundle data = new Bundle();
+                    data.putString("noteId", note.getNoteId());
+                    viewNoteFragment.setArguments(data);
+                    ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, viewNoteFragment).commit();
+                }
             }
         });
     }
@@ -103,7 +108,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
         TextView title, date, label;
         ImageView ivNoteItemLock;
         ItemClickListener itemClickListener;
-        ImageView ivNoteItemMenu;
+        ImageView ivNoteItemMenu, pin;
+
 
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
@@ -111,6 +117,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             date = itemView.findViewById(R.id.homepageNoteDate);
             label = itemView.findViewById(R.id.homepageNoteLabel);
             ivNoteItemLock = itemView.findViewById(R.id.ivNoteItemLock);
+            pin = itemView.findViewById(R.id.pin);
 
             ivNoteItemMenu = itemView.findViewById(R.id.ivNoteItemMenu);
             ivNoteItemMenu.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +126,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                     Note note = notes.get(getAdapterPosition());
                     PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
                     popupMenu.inflate(R.menu.recycler_item_menu);
+                    popupMenu.getMenu().findItem(R.id.recycler_item_changePassword).setVisible(false);
 
                     if(note.getPin()){
                         popupMenu.getMenu().findItem(R.id.recycler_item_pin).setVisible(false);
@@ -134,8 +142,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                         popupMenu.getMenu().findItem(R.id.recycler_item_lock).setVisible(false);
                     }else{
                         popupMenu.getMenu().findItem(R.id.recycler_item_restore).setVisible(false);
+                        popupMenu.getMenu().findItem(R.id.recycler_item_super_delete).setVisible(false);
                     }
-                    if(note.getPassword()){
+                    if(note.getPassword() && !note.getDelete()){
+                        popupMenu.getMenu().findItem(R.id.recycler_item_changePassword).setVisible(true);
                         popupMenu.getMenu().findItem(R.id.recycler_item_lock).setVisible(false);
                     }else{
                         popupMenu.getMenu().findItem(R.id.recycler_item_unlock).setVisible(false);
@@ -168,6 +178,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                                         lockNote(note.getNoteId(), "", getAdapterPosition());
                                     }
                                     break;
+                                case R.id.recycler_item_changePassword:
+                                    createChangeNotePassAlert(note.getNoteId(), getAdapterPosition());
+                                    break;
                                 case R.id.recycler_item_unlock:
                                     createVerifyNotePasswordAlert(note.getNoteId(), getAdapterPosition());
                                     break;
@@ -175,8 +188,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                                     deleteNote(note.getNoteId(), getAdapterPosition());
                                     break;
                                 case R.id.recycler_item_restore:
-                                    Toast.makeText(context, "Restore", Toast.LENGTH_SHORT).show();
+                                    restoreNote(note.getNoteId(), getAdapterPosition());
                                     break;
+                                case R.id.recycler_item_super_delete:
+                                    superDeleteNote(note.getNoteId(), getAdapterPosition());
                             }
                             return true;
                         }
@@ -231,6 +246,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                                 if(code == 200){
                                     notes.remove(position);
                                     NoteAdapter.this.notifyItemRemoved(position);
+                                    Toast.makeText( ((AppCompatActivity)context),"Set pin success", Toast.LENGTH_SHORT).show();
 
                                 }else{
                                     Toast.makeText( ((AppCompatActivity)context),"Set pin failed", Toast.LENGTH_SHORT).show();
@@ -278,7 +294,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                                 if(code == 200){
                                     notes.remove(position);
                                     NoteAdapter.this.notifyItemRemoved(position);
-
+                                    Toast.makeText( ((AppCompatActivity)context),"Unpin success", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(((AppCompatActivity)context),"Set unpin failed", Toast.LENGTH_SHORT).show();
                                 }
@@ -291,7 +307,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             });
         }
 
-        public void lockNote(String noteId, String password, int position) {
+        public void lockNote(String noteId, @NonNull String password, int position) {
             loading(true);
             String accessToken = sharedPreferences.getString("accessToken", "");
             OkHttpClient client = new OkHttpClient();
@@ -325,8 +341,52 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                                 if(code == 200){
                                     notes.get(position).setPassword(true);
                                     NoteAdapter.this.notifyItemChanged(position);
+                                    Toast.makeText( ((AppCompatActivity)context),"Lock success", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText( ((AppCompatActivity)context),"Set lock failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } catch (JSONException e) {
+                        Log.d("onResponse", e.getMessage());
+                    }
+                }
+            });
+        }
+
+        public void changeNotePassword(String noteId, String oldPassword, String newPassword, int position) {
+            loading(true);
+            String accessToken = sharedPreferences.getString("accessToken", "");
+            OkHttpClient client = new OkHttpClient();
+            String createStudentURL = "https://note-app-lake.vercel.app/notes/password/change";
+            FormBody.Builder formBody = new FormBody.Builder().add("noteId", noteId).add("oldPassword", oldPassword).add("password", newPassword);
+
+            FormBody form =  formBody.build();
+            Request request = new Request.Builder()
+                    .url(createStudentURL)
+                    .header("Authorization", "Bear " + accessToken)
+                    .put(form)
+                    .build();
+            client.newCall(request).enqueue(new okhttp3.Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.d("onFailure", e.getMessage());
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    loading(false);
+                    try {
+                        String responseData = response.body().string();
+                        JSONObject json = new JSONObject(responseData);
+                        int code = response.code();
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable(){
+                            @Override
+                            public void run(){
+                                if(code == 200){
+                                    Toast.makeText( ((AppCompatActivity)context),"Change password success", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText( ((AppCompatActivity)context),"Password invalid", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -368,6 +428,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                                 if(code == 200){
                                     notes.get(position).setPassword(false);
                                     NoteAdapter.this.notifyItemChanged(position);
+                                    Toast.makeText( ((AppCompatActivity)context),"Unlock success", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText( ((AppCompatActivity)context),"Password invalid", Toast.LENGTH_SHORT).show();
                                 }
@@ -404,6 +465,83 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                                 if(code == 200){
                                     notes.remove(position);
                                     NoteAdapter.this.notifyItemRemoved(position);
+                                    Toast.makeText( ((AppCompatActivity)context),"Delete success", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(((AppCompatActivity)context),"Delete note failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } catch (JSONException e) {
+                        Log.d("onResponse", e.getMessage());
+                    }
+                }
+            });
+        }
+
+        public void restoreNote(String noteId, int position){
+            loading(true);
+            String accessToken = sharedPreferences.getString("accessToken", "");
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url("https://note-app-lake.vercel.app/notes/unDelete/noteId/" + noteId).header("Authorization", "Bear " + accessToken).build();
+            client.newCall(request).enqueue(new okhttp3.Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.d("onFailure", e.getMessage());
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    loading(false);
+                    try {
+                        String responseData = response.body().string();
+                        JSONObject json = new JSONObject(responseData);
+                        int code = response.code();
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable(){
+                            @Override
+                            public void run(){
+                                if(code == 200){
+                                    notes.remove(position);
+                                    NoteAdapter.this.notifyItemRemoved(position);
+                                    Toast.makeText( ((AppCompatActivity)context),"Restore success", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(((AppCompatActivity)context),"Restore note failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } catch (JSONException e) {
+                        Log.d("onResponse", e.getMessage());
+                    }
+                }
+            });
+        }
+
+        public void superDeleteNote(String noteId, int position){
+            loading(true);
+            String accessToken = sharedPreferences.getString("accessToken", "");
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url("https://note-app-lake.vercel.app/notes/delete/super/noteId/" + noteId).header("Authorization", "Bear " + accessToken).build();
+            client.newCall(request).enqueue(new okhttp3.Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.d("onFailure", e.getMessage());
+                }
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    loading(false);
+                    try {
+                        String responseData = response.body().string();
+                        JSONObject json = new JSONObject(responseData);
+                        int code = response.code();
+                        ((AppCompatActivity)context).runOnUiThread(new Runnable(){
+                            @Override
+                            public void run(){
+                                if(code == 200){
+                                    notes.remove(position);
+                                    NoteAdapter.this.notifyItemRemoved(position);
+                                    Toast.makeText(((AppCompatActivity)context),"Delete success", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
                                     Toast.makeText(((AppCompatActivity)context),"Delete note failed", Toast.LENGTH_SHORT).show();
@@ -473,6 +611,43 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
                                 Toast.makeText(context, "Password invalid", Toast.LENGTH_SHORT).show();
                             } else {
                                 unlockNote(noteId, password.getText().toString().trim(), position);
+                            }
+                        }
+                    });
+            builder.show();
+        }
+
+        public void createChangeNotePassAlert(String noteId, int position){
+            AlertDialog builder;
+            builder = new AlertDialog.Builder(context).create();
+            builder.setCanceledOnTouchOutside(false);
+            builder.setTitle("Change Password");
+
+            final EditText oldPassword = new EditText(context);
+            oldPassword.setHint("Enter note password");
+            final EditText newPassword = new EditText(context);
+            newPassword.setHint("Enter new password");
+            final EditText confirm = new EditText(context);
+            confirm.setHint("Confirm new password");
+
+            oldPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            LinearLayout lp = new LinearLayout(context);
+            lp.setOrientation(LinearLayout.VERTICAL);
+            lp.addView(oldPassword);
+            lp.addView(newPassword);
+            lp.addView(confirm);
+            builder.setView(lp);
+
+            builder.setButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            if(newPassword.getText().toString().trim().length() < 6){
+                                Toast.makeText(context, "New password invalid", Toast.LENGTH_SHORT).show();
+                            } else if (!confirm.getText().toString().trim().equals(newPassword.getText().toString().trim())) {
+                                Toast.makeText(context, "Password confirm invalid", Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                changeNotePassword(noteId, oldPassword.getText().toString().trim(), newPassword.getText().toString().trim(), position);
                             }
                         }
                     });

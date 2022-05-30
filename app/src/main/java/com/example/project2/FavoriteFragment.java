@@ -114,7 +114,7 @@ public class FavoriteFragment extends Fragment {
         btnFavoriteFragmentAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.dashboard_container1, newNoteFragment).commit();
+                checkIsActive();
             }
         });
 
@@ -273,6 +273,71 @@ public class FavoriteFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void checkIsActive(){
+        loading(true);
+        String accessToken = sharedPreferences.getString("accessToken", "");
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/isActive").header("Authorization", "Bear " + accessToken).build();
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("onFailure", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                loading(false);
+                try {
+                    String responseData = response.body().string();
+                    JSONObject json = new JSONObject(responseData);
+                    int code = response.code();
+
+                    getActivity().runOnUiThread(new Runnable(){
+                        @Override
+                        public void run(){
+                            if(code == 200){
+                                System.out.println(json);
+                                try {
+                                    Boolean isActive = json.getBoolean("isActive");
+                                    if(isActive){
+                                        getFragmentManager().beginTransaction().replace(R.id.dashboard_container1, newNoteFragment).commit();
+                                    }
+                                    else{
+                                        showActiveDialog();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else {
+                                Toast.makeText(getContext(),"Get label failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    Log.d("onResponse", e.getMessage());
+                }
+            }
+        });
+    }
+
+    private void showActiveDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle("Active Require");
+        alertDialog.setMessage("You must active account to create more note");
+
+        alertDialog.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
     }
 
     private void showLabelDialog() {

@@ -11,6 +11,9 @@
         android:id="@+id/recycler_item_edit"
         android:title="Edit" />
     <item
+        android:id="@+id/recycler_item_changePassword"
+        android:title="Change password" />
+    <item
         android:id="@+id/recycler_item_unlock"
         android:title="Unlock" />
     <item
@@ -18,6 +21,9 @@
         android:title="Lock" />
     <item
         android:id="@+id/recycler_item_delete"
+        android:title="Delete" />
+    <item
+        android:id="@+id/recycler_item_super_delete"
         android:title="Delete" />
     <item
         android:id="@+id/recycler_item_restore"

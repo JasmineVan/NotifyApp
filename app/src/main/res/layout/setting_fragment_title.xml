@@ -181,31 +181,106 @@
                 android:fontFamily="sans-serif"
                 android:paddingStart="4dp"
                 android:text="Ringtone"
+                android:textColor="@color/black"
                 android:textSize="24dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSettingSounds"
                 android:layout_width="0dp"
-                android:fontFamily="sans-serif"
-                android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:gravity="center"
-                android:background="@color/gray"
                 android:layout_weight="1"
-                android:text="Select" />
+                android:background="@color/gray"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="Select"
+                android:textColor="@color/black" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:fontFamily="sans-serif"
+                android:paddingStart="4dp"
+                android:text="Label"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnAddLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="Add"
+                android:textColor="@color/black" />
+            <Button
+                android:id="@+id/btnEditLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="Edit"
+                android:textColor="@color/black" />
+            <Button
+                android:id="@+id/btnDeleteLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/darker_gray"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="Delete"
+                android:textColor="@color/black" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/settingLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:fontFamily="sans-serif"
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:textColor="@color/black"
+                android:paddingStart="8dp" />
+
         </LinearLayout>
         <View
             android:layout_width="match_parent"
