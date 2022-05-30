@@ -111,7 +111,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteHolder> {
             date = itemView.findViewById(R.id.homepageNoteDate);
             label = itemView.findViewById(R.id.homepageNoteLabel);
             ivNoteItemLock = itemView.findViewById(R.id.ivNoteItemLock);
-            
+
             ivNoteItemMenu = itemView.findViewById(R.id.ivNoteItemMenu);
             ivNoteItemMenu.setOnClickListener(new View.OnClickListener() {
                 @Override

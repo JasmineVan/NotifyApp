@@ -3,6 +3,11 @@ package com.example.project2;
 import java.util.ArrayList;
 
 public class Note {
+
+    public static final int TYPE_LIST = 1;
+    public static final int TYPE_GRID = 2;
+
+    private int typeDisplay;
     private String noteId;
     private String userId;
     private String title;
@@ -125,5 +130,13 @@ public class Note {
 
     public void setNotePassword(String notePassword) {
         this.notePassword = notePassword;
+    }
+
+    public int getTypeDisplay() {
+        return typeDisplay;
+    }
+
+    public void setTypeDisplay(int typeDisplay) {
+        this.typeDisplay = typeDisplay;
     }
 }

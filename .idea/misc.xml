@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.25089928057553956" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/drawable-hdpi/note_items_bg.xml" value="0.1075" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_change_password.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_forgot_password.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/activity_login_page.xml" value="0.275" />
@@ -16,13 +17,16 @@
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_favorite.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_home.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_new_note.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_setting.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_trash.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/fragment_view_note.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/home_fragment_title.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/homepage_items.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/homepage_items_2.xml" value="0.27395833333333336" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/new_note_fragment_title.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/setting_fragment_title.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/trash_fragment_title.xml" value="0.275" />
+        <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/user_fragment_title.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/layout/view_note_fragment_title.xml" value="0.275" />
         <entry key="..\:/Learning3/Mobile_Final/Project2/app/src/main/res/menu/recycler_item_menu.xml" value="0.275" />
         <entry key="..\:/Learning3/Project2/app/src/main/res/drawable/custom_button.xml" value="0.2225" />

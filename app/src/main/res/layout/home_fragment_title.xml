@@ -36,7 +36,7 @@
             android:layout_alignParentLeft="true"/>
 
         <ImageView
-            android:id="@+id/homeFragmentGrid"
+            android:id="@+id/homeFragmentChangeLayoutView"
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:clickable="true"
