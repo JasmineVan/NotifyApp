@@ -6,13 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -44,7 +43,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class FavoriteFragment extends Fragment {
+public class FavoriteFragment2 extends Fragment {
 
     private RecyclerView recyclerView;
     public List<Note> allNotes;
@@ -57,11 +56,10 @@ public class FavoriteFragment extends Fragment {
     private LinearLayout fragment_favorite_empty_holder;
     private TextView fragment_favorite_empty;
     private FloatingActionButton btnFavoriteFragmentAddNote;
-    private ImageView favoriteFragmentFilter, ivFavoriteFragmentGrid;
+    private ImageView favoriteFragmentFilter;
     private ArrayList<String> listLabel;
     private ArrayList<Integer> labelSelected;
     private NewNoteFragment newNoteFragment = new NewNoteFragment();
-    private FavoriteFragment2 favoriteFragment2 = new FavoriteFragment2();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,15 +75,14 @@ public class FavoriteFragment extends Fragment {
         fragment_favorite_empty = view.findViewById(R.id.fragment_favorite_empty);
         btnFavoriteFragmentAddNote = view.findViewById(R.id.btnFavoriteFragmentAddNote);
         favoriteFragmentSearch= view.findViewById(R.id.favoriteFragmentSearch);
-        ivFavoriteFragmentGrid = view.findViewById(R.id.ivFavoriteFragmentGrid);
-        recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
+        recyclerView.setLayoutManager(new GridLayoutManager((this.getContext()), 2));
         allNotes = new ArrayList<>();
         adapter = new NoteAdapter(this.getContext(), allNotes);
         dialog = new ProgressDialog(getActivity());
 
         //recyclerView setting
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(), 2, RecyclerView.VERTICAL, false));
         //recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), RecyclerView.VERTICAL));
         sharedPreferences = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
 
@@ -93,13 +90,6 @@ public class FavoriteFragment extends Fragment {
 
         GetNotes("",labelFilter);
         getUserLabel();
-
-        ivFavoriteFragmentGrid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, favoriteFragment2).commit();
-            }
-        });
 
         favoriteFragmentFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,7 +240,7 @@ public class FavoriteFragment extends Fragment {
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/settings").header("Authorization", "Bear " + accessToken).build();
-        client.newCall(request).enqueue(new okhttp3.Callback() {
+        client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 Log.d("onFailure", e.getMessage());
@@ -293,7 +283,7 @@ public class FavoriteFragment extends Fragment {
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/isActive").header("Authorization", "Bear " + accessToken).build();
-        client.newCall(request).enqueue(new okhttp3.Callback() {
+        client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 Log.d("onFailure", e.getMessage());

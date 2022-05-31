@@ -6,13 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -44,83 +43,74 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class FavoriteFragment extends Fragment {
+public class HomeFragment2 extends Fragment {
 
     private RecyclerView recyclerView;
-    public List<Note> allNotes;
+    public List<Note> pinNotes;
     private NoteAdapter adapter;
     private SharedPreferences sharedPreferences;
     private View view;
     private ProgressDialog dialog;
-    private SearchView favoriteFragmentSearch;
+    private SearchView homeFragmentSearch;
+    private TextView fragment_home_empty;
+    private LinearLayout fragment_home_empty_holder;
     private ArrayList<String> labelFilter;
-    private LinearLayout fragment_favorite_empty_holder;
-    private TextView fragment_favorite_empty;
-    private FloatingActionButton btnFavoriteFragmentAddNote;
-    private ImageView favoriteFragmentFilter, ivFavoriteFragmentGrid;
+    private FloatingActionButton btnHomeFragmentAddNote;
+    private ImageView homeFragmentFilter;
     private ArrayList<String> listLabel;
     private ArrayList<Integer> labelSelected;
     private NewNoteFragment newNoteFragment = new NewNoteFragment();
-    private FavoriteFragment2 favoriteFragment2 = new FavoriteFragment2();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_favorite, container, false);
+        view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_home, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
         listLabel = new ArrayList<String>();
         labelSelected = new ArrayList<Integer>();
         labelFilter = new ArrayList<String>();
-        favoriteFragmentFilter = view.findViewById(R.id.favoriteFragmentFilter);
-        fragment_favorite_empty_holder = view.findViewById(R.id.fragment_favorite_empty_holder);
-        fragment_favorite_empty = view.findViewById(R.id.fragment_favorite_empty);
-        btnFavoriteFragmentAddNote = view.findViewById(R.id.btnFavoriteFragmentAddNote);
-        favoriteFragmentSearch= view.findViewById(R.id.favoriteFragmentSearch);
-        ivFavoriteFragmentGrid = view.findViewById(R.id.ivFavoriteFragmentGrid);
-        recyclerView.setLayoutManager(new LinearLayoutManager((this.getContext())));
-        allNotes = new ArrayList<>();
-        adapter = new NoteAdapter(this.getContext(), allNotes);
+        homeFragmentSearch = view.findViewById(R.id.homeFragmentSearch);
+        recyclerView.setLayoutManager(new GridLayoutManager((this.getContext()), 2));
+        btnHomeFragmentAddNote = view.findViewById(R.id.btnHomeFragmentAddNote);
+        fragment_home_empty = view.findViewById(R.id.fragment_home_empty);
+        fragment_home_empty_holder = view.findViewById(R.id.fragment_home_empty_holder);
+        homeFragmentFilter = view.findViewById(R.id.homeFragmentFilter);
+        pinNotes = new ArrayList<>();
+        adapter = new NoteAdapter(this.getContext(), pinNotes);
         dialog = new ProgressDialog(getActivity());
 
         //recyclerView setting
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), RecyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(this.getContext(), 2, RecyclerView.VERTICAL, false));
         //recyclerView.addItemDecoration(new DividerItemDecoration(this.getContext(), RecyclerView.VERTICAL));
         sharedPreferences = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
 
         recyclerView.setAdapter(adapter);
 
-        GetNotes("",labelFilter);
+        GetPinNote("",labelFilter);
         getUserLabel();
 
-        ivFavoriteFragmentGrid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, favoriteFragment2).commit();
-            }
-        });
-
-        favoriteFragmentFilter.setOnClickListener(new View.OnClickListener() {
+        homeFragmentFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showLabelDialog();
             }
         });
 
-        favoriteFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        homeFragmentSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String search) {
-                GetNotes(search, labelFilter);
-                return false;
+                GetPinNote(search, labelFilter);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String search) {
-                return false;
+                return true;
             }
         });
-        btnFavoriteFragmentAddNote.setOnClickListener(new View.OnClickListener() {
+        btnHomeFragmentAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkIsActive();
@@ -130,21 +120,21 @@ public class FavoriteFragment extends Fragment {
         return view;
     }
 
-    public void setNotes(JSONArray jsonArray){
+    public void setPinNotes(@NonNull JSONArray jsonArray){
         try {
             if(jsonArray.length() == 0){
-                fragment_favorite_empty_holder.setVisibility(View.VISIBLE);
-                fragment_favorite_empty.setVisibility(View.VISIBLE);
+                fragment_home_empty_holder.setVisibility(View.VISIBLE);
+                fragment_home_empty.setVisibility(View.VISIBLE);
             }
             else{
-                fragment_favorite_empty_holder.setVisibility(View.GONE);
-                fragment_favorite_empty.setVisibility(View.GONE);
+                fragment_home_empty_holder.setVisibility(View.GONE);
+                fragment_home_empty.setVisibility(View.GONE);
             }
-            allNotes.clear();
+            pinNotes.clear();
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date, notePassword;
-            JSONArray jsonLabel;
             Boolean isPassword, isPin, isDelete;
+            JSONArray jsonLabel;
             String label;
             for(int i = 0; i < jsonArray.length(); i++){
                 label = "";
@@ -166,91 +156,20 @@ public class FavoriteFragment extends Fragment {
                         label += ", ";
                     }
                 }
-                allNotes.add(new Note(noteId, userId, title, label, content, date, isPassword, isPin, isDelete, notePassword));
+                pinNotes.add(new Note(noteId, userId, title, label, content, date, isPassword, isPin, isDelete, notePassword));
             }
 
             recyclerView.setAdapter(adapter);
         } catch (JSONException e) {
-            Log.e("setNote error", e.toString());
+            Log.e("setPin error", e.toString());
         }
-    }
-
-    public static String formatDateFromString(String inputFormat, String outputFormat, String inputDate){
-        Date parsed = null;
-        String outputDate = "";
-
-        SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
-        SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
-
-        try {
-            parsed = df_input.parse(inputDate);
-            outputDate = df_output.format(parsed);
-
-        } catch (ParseException e) {
-            Log.e("Date","ParseException - dateFormat");
-        }
-
-        return outputDate;
-    }
-
-    public void GetNotes(String search, ArrayList<String> label){
-        loading(true);
-        String accessToken = sharedPreferences.getString("accessToken", "");
-        OkHttpClient client = new OkHttpClient();
-        String createStudentURL = "https://note-app-lake.vercel.app/notes/query";
-        FormBody.Builder formBody = new FormBody.Builder().add("search",search);
-        if(label.size() > 0){
-            for(int i = 0; i < label.size(); i++){
-                formBody.add("label", label.get(i));
-            }
-        }
-        FormBody form =  formBody.build();
-        Request request = new Request.Builder()
-                .url(createStudentURL)
-                .header("Authorization", "Bear " + accessToken)
-                .post(form)
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d("onFailure", e.getMessage());
-            }
-            @Override
-            public void onResponse(Call call, final Response response)
-                    throws IOException {
-                loading(false);
-                try {
-                    String responseData = response.body().string();
-                    int code = response.code();
-                    JSONObject json = new JSONObject(responseData);
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(code == 200){
-                                try {
-                                    JSONArray data =  json.getJSONArray("data");
-                                    setNotes(data);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            else {
-                                Toast.makeText(getContext(),"Active failed", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } catch (JSONException e) {
-                    Log.d("onResponse", e.getMessage());
-                }
-            }
-        });
     }
 
     public void getUserLabel(){
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/settings").header("Authorization", "Bear " + accessToken).build();
-        client.newCall(request).enqueue(new okhttp3.Callback() {
+        client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 Log.d("onFailure", e.getMessage());
@@ -293,7 +212,7 @@ public class FavoriteFragment extends Fragment {
         String accessToken = sharedPreferences.getString("accessToken", "");
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url("https://note-app-lake.vercel.app/users/isActive").header("Authorization", "Bear " + accessToken).build();
-        client.newCall(request).enqueue(new okhttp3.Callback() {
+        client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
                 Log.d("onFailure", e.getMessage());
@@ -326,6 +245,59 @@ public class FavoriteFragment extends Fragment {
                             }
                             else {
                                 Toast.makeText(getContext(),"Get label failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    Log.d("onResponse", e.getMessage());
+                }
+            }
+        });
+    }
+
+    public void GetPinNote(String search, @NonNull ArrayList<String> label){
+        loading(true);
+        String accessToken = sharedPreferences.getString("accessToken", "");
+        OkHttpClient client = new OkHttpClient();
+        String createStudentURL = "https://note-app-lake.vercel.app/notes/query";
+        FormBody.Builder formBody = new FormBody.Builder().add("search",search).add("isPin", "true");
+        if(label.size() > 0){
+            for(int i = 0; i < label.size(); i++){
+                formBody.add("label", label.get(i));
+            }
+        }
+        FormBody form =  formBody.build();
+        Request request = new Request.Builder()
+                .url(createStudentURL)
+                .header("Authorization", "Bear " + accessToken)
+                .post(form)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.e("onFailure", e.getMessage());
+            }
+            @Override
+            public void onResponse(Call call, final Response response)
+                    throws IOException {
+                loading(false);
+                try {
+                    String responseData = response.body().string();
+                    int code = response.code();
+                    JSONObject json = new JSONObject(responseData);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(code == 200){
+                                try {
+                                    JSONArray data =  json.getJSONArray("data");
+                                    setPinNotes(data);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            else {
+                                Toast.makeText(getContext(),"Active failed", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -387,7 +359,7 @@ public class FavoriteFragment extends Fragment {
                         for(int index = 0; index < labelSelected.size(); index++){
                             labelFilter.add(listLabel.get(labelSelected.get(index)));
                         }
-                        GetNotes("", labelFilter);
+                        GetPinNote("", labelFilter);
                     }
                 });
         alertDialog.setNegativeButton("Cancel",
@@ -400,6 +372,24 @@ public class FavoriteFragment extends Fragment {
         AlertDialog alert = alertDialog.create();
         alert.setCanceledOnTouchOutside(false);
         alert.show();
+    }
+
+    public static String formatDateFromString(String inputFormat, String outputFormat, String inputDate){
+        Date parsed = null;
+        String outputDate = "";
+
+        SimpleDateFormat df_input = new SimpleDateFormat(inputFormat, java.util.Locale.getDefault());
+        SimpleDateFormat df_output = new SimpleDateFormat(outputFormat, java.util.Locale.getDefault());
+
+        try {
+            parsed = df_input.parse(inputDate);
+            outputDate = df_output.format(parsed);
+
+        } catch (ParseException e) {
+            Log.e("Date","ParseException - dateFormat");
+        }
+
+        return outputDate;
     }
 
     public void loading(boolean isLoad){

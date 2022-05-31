@@ -1,0 +1,138 @@
+<resources>
+    <!--  All activity  -->
+    <string name="project_name">Notify</string>
+    <string name="error">Thông báo lỗi</string>
+    <string name="Logout">Đăng xuất</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--  Login  -->
+    <string name="app_name">Project2</string>
+    <string name="login_description">Đăng nhập vào tài khoản Notify của bạn</string>
+    <string name="login_remember">Ghi nhớ đăng nhập</string>
+    <string name="login_no_account">Chưa có tài khoản?</string>
+    <string name="login_forgot">Quên mật khẩu?</string>
+    <string name="login_back">quay lại</string>
+    <string name="login_title">Đăng nhập</string>
+    <string name="login_username_hint">Nhập số điện thoại</string>
+    <string name="login_password_hint">Nhập mật khẩu</string>
+    <!--  Signup  -->
+    <string name="signup_title">Đăng ký</string>
+    <string name="signup_description">Đăng ký tài khoản Notify</string>
+    <string name="signup_username_hint">Họ và tên</string>
+    <string name="signup_password_hint">Mật khẩu</string>
+    <string name="signup_re_password_hint">Xác nhận mật khẩu</string>
+    <string name="signup_email_hint">Email</string>
+    <string name="signup_phone_hint">Số điện thoại</string>
+    <string name="signup_has_account">Đã có tài khoản?</string>
+    <!-- Register -->
+    <string name="register_description">Đăng ký tài khoản Notify</string>
+    <string name="register_title">Đăng ký</string>
+    <string name="register_skip">Bỏ qua</string>
+    <string name="phone_register_hint">Đăng ký với số điện thoại</string>
+    <string name="phone_register_switch">Đăng ký với email</string>
+    <string name="email_register_hint">Đăng ký với email</string>
+    <string name="email_register_switch">Đăng ký với số điện thoại</string>
+    <!--  OTP  -->
+    <string name="otp_title">Xác nhận OTP</string>
+    <string name="verify_title">Xác nhận</string>
+    <string name="otp_no_receive">Chưa nhận được mã OTP?</string>
+    <string name="otp_resend">Gửi lại</string>
+    <!--  send OTP  -->
+    <string name="sendOTP_title">Kích hoạt</string>
+    <string name="sendOTP_phone_hint">Số điện thoại hiển thị ở đây</string>
+    <string name="sendOtp_skip">Bỏ qua</string>
+    <string name="sendOtp_change_phone">Đổi số điện thoại</string>
+    <!--    dash board-->
+    <!--    user fragment-->
+    <string name="user_fragment_title">Cài đặt người dùng</string>
+    <string name="user_fragment_fullname">Họ và tên</string>
+    <string name="user_fragment_phone">Số điện thoại</string>
+    <string name="user_fragment_edit">Chỉnh sửa</string>
+    <string name="user_fragment_change">Đổi mật khẩu</string>
+    <!-- view note -->
+    <string name="dummy1">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</string>
+    <string name="change_pass_hint">Đổi mật khẩu tài khoản Notify của bạn</string>
+    <string name="change_password_title">Đổi mật khẩu</string>
+    <string name="old_password">Mật khẩu cũ</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="new_password_confirm">Xác nhận mật khẩu mới</string>
+    <string name="save">Lưu</string>
+    <string name="edit_profile_hint">Chỉnh sửa thông tin tài khoản Notify của bạn</string>
+    <string name="edit_profile_title">Chỉnh sửa</string>
+    <string name="forgot_password_hint">Khôi phục tài khoản Notify</string>
+    <string name="forgot_password_title">Khôi pục</string>
+    <string name="enter_phone_num">Nhập vào số điện thoại</string>
+    <string name="send_otp">Gửi OTP</string>
+    <string name="get_started">Bắt đầu</string>
+    <string name="otp_min">00</string>
+    <string name="otp_break">:</string>
+    <string name="otp_recover_hint">Khôi phục tài khoản Notify của bạn</string>
+    <string name="otp_recover_title">Xác nhận mã OTP khôi phục</string>
+    <string name="password_recover_hint">Khôi phục tài khoản Notify của bạn</string>
+    <string name="password_recover_title">Khôi phục mật khẩu</string>
+    <string name="title_show_here">Tiêu đề hiển thị ở đây</string>
+    <string name="label_blue">Chọn nhãn</string>
+    <string name="content_here">Nội dung hiển thị ở đây</string>
+    <string name="note_picture">Hình ảnh</string>
+    <string name="note_video">Video</string>
+    <string name="note_audio">Âm thanh</string>
+    <string name="note_notification">Thông báo</string>
+    <string name="note_share">Chia sẻ</string>
+    <string name="note_grid">Lưới</string>
+    <string name="all_note">Tất cả ghi chú</string>
+    <string name="note_filter">Lọc</string>
+    <string name="all_note_is_empty">Không có ghi chú</string>
+    <string name="btn_new_note">Ghi chú mới</string>
+    <string name="pin_note_is_empty">Không có ghi chú</string>
+    <string name="trash_is_empty">Thùng rác rỗng</string>
+    <string name="pin_note">Ghi chú được ghim</string>
+    <string name="ote_title_here">Tiêu đề ghi chú</string>
+    <string name="note_lock">Khóa</string>
+    <string name="note_menu">Menu</string>
+    <string name="day_time">Chủ nhật 15/05/2022 12:00</string>
+    <string name="new_note">Ghi chú mới</string>
+    <string name="app_setting">Cài đặt ứng dụng</string>
+    <string name="language">Ngôn ngữ</string>
+    <string name="font">Kiểu chữ</string>
+    <string name="delete_after">Xóa sau</string>
+    <string name="ringtone">Âm báo</string>
+    <string name="select">Chọn</string>
+    <string name="label">Nhãn</string>
+    <string name="add">Thêm</string>
+    <string name="edit">Xem</string>
+    <string name="delete">Xóa</string>
+    <string name="trash">Rác</string>
+    <string name="note_bin">Xóa ghi chú</string>
+    <string name="click_here_to_active">Kích hoạt tài khoản Notify ở đây!</string>
+    <string name="view_note">Xem ghi chú</string>
+    <string name="send">Gửi</string>
+    <string name="home">Trang chủ</string>
+    <string name="note">Ghi chú</string>
+    <string name="user">Người dùng</string>
+    <string name="setting">Cài đặt</string>
+    <string name="trash2">Thùng rác</string>
+    <string name="pin">Ghim</string>
+    <string name="unpin">Bỏ ghim</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="unlock">Bỏ khóa</string>
+    <string name="lock">Khóa</string>
+    <string name="restore">Khôi phục</string>
+    <string name="edit_note">Chỉnh sửa ghi chú</string>
+    <string name="new_title">Tiêu đề mới</string>
+    <!-- app setting -->
+    <string-array name="languages">
+        <item>English</item>
+        <item>Vietnamese</item>
+    </string-array>
+    <string-array name="fonts">
+        <item>Mặc định</item>
+        <item>Arya</item>
+        <item>Cambay</item>
+        <item>Oleo Script</item>
+    </string-array>
+    <string-array name="ringtones">
+        <item>Âm báo 1</item>
+        <item>Âm báo 2</item>
+        <item>Âm báo 3</item>
+        <item>Âm báo 4</item>
+    </string-array>
+</resources>

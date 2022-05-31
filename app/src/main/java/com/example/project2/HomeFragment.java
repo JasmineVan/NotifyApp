@@ -18,6 +18,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -68,10 +69,11 @@ public class HomeFragment extends Fragment {
     private LinearLayout fragment_home_empty_holder;
     private ArrayList<String> labelFilter;
     private FloatingActionButton btnHomeFragmentAddNote;
-    private ImageView homeFragmentFilter;
+    private ImageView homeFragmentFilter, homeFragmentChangeLayoutView;
     private ArrayList<String> listLabel;
     private ArrayList<Integer> labelSelected;
     private NewNoteFragment newNoteFragment = new NewNoteFragment();
+    private HomeFragment2 homeFragment2 = new HomeFragment2();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -88,6 +90,7 @@ public class HomeFragment extends Fragment {
         fragment_home_empty = view.findViewById(R.id.fragment_home_empty);
         fragment_home_empty_holder = view.findViewById(R.id.fragment_home_empty_holder);
         homeFragmentFilter = view.findViewById(R.id.homeFragmentFilter);
+        homeFragmentChangeLayoutView = view.findViewById(R.id.homeFragmentChangeLayoutView);
         pinNotes = new ArrayList<>();
         adapter = new NoteAdapter(this.getContext(), pinNotes);
         dialog = new ProgressDialog(getActivity());
@@ -102,6 +105,12 @@ public class HomeFragment extends Fragment {
 
         GetPinNote("",labelFilter);
         getUserLabel();
+        homeFragmentChangeLayoutView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.dashboard_container1, homeFragment2).commit();
+            }
+        });
 
         homeFragmentFilter.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -35,6 +36,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -46,7 +48,6 @@ import okhttp3.Response;
 public class SettingFragment extends Fragment {
 
     private View view;
-    private Spinner languageSpinner;
     private TextView settingFonts, settingDelete;
     private SharedPreferences sharedPreferences;
     private int font = 0;
@@ -57,7 +58,7 @@ public class SettingFragment extends Fragment {
     private String[] deleteTimes = {"30s", "1 days", "7 days"};
     private ArrayList<Integer> labelSelected;
     private ArrayList<String> listLabel;
-    private Button btnDeleteLabel, btnEditLabel, btnAddLabel;
+    private Button btnDeleteLabel, btnEditLabel, btnAddLabel, btnSettingLanguage;
     private Button fragment_setting_btnSave;
     private  int lb = 0;
 
@@ -69,10 +70,10 @@ public class SettingFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_setting, container, false);
         dialog = new ProgressDialog(getActivity());
-        languageSpinner = view.findViewById(R.id.settingLanguages);
         settingFonts = view.findViewById(R.id.settingFonts);
         settingDelete = view.findViewById(R.id.settingDelete);
         btnSettingSounds = view.findViewById(R.id.btnSettingSounds);
+        btnSettingLanguage = view.findViewById(R.id.btnSettingLanguage);
         sharedPreferences = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
         listLabel = new ArrayList<String>();
         btnDeleteLabel = view.findViewById(R.id.btnDeleteLabel);
@@ -80,14 +81,7 @@ public class SettingFragment extends Fragment {
         btnAddLabel = view.findViewById(R.id.btnAddLabel);
         fragment_setting_btnSave = view.findViewById(R.id.fragment_setting_btnSave);
 
-
         getUserSettings();
-
-        //language spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(),
-                R.array.languages, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        languageSpinner.setAdapter(adapter);
 
         //font settings
         settingFonts.setOnClickListener(new View.OnClickListener() {
