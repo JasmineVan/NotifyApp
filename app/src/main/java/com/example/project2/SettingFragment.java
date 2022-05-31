@@ -34,10 +34,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import okhttp3.Call;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SettingFragment extends Fragment {
@@ -48,12 +51,14 @@ public class SettingFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private int font = 0;
     private int deleteTime = 0;
+    private int deleteTimeTemp = 0;
     private ProgressDialog dialog;
     private String[] fonts = {"Default", "Arya", "Oleo Script"};
     private String[] deleteTimes = {"30s", "1 days", "7 days"};
     private ArrayList<Integer> labelSelected;
     private ArrayList<String> listLabel;
     private Button btnDeleteLabel, btnEditLabel, btnAddLabel;
+    private Button fragment_setting_btnSave;
     private  int lb = 0;
 
     private Button btnSettingSounds;
@@ -72,6 +77,8 @@ public class SettingFragment extends Fragment {
         listLabel = new ArrayList<String>();
         btnDeleteLabel = view.findViewById(R.id.btnDeleteLabel);
         btnEditLabel = view.findViewById(R.id.btnEditLabel);
+        btnAddLabel = view.findViewById(R.id.btnAddLabel);
+        fragment_setting_btnSave = view.findViewById(R.id.fragment_setting_btnSave);
 
 
         getUserSettings();
@@ -99,30 +106,69 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        //Label
+
+        btnAddLabel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog builder;
+                builder = new AlertDialog.Builder(getContext()).create();
+                builder.setCanceledOnTouchOutside(false);
+                builder.setTitle("Add Label");
+                final EditText input = new EditText(getContext());
+                input.setHint("Enter label");
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                input.setLayoutParams(lp);
+                builder.setView(input);
+
+                builder.setButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(!input.getText().toString().trim().equals("")){
+                                    listLabel.add(input.getText().toString().trim());
+                                    Toast.makeText(getContext(), "Add label success", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                builder.show();
+            }
+        });
+
         btnEditLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String[] lbs = new String[listLabel.size()];
-                for(int i = 0; i < listLabel.size(); i++){
-                    lbs[i] = listLabel.get(i);
+                if(listLabel.size() > 0){
+                    String[] lbs = new String[listLabel.size()];
+                    for(int i = 0; i < listLabel.size(); i++){
+                        lbs[i] = listLabel.get(i);
+                    }
+                    new AlertDialog.Builder(getContext())
+                            .setSingleChoiceItems(lbs, lb, null)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    lb = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                                    editLabel(lb);
+                                    dialog.dismiss();
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                    }else{
+                    Toast.makeText(getContext(), "No label to edit", Toast.LENGTH_SHORT).show();
                 }
-                new AlertDialog.Builder(getContext())
-                        .setSingleChoiceItems(lbs, lb, null)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                lb = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
-                                editLabel(lb);
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
+                }
         });
 
         btnDeleteLabel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showLabelDialog();
+                showLabelDeleteDialog();
             }
         });
 
@@ -160,7 +206,130 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        fragment_setting_btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = checkSettings();
+                if(msg.equals("")){
+                    if(deleteTime != deleteTimeTemp){
+                        updateTimeDelete();
+                    }
+                    saveSetting();
+                }
+                else{
+                    Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         return view;
+    }
+
+    public void updateTimeDelete(){
+        int deleteNoteTime = 0;
+        switch (deleteTime){
+            case 0:
+                deleteNoteTime = 30000;
+                break;
+            case 1:
+                deleteNoteTime = 86400000;
+                break;
+            case 2:
+                deleteNoteTime = 604800000;
+                break;
+        }
+        OkHttpClient client = new OkHttpClient();
+        String accessToken = sharedPreferences.getString("accessToken", "");
+        String createStudentURL = "https://note-app-lake.vercel.app/users/updateDelete";
+        FormBody.Builder formBody = new FormBody.Builder().add("deleteNoteTime",String.valueOf(deleteNoteTime));
+        FormBody form =  formBody.build();
+        Request request = new Request.Builder()
+                .url(createStudentURL)
+                .header("Authorization", "Bear " + accessToken)
+                .put(form)
+                .build();
+
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("onFailure", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                try {
+                    String responseData = response.body().string();
+                    JSONObject json = new JSONObject(responseData);
+                    int code = response.code();
+                    getActivity().runOnUiThread(new Runnable(){
+                        @Override
+                        public void run(){
+                            if(code == 200){
+                                Toast.makeText(getContext(),"Update delete time success", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(getContext(),"Update delete time failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    Log.d("onResponse", e.getMessage());
+                }
+            }
+        });
+    }
+
+    public String checkSettings(){
+        String msg = "";
+        if(listLabel.size() <= 0){
+            msg = "Missing label";
+        }
+        return msg;
+    }
+
+    public void saveSetting(){
+        loading(true);
+        OkHttpClient client = new OkHttpClient();
+        String accessToken = sharedPreferences.getString("accessToken", "");
+        String createStudentURL = "https://note-app-lake.vercel.app/users/updateSettings";
+        FormBody.Builder formBody = new FormBody.Builder().add("font",String.valueOf(font));
+        for(int i = 0; i < listLabel.size(); i++){
+            formBody.add("label", listLabel.get(i));
+        }
+        FormBody form =  formBody.build();
+        Request request = new Request.Builder()
+                .url(createStudentURL)
+                .header("Authorization", "Bear " + accessToken)
+                .put(form)
+                .build();
+
+        client.newCall(request).enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("onFailure", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                loading(false);
+                try {
+                    String responseData = response.body().string();
+                    JSONObject json = new JSONObject(responseData);
+                    int code = response.code();
+                    getActivity().runOnUiThread(new Runnable(){
+                        @Override
+                        public void run(){
+                            if(code == 200){
+                                Toast.makeText(getContext(),"Update settings success", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(getContext(),"Update settings failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    Log.d("onResponse", e.getMessage());
+                }
+            }
+        });
     }
 
      @Override
@@ -170,7 +339,7 @@ public class SettingFragment extends Fragment {
         }
     }
 
-    private void showLabelDialog() {
+    private void showLabelDeleteDialog() {
         labelSelected = new ArrayList<Integer>();
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle("Label");
@@ -201,19 +370,15 @@ public class SettingFragment extends Fragment {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        Collections.sort(labelSelected);
+                        Collections.reverse(labelSelected);
                         for(int index = 0; index < labelSelected.size(); index++){
                             listLabel.remove(listLabel.get(labelSelected.get(index)));
                         }
+                        Toast.makeText(getContext(), "Delete label success", Toast.LENGTH_SHORT).show();
                     }
                 });
 
-        alertDialog.setPositiveButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
         AlertDialog alert = alertDialog.create();
         alert.setCanceledOnTouchOutside(false);
         alert.show();
@@ -236,6 +401,7 @@ public class SettingFragment extends Fragment {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         listLabel.set(position, input.getText().toString().trim());
+                        Toast.makeText(getContext(), "Edit label success", Toast.LENGTH_SHORT).show();
                     }
                 });
         builder.show();
@@ -272,12 +438,15 @@ public class SettingFragment extends Fragment {
                                     switch (deleteNoteTime){
                                         case 30000:
                                             deleteTime = 0;
+                                            deleteTimeTemp = 0;
                                             break;
                                         case 86400000:
                                             deleteTime = 1;
+                                            deleteTimeTemp = 1;
                                             break;
                                         case 604800000:
                                             deleteTime = 2;
+                                            deleteTimeTemp = 2;
                                             break;
                                     }
                                     for(int i = 0; i < labels.length(); i++){

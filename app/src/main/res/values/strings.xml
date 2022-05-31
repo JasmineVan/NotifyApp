@@ -70,7 +70,7 @@
     <string name="password_recover_hint">Recover your Notify account</string>
     <string name="password_recover_title">Password Recover</string>
     <string name="title_show_here">Title show here</string>
-    <string name="label_blue">Label Blue</string>
+    <string name="label_blue">Select Label</string>
     <string name="content_here">Content here</string>
     <string name="note_picture">Note picture</string>
     <string name="note_video">Note video</string>
