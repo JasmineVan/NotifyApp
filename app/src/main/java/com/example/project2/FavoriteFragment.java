@@ -127,6 +127,10 @@ public class FavoriteFragment extends Fragment {
                 fragment_favorite_empty_holder.setVisibility(View.VISIBLE);
                 fragment_favorite_empty.setVisibility(View.VISIBLE);
             }
+            else{
+                fragment_favorite_empty_holder.setVisibility(View.GONE);
+                fragment_favorite_empty.setVisibility(View.GONE);
+            }
             allNotes.clear();
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date, notePassword;

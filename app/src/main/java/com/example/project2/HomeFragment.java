@@ -138,6 +138,10 @@ public class HomeFragment extends Fragment {
                 fragment_home_empty_holder.setVisibility(View.VISIBLE);
                 fragment_home_empty.setVisibility(View.VISIBLE);
             }
+            else{
+                fragment_home_empty_holder.setVisibility(View.GONE);
+                fragment_home_empty.setVisibility(View.GONE);
+            }
             pinNotes.clear();
             JSONObject note;
             String noteId, userId, title ,content, createdAt, date, notePassword;

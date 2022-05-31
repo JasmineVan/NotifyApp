@@ -80,9 +80,9 @@
     <string name="note_grid">Note grid</string>
     <string name="all_note">All Note</string>
     <string name="note_filter">Note filter</string>
-    <string name="all_note_is_empty">All note is empty</string>
+    <string name="all_note_is_empty">No note to show</string>
     <string name="btn_new_note">New note</string>
-    <string name="pin_note_is_empty">Pin note is empty</string>
+    <string name="pin_note_is_empty">No note to show</string>
     <string name="trash_is_empty">Trash is empty</string>
     <string name="pin_note">Pin Note</string>
     <string name="ote_title_here">Note title here</string>
