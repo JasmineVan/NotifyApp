@@ -74,7 +74,6 @@
             android:orientation="vertical">
 
             <EditText
-                android:text="thai"
                 android:id="@+id/textSignupUsername"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -92,7 +91,6 @@
                 android:autofillHints="" />
 
             <EditText
-                android:text="0364511405"
                 android:inputType="phone"
                 android:id="@+id/textSignupPhone"
                 android:layout_width="match_parent"
@@ -119,7 +117,6 @@
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp">
                 <EditText
-                    android:text="123456"
                     android:inputType="textPassword"
                     android:id="@+id/textSignupPassword"
                     android:layout_width="match_parent"
@@ -147,7 +144,6 @@
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="0dp">
                 <EditText
-                    android:text="123456"
                     android:inputType="textPassword"
                     android:id="@+id/textSignupPasswordConfirm"
                     android:layout_width="match_parent"
