@@ -146,7 +146,7 @@ public class SettingFragment extends Fragment {
                     }
                     new AlertDialog.Builder(getContext())
                             .setSingleChoiceItems(lbs, lb, null)
-                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     lb = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                                     editLabel(lb);

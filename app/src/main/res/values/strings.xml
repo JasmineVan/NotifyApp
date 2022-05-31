@@ -98,7 +98,7 @@
     <string name="select">Select</string>
     <string name="label">Label</string>
     <string name="add">Add</string>
-    <string name="edit">Edit</string>
+    <string name="edit">View</string>
     <string name="delete">Delete</string>
     <string name="trash">Trash</string>
     <string name="note_bin">Note delete</string>
